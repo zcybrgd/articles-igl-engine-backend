@@ -1,8 +1,17 @@
 version: '3'
 
+# containers that make the application
 services:
+  frontend:
+    build:
+      context: ./frontend/articles-igl-engine-frontend
+    ports:
+      - "5173:5173"
+
   backend:
     build:
-      context: .
+      context: ./backend/articles_igl_engine
     ports:
       - "8000:8000"
+    depends_on:
+      - frontend
