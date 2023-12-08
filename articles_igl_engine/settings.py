@@ -90,7 +90,7 @@ DATABASES = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:8000',  # Adjust the host and port based on my Elasticsearch setup
+        'hosts': 'localhost:9200',  
     },
 }
 
