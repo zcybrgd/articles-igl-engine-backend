@@ -23,3 +23,5 @@ installer le chromedriver and put it at the same file level as manage.py: so thi
 les devs run to install dependencies:
 pip install -r requirements.txt
 python manage.py runserver
+
+
