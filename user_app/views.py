@@ -34,16 +34,6 @@ def mods_list(request):
     return JsonResponse({"mods": response.data})  # returning the response while setting safe to false to allow non dict objects to be serialized
 
 
-@api_view(['POST']) #adding a mod to the list of moderators
-def add_mod(userName, firstName=None, familyName=None, password=None, imgUrl=None):
-    user = UserSerializer(data={'userName': userName, 'firstName': firstName, 'familyName':familyName, 'email':email, 'password':password, 'role':'moderator', 'imgUrl':imgUrl}) #to take his user profile info
-    if user.is_valid():
-        user.save()
-        mod = ModeratorSerializer(data={user.id, admin.id}) #to create his mod profile
-        mod.save()
-        return JsonResponse({"message": "Moderator added successfully"}, status=status.HTTP_201_CREATED)
-    return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
-
 #@csrf_exempt
 def delete_user(request, id):
     try:
@@ -64,14 +54,3 @@ def delete_mod(request, id):
     modToDelete.delete()
     return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
-
-def modify_mod(request,id):
-    try:
-        modToModify = Moderator.objects.get(pk=id)
-    except Moderator.DoesNotExist:
-        return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
-    serializer = ModeratorSerializer(modToModify, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response({"message": "User modified successfully"}, status=status.HTTP_200_OK)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
