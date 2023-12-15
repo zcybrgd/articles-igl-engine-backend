@@ -33,6 +33,7 @@ SELENIUM_WEBDRIVER_PATH = '../chromedriver_win32'
 # Application definition
 
 INSTALLED_APPS = [
+    'user_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'crum.CurrentRequestUserMiddleware'
 ]
 
 ROOT_URLCONF = 'articles_igl_engine.urls'
@@ -82,15 +84,20 @@ WSGI_APPLICATION = 'articles_igl_engine.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ArticlesBDD',
+        'USER': 'postgres',
+        'PASSWORD': 'TPIGL062023@//@',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
 
+
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200',  
+        'hosts': 'localhost:8000',  # Adjust the host and port based on my Elasticsearch setup
     },
 }
 
