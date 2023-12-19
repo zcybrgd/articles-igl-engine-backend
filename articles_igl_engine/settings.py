@@ -34,6 +34,7 @@ SELENIUM_WEBDRIVER_PATH = '../chromedriver_win32'
 
 INSTALLED_APPS = [
     'user_app',
+    'Users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'debug_toolbar',
-    'core'
+    'core',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -121,11 +123,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+   'DEFAULT_AUTHENTICATION_CLASSES':(
+'rest_framework.authentication.TokenAuthentication',
+# for browsable api view usage
+'rest_framework.authentication.SessionAuthentication',
+),
+'DEFAULT_PERMISSION_CLASSES': (
+'rest_framework.permissions.IsAuthenticated',
+),
+
 }
 
 # Internationalization
