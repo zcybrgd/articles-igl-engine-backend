@@ -33,7 +33,6 @@ SELENIUM_WEBDRIVER_PATH = '../chromedriver_win32'
 # Application definition
 
 INSTALLED_APPS = [
-    'user_app',
     'Users',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'core',
-    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -123,11 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-   'DEFAULT_AUTHENTICATION_CLASSES':(
-'rest_framework.authentication.TokenAuthentication',
-# for browsable api view usage
-'rest_framework.authentication.SessionAuthentication',
-),
+
 'DEFAULT_PERMISSION_CLASSES': (
 'rest_framework.permissions.IsAuthenticated',
 ),

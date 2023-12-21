@@ -4,9 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
-from rest_framework.authtoken.models import Token
-from .serializers import UserSerializer, ClientSerializer
-from .models import user, client
+from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer
+from .models import user, client, Token, Admin, Moderator
+from django.contrib.auth.hashers import make_password
 
 
 @api_view(['POST'])
@@ -16,7 +16,7 @@ def signup(request):
     if serializer.is_valid():
         serializer.save()
         actualClient = client.objects.get(userName=request.data['userName'])
-        actualClient.password = actualClient.set_password(raw_password=request.data['password'])
+        actualClient.password = make_password(request.data['password'])
         userClient = user(userName=actualClient.userName, password=actualClient.password, role='Client')
         userClient.save()
         actualClient.userId = userClient
@@ -64,3 +64,17 @@ def clients_list(request):
     clients = client.objects.all()  # fetch the moderators from db
     response = ClientSerializer(clients, many=True)  # turning all of them into json
     return JsonResponse({"users": response.data})
+
+
+def admins_list(request):
+    admins = Admin.objects.all()  # fetch the moderators from db
+    response = AdminSerializer(admins, many=True)  # turning all of them into json
+    return JsonResponse({"admins": response.data})
+
+
+# getting the list of moderators
+def mods_list(request):
+    mods = Moderator.objects.all()  # fetch the moderators from db
+    response = ModeratorSerializer(mods, many=True)  # turning all of them into json
+    return JsonResponse({"mods": response.data})  # returning the response while setting safe to false to allow non dict objects to be serialized
+

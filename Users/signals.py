@@ -1,4 +1,5 @@
 import crum
+from django.contrib.auth.hashers import make_password
 from django.db.models.signals import pre_save, post_delete, post_save
 from django.dispatch import receiver
 from Users.models import Moderator, user, Admin
@@ -6,6 +7,7 @@ from Users.models import Moderator, user, Admin
 
 @receiver(pre_save, sender=Moderator)#before saving a moderator , to link it to its user profile and the admin that created it
 def save_mod(sender, instance, **kwargs):
+    instance.password = make_password(instance.password)
     userInstance = user(userName=instance.userName, password=instance.password, role='Moderator')#creating user of the mode instance
     userInstance.save()
     instance.userId = userInstance
