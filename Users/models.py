@@ -36,7 +36,7 @@ class Token(models.Model):
 
 
 class user(models.Model):  # the common and important attributes that the 3 types of users have
-    userName = models.CharField(max_length=MAX_CHAR_LENGTH)
+    userName = models.CharField(max_length=MAX_CHAR_LENGTH, unique=True)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
     role = models.CharField(max_length=MAX_CHAR_LENGTH)
 
@@ -60,7 +60,7 @@ class Moderator(models.Model):  # a moderator in our website is in charge of cor
         null=True
     )  # to link the moderator to its user instance
     adminId = models.ForeignKey(Admin, on_delete=models.CASCADE, blank=True, null=True)
-    userName = models.CharField(max_length=MAX_CHAR_LENGTH)
+    userName = models.CharField(max_length=MAX_CHAR_LENGTH, unique=True)
     firstName = models.CharField(max_length=MAX_CHAR_LENGTH)
     familyName = models.CharField(max_length=MAX_CHAR_LENGTH)
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
@@ -78,7 +78,7 @@ class client(models.Model):
         blank=True,
         null=True
     )  # to link the client to its user instance
-    userName = models.CharField(max_length=MAX_CHAR_LENGTH, default=" ")
+    userName = models.CharField(max_length=MAX_CHAR_LENGTH, default=" ", unique=True)
     firstName = models.CharField(max_length=MAX_CHAR_LENGTH)
     familyName = models.CharField(max_length=MAX_CHAR_LENGTH)
     email = models.CharField(max_length=MAX_CHAR_LENGTH)

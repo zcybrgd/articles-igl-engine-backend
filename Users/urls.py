@@ -6,9 +6,9 @@ urlpatterns = [
     re_path('signup', views.signup),
     re_path('login', views.login),
     path('users', users_list),
+    path('client/<int:id>', delete_client),
     path('clients', clients_list),
     path('mods', mods_list),
     path('admins', admins_list),
-    path('users/<int:id>', delete_user),
-    path('clients/<int:id>', delete_client),
+    path('user/<int:id>', delete_user),
 ]
