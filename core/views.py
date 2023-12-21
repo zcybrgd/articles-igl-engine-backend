@@ -23,45 +23,35 @@ class UploadPDFView(APIView):
         try:
             pdf_url = "NoneAtTheMoment"
             pdf_manipulator = PDFManipulation()
-            pdf_processor = PDFProcessing()
-            cleaner = TextCleaner()
+            pdf_files = []
+
             if 'pdf_url' in request.data:
                 pdf_url = request.data['pdf_url']
                 pdf_file = pdf_manipulator.download_pdf_from_drive(pdf_url)
+                pdf_files.append(pdf_file)
             else:
-                pdf_file = request.FILES['pdf_file']
+                pdf_files = request.FILES.getlist('pdf_file')
+
             # Extract text from PDF and update the content field
-            text, first_page = pdf_manipulator.extract_text_from_pdf(pdf_file)
-            article = Article.objects.create(
-                content=text,
-                url_pdf=pdf_url,
-            )
-            # extract abstract, and then references, and then keywords, and then clean the text
-            # and then authors and organizations
-            abstract, text_without_abstract = pdf_processor.extract_abstract(text)
-            references, text_without_references = pdf_processor.extract_references(text_without_abstract)
-            keywords = pdf_processor.extract_keywords(text_without_references)
-            objectAuthorOrg = pdf_processor.spacyNER(first_page)
-            print("\nFirst page:\n", first_page)
-            print("\nAbstract:\n",abstract)
-            print("\nReferences:\n",references)
-            print("\nKeywords:\n", keywords)
-            print("\n\nAuteurs et org\n", objectAuthorOrg)
-            print("\n\n\ntitle: \n", pdf_processor.detect_article_title(first_page))
-            #textFINAL = cleaner.cleaning_text(text_without_references)
-            #print("\n\n\nRest of text:\n", textFINAL)'''
-            article.save()
-            serializer = ArticleSerializer(article, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response({'message': 'File uploaded successfully.'}, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            for pdf_file in pdf_files:
+                text, first_page = pdf_manipulator.extract_text_from_pdf(pdf_file)
+                article_data = {
+                    'content': text,
+                    'url_pdf': pdf_url,
+                }
+                print("\n\nfirst page: \n", first_page)
+                serializer = ArticleSerializer(data=article_data)
+                if serializer.is_valid():
+                    serializer.save()
+                else:
+                    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            return Response({'message': 'Files uploaded successfully.'}, status=status.HTTP_201_CREATED)
 
         except MultiValueDictKeyError:
-            return Response({'error': 'PDF file or URL is required.'})
+            return Response({'error': 'PDF file or URL is required.'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({'error': f'An error occurred: {str(e)}'})
+            return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 
