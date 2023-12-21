@@ -17,12 +17,14 @@ class PDFManipulation():
         for page_num in range(doc.page_count):
             page = doc[page_num]
             text += page.get_text()
+            if page_num==0:
+                first_page = text
 
         # Close the PyMuPDF document
         doc.close()
         # Clean up: delete the temporary file
         os.unlink(temp_file.name)
-        return text
+        return text, first_page
 
 
     def get_drive_direct_link(self, gdrive_link):

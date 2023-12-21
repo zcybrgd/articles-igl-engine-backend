@@ -8,25 +8,20 @@ import re
 import string
 
 import spacy
-from spacy.matcher import Matcher
-import nltk
-from nltk.tokenize import word_tokenize, sent_tokenize
-from nltk.corpus import stopwords
+
 
 
 class PDFProcessing():
     def __init__(self):
         try:
-            self.nlp = spacy.load("en_core_web_sm")
+            self.nlp = spacy.load("en_core_web_lg")
         except OSError:
             # Model not found. Download and install it.
-            spacy.cli.download("en_core_web_sm")
-            self.nlp = spacy.load("en_core_web_sm")
-
+            spacy.cli.download("en_core_web_lg")
+            self.nlp = spacy.load("en_core_web_lg")
 
     def spacyNER(self, text):
         doc = self.nlp(text)
-
         persons = []
         organizations = []
         locations = []
@@ -35,13 +30,18 @@ class PDFProcessing():
 
         for ent in doc.ents:
             if ent.label_ == "PERSON" and ent.text not in persons:
-                persons.append(ent.text)
+                # Check if the person's name has two or more words, this is what came to mind for improving the perf
+                if 2 <= len(ent.text.split()) < 4:
+                    persons.append(ent.text)
             elif ent.label_ == "ORG" and ent.text not in organizations:
-                organizations.append(ent.text)
+                # Check if all characters are uppercase or at least 90% of characters are uppercase
+                is_all_caps = all(char.isupper() for char in ent.text) or (sum(char.isupper() for char in ent.text) / len(ent.text) >= 0.9)
+                if is_all_caps:
+                 organizations.append(ent.text)
             elif ent.label_ == "LOC" and ent.text not in locations:
                 locations.append(ent.text)
             elif ent.label_ == "GPE" and ent.text not in geopolitical_entities:
-                geopolitical_entities.append(ent.text)
+                persons.append(ent.text)
             elif ent.label_ == "DATE" and ent.text not in dates:
                 dates.append(ent.text)
 
@@ -49,9 +49,9 @@ class PDFProcessing():
             "persons": persons,
             "organizations": organizations,
             "locations": locations,
-            "geopolitical_entities": geopolitical_entities,
             "dates": dates
         }
+
 
     def is_title(self, token):
         # Customize this function based on your specific data and title characteristics
@@ -132,10 +132,53 @@ class PDFProcessing():
             if reference_index != -1:
                 first_line_after_references = min(first_line_after_references, reference_index)
 
-        # Extract text without references
-        text_without_references = text[:first_line_after_references].strip()
+        # Extract text without references using spaCy tokenization
+        doc = self.nlp(text[:first_line_after_references].strip())
+        text_without_references = ' '.join([token.text for token in doc])
 
         return references, text_without_references
+
+    def detect_article_title(self,text):
+
+        # Process the text with spaCy
+        doc = self.nlp(text)
+
+        # Initialize variables to track candidate titles and their corresponding lines
+        current_title = ""
+        potential_titles = []
+        potential_title_lines = []
+
+        # Iterate through tokens in the document
+        for sent in doc.sents:
+            # Check if the sentence starts with common words
+            if sent[0].text.lower() in ["on", "a", "the"]:
+                current_title = sent.text.strip()
+                continue
+
+            for token in sent:
+                # Check if the token is a proper noun (capitalized word)
+                if token.pos_ == "PROPN":
+                    current_title += " " + token.text
+                else:
+                    # Check if the current sequence is a potential title
+                    if current_title and (current_title.istitle() or current_title.isupper()):
+                        potential_titles.append(current_title.strip())
+                        potential_title_lines.append(sent.text.split('\n')[0].strip())
+                    current_title = ""
+
+        # Check for the last potential title
+        if current_title and (current_title.istitle() or current_title.isupper()):
+            potential_titles.append(current_title.strip())
+            potential_title_lines.append(sent.text.split('\n')[0].strip())
+
+        # Return the longest potential title and its entire line
+        if potential_titles:
+            longest_title = max(potential_titles, key=len)
+            index_of_longest_title = potential_titles.index(longest_title)
+            return "\nLongest Title: " + str(longest_title), "\nPotential Line: " + str(
+                potential_title_lines[index_of_longest_title])
+        else:
+            return None, None
 
     def extract_keywords(self, article_text):
         # Define common indicators for keywords
@@ -189,19 +232,7 @@ class PDFProcessing():
         # Remove extra spaces and return the extracted keywords
         return extracted_keywords.strip()
 
-    '''
-    def ie_stanford(txt):
-        """
-            Name entity recognition (StanfordCoreNlP)
-        """
-        nlp = StanfordCoreNLP('http://localhost:9000')
-        ann = nlp.annotate(txt, properties={
-            'annotators': 'tokenize, ssplit, pos, lemma, ner',
-            'outputFormat': 'json'})
-        ent = [(w['word'], w['ner']) for sent in ann["sentences"] for w in sent['tokens']]
-        for item in ent:
-            print(item[0], item[1])
-    '''
+
 
 
 

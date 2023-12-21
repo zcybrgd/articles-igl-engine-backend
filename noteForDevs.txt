@@ -24,3 +24,5 @@ les devs run to install dependencies:
 pip install -r requirements.txt
 python manage.py runserver
 
+
+en-core-web-lg==3.7.1
