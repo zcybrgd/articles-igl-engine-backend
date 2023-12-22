@@ -9,32 +9,6 @@ MAX_CHAR_LENGTH = 110  # constant to make the lengths of chars more maintainable
 
 
 # Create your models here.
-class Token(models.Model):
-    key = models.CharField(_("Key"), max_length=40, primary_key=True)
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name='auth_token',
-        on_delete=models.CASCADE, verbose_name=_("user")
-    )
-    created = models.DateTimeField(_("Created"), auto_now_add=True)
-
-    class Meta:
-        abstract = 'rest_framework.authtoken' not in settings.INSTALLED_APPS
-        verbose_name = _("Token")
-        verbose_name_plural = _("Tokens")
-
-    def save(self, *args, **kwargs):
-        if not self.key:
-            self.key = self.generate_key()
-        return super().save(*args, **kwargs)
-
-    @classmethod
-    def generate_key(cls):
-        return binascii.hexlify(os.urandom(20)).decode()
-
-    def __str__(self):
-        return self.key
-
-
 class user(models.Model):  # the common and important attributes that the 3 types of users have
     userName = models.CharField(max_length=MAX_CHAR_LENGTH, unique=True)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
@@ -52,7 +26,8 @@ class Admin(models.Model):
     )# to link the admin to its user instance
 
 
-class Moderator(models.Model):  # a moderator in our website is in charge of correcting extracted articles , validating and deleting them
+# a moderator in our website is in charge of correcting extracted articles , validating and deleting them
+class Moderator(models.Model):
     userId = models.OneToOneField(
         user,
         on_delete=models.CASCADE,
@@ -71,6 +46,7 @@ class Moderator(models.Model):  # a moderator in our website is in charge of cor
         return self.userName
 
 
+#the client is the main user of our website , he's the one who searches for articles , reads them , save them to favorites and so on
 class client(models.Model):
     userId = models.OneToOneField(
         user,
@@ -84,6 +60,33 @@ class client(models.Model):
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH, default=" ")
     imgUrl = models.CharField(max_length=MAX_CHAR_LENGTH)
+
+
+#The token model that we used to replace the token model defined in the User's auth app
+class NonUserToken(models.Model):
+    key = models.CharField(_("Key"), max_length=40, primary_key=True)
+    user = models.OneToOneField(
+        user, related_name='auth_token',
+        on_delete=models.CASCADE, verbose_name=_("user")
+    )
+    created = models.DateTimeField(_("Created"), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Token")
+        verbose_name_plural = _("Tokens")
+
+    def save(self, *args, **kwargs):
+        if not self.key:
+            self.key = self.generate_key()
+        return super().save(*args, **kwargs)
+
+    @classmethod
+    def generate_key(cls):
+        return binascii.hexlify(os.urandom(20)).decode()
+
+    def __str__(self):
+        return self.key
+
 
 
 

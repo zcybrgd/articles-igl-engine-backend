@@ -1,6 +1,5 @@
-import crum
 from django.contrib import admin
-from .models import Moderator, user
+from .models import Moderator
 
 
 class WebsiteAdmin(admin.ModelAdmin):

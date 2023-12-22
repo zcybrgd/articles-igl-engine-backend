@@ -5,34 +5,38 @@ from rest_framework import status
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer
-from .models import user, client, Token, Admin, Moderator
-from django.contrib.auth.hashers import make_password
+from .models import user, client, NonUserToken, Admin, Moderator
+from django.contrib.auth.hashers import make_password, check_password
 
-
+#this is an api to register a client into the db , alon with its user instance and creating its token
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def signup(request):
     serializer = ClientSerializer(data=request.data)
+    #the userName field must be unique , if not a message will appear telling the user to change it
     if serializer.is_valid():
         serializer.save()
         actualClient = client.objects.get(userName=request.data['userName'])
-        actualClient.password = make_password(request.data['password'])
-        userClient = user(userName=actualClient.userName, password=actualClient.password, role='Client')
+        actualClient.password = make_password(request.data['password']) #hash the password provided by the user
+        userClient = user(userName=actualClient.userName, password=actualClient.password, role='Client') #registering the user instance
         userClient.save()
-        actualClient.userId = userClient
+        actualClient.userId = userClient #linking the client to its user instance
         actualClient.save()
-        token = Token.objects.create(user=userClient)
-        return Response({'token': token.key, 'user': serializer.data})
+        token = NonUserToken.objects.create(user=userClient) #creating its token
+        return Response({'token': token.key})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+#this api is used to login both the client and moderator , the difference is in the role attribute in their user instance
 @api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
 def login(request):
     userClient = get_object_or_404(user, userName=request.data['userName'])
-    if not user.check_password(request.data['password']):
+    checking = check_password(request.data['password'], userClient.password)
+    if not checking:
         return Response("missing user", status=status.HTTP_404_NOT_FOUND)
-    token, created = Token.objects.get_or_create(user=userClient)
-    serializer = UserSerializer(user)
+    token, created = NonUserToken.objects.get_or_create(user=userClient)
+    serializer = UserSerializer(userClient)
     return Response({'token': token.key, 'user': serializer.data})
 
 
@@ -55,13 +59,13 @@ def delete_client(request, id):
 
 
 def users_list(request):
-    users = user.objects.all()  # fetch the moderators from db
+    users = user.objects.all()  # fetch the users from db
     response = UserSerializer(users, many=True)  # turning all of them into json
     return JsonResponse({"users": response.data})
 
 @permission_classes((permissions.AllowAny,))
 def clients_list(request):
-    clients = client.objects.all()  # fetch the moderators from db
+    clients = client.objects.all()  # fetch the clients from db
     response = ClientSerializer(clients, many=True)  # turning all of them into json
     return JsonResponse({"users": response.data})
 
