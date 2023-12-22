@@ -16,7 +16,7 @@ class Command(BaseCommand):
         index = ArticleIndex._index._name
 
         # Read data from JSON file
-        with open('search/books.json') as json_file:
+        with open('search/articles.json') as json_file:
             articles_data = json.load(json_file)
 
         actions = [
