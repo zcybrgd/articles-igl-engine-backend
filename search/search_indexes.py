@@ -2,7 +2,9 @@
 from elasticsearch_dsl import Document, Text, Keyword, Date
 
 
+    #Création d'un document ElasticSearch DSL pour notre Article
 class ArticleIndex(Document):
+    #Definition des types des paramètres à indexer
     title = Text()
     author = Keyword()
     institutions = Keyword()
@@ -12,5 +14,7 @@ class ArticleIndex(Document):
     text = Text()
     date = Date()
 
+
     class Index:
+        #Ceci représente le nom de  l'index à construire
         name = 'article_index'

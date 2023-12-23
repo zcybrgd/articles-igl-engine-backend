@@ -1,4 +1,4 @@
-<!-- search/templates/search_articles.html -->
+<!-- Template Html pour l'affichage des résultats de recherche -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,23 +11,17 @@
     <h1>Search Results for "{{ query }}"</h1>
     <ul>
         {% for result in results %}
-        <br>
-            <li>{{ result.title }}
-                <br>
-                {{ result.authors }}
-                <br>
-                {{ result.institutions }}
-                <br>
-                {{ result.keywords }}
-                <br>
-                {{ result.pdf_url }}
-                <br>
-                {{ result.text }}
-                <br>
-                {{ result.bibliographie }}
-                <br>
-                {{ result.date }}
-            </li>
+        <li>
+            <strong>Title:</strong> {{ result.title }}<br>
+            <strong>Authors:</strong> {{ result.authors }}<br>
+            <strong>Institutions:</strong> {{ result.institutions }}<br>
+            <strong>Keywords:</strong> {{ result.keywords }}<br>
+            <strong>PDF URL:</strong> {{ result.pdf_url }}<br>
+            <strong>Text:</strong> {{ result.text }}<br>
+            <strong>Bibliography:</strong> {{ result.bibliographie }}<br>
+            <strong>Date:</strong> {{ result.date }}<br>
+        </li>
+        <br> <!-- Optional line break between results -->
         {% endfor %}
     </ul>
 </body>
