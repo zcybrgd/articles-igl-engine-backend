@@ -16,3 +16,6 @@ def index_article_info(article_info, index_name='articles'):
     es.indices.create(index=index_name, ignore=400)
     # Indexation des données
     es.index(index=index_name, body=article_info)'''
+
+
+

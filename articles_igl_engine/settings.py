@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'core',
+    'Users'
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'crum.CurrentRequestUserMiddleware'
 ]
 
 ROOT_URLCONF = 'articles_igl_engine.urls'
@@ -87,7 +89,7 @@ DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'ArticlesBDD',
         'USER': 'postgres',
         'PASSWORD': 'TPIGL062023@//@',
         'HOST': '127.0.0.1',

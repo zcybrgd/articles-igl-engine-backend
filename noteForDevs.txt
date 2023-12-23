@@ -26,3 +26,6 @@ python manage.py runserver
 
 
 en-core-web-lg==3.7.1
+
+superuser: admin1
+mdp: OwisAdmin2003
