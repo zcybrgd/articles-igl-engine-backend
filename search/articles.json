@@ -13,7 +13,7 @@
     "title": "Article Title 2",
     "authors": ["Author 3", "Author 4"],
     "institutions": ["Institution 3", "Institution 4"],
-    "keywords": "Keyword4, Keyword5, Keyword6",
+    "keywords": "Keyword4, Keyword5, Keyword6, Keyword7",
     "pdf_url": "https://example.com/article2.pdf",
     "bibliographie": ["Reference 3", "Reference 4"],
     "text": "This is the text of Article 2.",

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'core',
+    'corsheaders',
     'search',
     'elasticsearch_dsl',
 ]
@@ -54,8 +55,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'articles_igl_engine.urls'
 
