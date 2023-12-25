@@ -37,22 +37,22 @@ def signup(request):
 def login(request):
     #check if username exists in the request
     if 'userName' not in request.data:
-        return Response("missing username")
+        return Response({'error':"missing username"})
 
     #check if password exists in the request
     if 'password' not in request.data:
-        return Response("missing password")
+        return Response({'error':"missing password"})
 
     try:
         #récuperer the user
         user_client = get_object_or_404(user, userName=request.data['userName'])
     except Http404:
         #if it doesnt exist
-        return Response("username does not exist")
+        return Response({'error':"username does not exist"})
 
     #check if the passowrd provided is correct
     if not check_password(request.data['password'], user_client.password):
-        return Response("incorrect password")
+        return Response({'error':"incorrect password"})
 
     token, created = NonUserToken.objects.get_or_create(user=user_client)
     serializer = UserSerializer(user_client)
