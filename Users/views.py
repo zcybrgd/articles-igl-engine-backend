@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,6 +12,10 @@ from django.contrib.auth.hashers import make_password, check_password
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def signup(request):
+    existing_user = client.objects.filter(userName=request.data.get('userName', ''))
+
+    if existing_user.exists():
+        return Response({'error': 'Username already exists. Please choose a different username.'})
     serializer = ClientSerializer(data=request.data)
     #the userName field must be unique , if not a message will appear telling the user to change it
     if serializer.is_valid():
@@ -31,12 +35,27 @@ def signup(request):
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def login(request):
-    userClient = get_object_or_404(user, userName=request.data['userName'])
-    checking = check_password(request.data['password'], userClient.password)
-    if not checking:
-        return Response("missing user", status=status.HTTP_404_NOT_FOUND)
-    token, created = NonUserToken.objects.get_or_create(user=userClient)
-    serializer = UserSerializer(userClient)
+    #check if username exists in the request
+    if 'userName' not in request.data:
+        return Response("missing username")
+
+    #check if password exists in the request
+    if 'password' not in request.data:
+        return Response("missing password")
+
+    try:
+        #récuperer the user
+        user_client = get_object_or_404(user, userName=request.data['userName'])
+    except Http404:
+        #if it doesnt exist
+        return Response("username does not exist")
+
+    #check if the passowrd provided is correct
+    if not check_password(request.data['password'], user_client.password):
+        return Response("incorrect password")
+
+    token, created = NonUserToken.objects.get_or_create(user=user_client)
+    serializer = UserSerializer(user_client)
     return Response({'token': token.key, 'user': serializer.data})
 
 

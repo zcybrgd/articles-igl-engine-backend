@@ -24,6 +24,7 @@ class Admin(models.Model):
         blank=True,
         null=True
     )# to link the admin to its user instance
+    created_moderators = models.ManyToManyField(user, related_name='created_by_admin', blank=True)
 
 
 class Moderator(models.Model):
@@ -39,7 +40,7 @@ class Moderator(models.Model):
     familyName = models.CharField(max_length=MAX_CHAR_LENGTH)
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
-    profile_picture = models.ImageField(upload_to='profile_pics', null=True, blank=True, default='profile_pics/')
+    profile_picture = models.ImageField(upload_to='profile_pics', null=True, blank=True, default='media/profile_pics/default_profile_pic.jpg')
     edit_count = models.IntegerField(default=0)  # New field to store edit count
 
     def __str__(self):
@@ -58,7 +59,7 @@ class client(models.Model):
     familyName = models.CharField(max_length=MAX_CHAR_LENGTH)
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH, default=" ")
-    imgUrl = models.CharField(max_length=MAX_CHAR_LENGTH)
+    profile_picture = models.ImageField(upload_to='media/profile_pics', null=True, blank=True, default='media/profile_pics/')
 
 
 #The token model that we used to replace the token model defined in the User's auth app

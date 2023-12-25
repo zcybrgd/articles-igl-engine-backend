@@ -1,6 +1,11 @@
-from django.urls import path, include
-from .views import home
+from django.urls import path
+from .views import home, UploadPDFView  # Import the home view
+
+
 
 urlpatterns = [
-path('', home, name='home'),
+    path('api/uploadPDF', UploadPDFView.as_view(), name='uploadPDF'),
+    path('', home, name='home'),
 ]
+
+#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

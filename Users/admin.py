@@ -3,7 +3,7 @@ from .models import Moderator
 
 
 class WebsiteAdmin(admin.ModelAdmin):
-    fields = ['userName', 'firstName', 'familyName', 'email', 'password', 'imgUrl']
+    fields = ['userName', 'firstName', 'familyName', 'email', 'password', 'profile_picture','edit_count']
     list_display = ['userName', 'email']
 
 
