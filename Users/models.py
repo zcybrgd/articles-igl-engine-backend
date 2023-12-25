@@ -26,25 +26,24 @@ class Admin(models.Model):
     )# to link the admin to its user instance
 
 
-# a moderator in our website is in charge of correcting extracted articles , validating and deleting them
 class Moderator(models.Model):
     userId = models.OneToOneField(
         user,
         on_delete=models.CASCADE,
         blank=True,
         null=True
-    )  # to link the moderator to its user instance
+    )
     adminId = models.ForeignKey(Admin, on_delete=models.CASCADE, blank=True, null=True)
     userName = models.CharField(max_length=MAX_CHAR_LENGTH, unique=True)
     firstName = models.CharField(max_length=MAX_CHAR_LENGTH)
     familyName = models.CharField(max_length=MAX_CHAR_LENGTH)
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
-    imgUrl = models.CharField(max_length=MAX_CHAR_LENGTH)
+    profile_picture = models.ImageField(upload_to='profile_pics', null=True, blank=True, default='profile_pics/')
+    edit_count = models.IntegerField(default=0)  # New field to store edit count
 
     def __str__(self):
         return self.userName
-
 
 #the client is the main user of our website , he's the one who searches for articles , reads them , save them to favorites and so on
 class client(models.Model):
