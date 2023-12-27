@@ -8,10 +8,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Article
 from django.middleware.csrf import get_token
-from .serializers import ArticleSerializer
+from .serializers import ArticleSerializer, ArticleUnReviewedSerializer
 from .pdf_manipulation import PDFManipulation
-from.pdf_processing import PDFProcessing
-from .pdf_cleaning import TextCleaner
+from .mod_articles import ModArticles
+from rest_framework.decorators import authentication_classes, permission_classes
+
+
 class UploadPDFView(APIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
@@ -66,3 +68,14 @@ class UploadPDFView(APIView):
 
 def home(request):
     return render(request, 'home.html')
+
+
+@authentication_classes([])
+@permission_classes([])
+class ArticlesApiView(APIView):
+    @action(detail=False, methods=['get'])
+    def get(self, request):
+        mod_articles = ModArticles()
+        articles = mod_articles.articles
+        serializer = ArticleUnReviewedSerializer(articles, many=True)
+        return Response({'articles': serializer.data}, status=status.HTTP_200_OK)

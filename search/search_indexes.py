@@ -11,6 +11,7 @@ class ArticleIndex(Document):
     keywords = Keyword()
     pdf_url = Keyword()
     bibliographie = Keyword()
+    abstract = Text()
     text = Text()
     date = Date()
 

@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
     #Definition du port, host et de l'index utilisés
     def handle(self, *args, **options):
-        es = Elasticsearch(['http://localhost:9200'])
+        es = Elasticsearch(['http://localhost:9200'],)
         index = ArticleIndex._index._name
 
         #es.indices.delete(index=index) Décommenter cette instruction en cas de dupplications(permet de supprimer l'index existant)
@@ -36,6 +36,7 @@ class Command(BaseCommand):
                     'keywords': data.get('keywords', ''),
                     'pdf_url': data.get('pdf_url', ''),
                     'bibliographie': data.get('bibliographie', ''),
+                    'abstract': data.get('abstract', ''),
                     'text': data.get('text', ''),
                     'date': data.get('date', ''),
                 }

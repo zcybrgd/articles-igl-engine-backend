@@ -6,7 +6,7 @@ from search.search_indexes import ArticleIndex
 
 def search_articles(request):
     query = request.GET.get('q', '')
-    fields = ['title', 'authors', 'keywords', 'text']
+    fields = ['title', 'authors', 'keywords', 'text','abstract']
     multi_match_query = MultiMatch(query=query, fields=fields, type='phrase')
     s = Search(index='article_index').query(multi_match_query)
     response = s.execute()
@@ -18,6 +18,7 @@ def search_articles(request):
                 'keywords': hit.keywords,
                 'pdf_url': hit.pdf_url,
                 'bibliographie': list(hit.bibliographie) if isinstance(hit.bibliographie, AttrList) else hit.bibliographie,
+                'abstract':hit.abstract,
                 'text': hit.text,
                 'date': hit.date} for hit in response]
 
