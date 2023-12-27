@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'debug_toolbar',
     'core',
+    'search',
+    'elasticsearch_dsl',
+    #'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -98,7 +101,7 @@ DATABASES = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:8000',  # Adjust the host and port based on my Elasticsearch setup
+        'hosts': 'localhost:9200',  # Adjust the host and port based on my Elasticsearch setup
     },
 }
 
