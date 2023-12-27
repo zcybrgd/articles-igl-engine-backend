@@ -21,7 +21,9 @@ class ModArticles:
         self.save_articles()
 
     def delete_article(self, article_id):
+        print("\ndid we enter here\n")
         self.articles = [article for article in self.articles if article.get('id') != article_id]
+        print("\nand what about hr; : ", self.articles)
         self.save_articles()
 
     def add_article(self, new_article_data):

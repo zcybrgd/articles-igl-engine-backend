@@ -79,3 +79,9 @@ class ArticlesApiView(APIView):
         articles = mod_articles.articles
         serializer = ArticleUnReviewedSerializer(articles, many=True)
         return Response({'articles': serializer.data}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['delete'])
+    def delete(self, request, article_id):
+        mod_articles = ModArticles()
+        mod_articles.delete_article(str(article_id))
+        return Response({'message': 'Article deleted successfully'}, status=status.HTTP_200_OK)
