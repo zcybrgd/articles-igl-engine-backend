@@ -1,18 +1,18 @@
 import binascii
 import os
-from django.conf import settings
 from django.db import models
+from rest_framework.authtoken.models import Token as BaseToken
 from django.utils.translation import gettext_lazy as _
 
 
 MAX_CHAR_LENGTH = 110  # constant to make the lengths of chars more maintainable
 
 
-# Create your models here.
 class user(models.Model):  # the common and important attributes that the 3 types of users have
     userName = models.CharField(max_length=MAX_CHAR_LENGTH, unique=True)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
     role = models.CharField(max_length=MAX_CHAR_LENGTH)
+    is_active = models.BooleanField(_('active'),default=True,)
 
 
 #represents the admin in our database , he controls the Moderator model
@@ -24,7 +24,6 @@ class Admin(models.Model):
         blank=True,
         null=True
     )# to link the admin to its user instance
-    created_moderators = models.ManyToManyField(user, related_name='created_by_admin', blank=True)
 
 
 class Moderator(models.Model):
@@ -41,7 +40,6 @@ class Moderator(models.Model):
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
     profile_picture = models.ImageField(upload_to='profile_pics', null=True, blank=True, default='media/profile_pics/default_profile_pic.jpg')
-    edit_count = models.IntegerField(default=0)  # New field to store edit count
 
     def __str__(self):
         return self.userName
@@ -63,7 +61,7 @@ class client(models.Model):
 
 
 #The token model that we used to replace the token model defined in the User's auth app
-class NonUserToken(models.Model):
+class NonUserToken(BaseToken):
     key = models.CharField(_("Key"), max_length=40, primary_key=True)
     user = models.OneToOneField(
         user, related_name='auth_token',
@@ -86,7 +84,3 @@ class NonUserToken(models.Model):
 
     def __str__(self):
         return self.key
-
-
-
-
