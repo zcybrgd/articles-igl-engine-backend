@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ ALLOWED_HOSTS = []
 
 SELENIUM_WEBDRIVER_PATH = '../chromedriver_win32'
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,12 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_simplejwt',
     'debug_toolbar',
     'core',
-    'search',
-    'elasticsearch_dsl',
-    #'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'articles_igl_engine.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -98,14 +91,11 @@ DATABASES = {
     }
 }
 
-
-
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200',  # Adjust the host and port based on my Elasticsearch setup
+        'hosts': 'localhost:8000',  # Adjust the host and port based on my Elasticsearch setup
     },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -126,15 +116,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-
-'DEFAULT_PERMISSION_CLASSES': (
-'rest_framework.permissions.IsAuthenticated',
-),
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'Users.authentication.TokenAuthentication'
+        'Users.authentication.TokenAuthentication',
     ],
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+
 }
 
 # Internationalization
@@ -147,7 +136,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

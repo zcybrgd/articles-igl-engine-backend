@@ -3,58 +3,58 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
-from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer
-from .models import user, client, NonUserToken, Admin, Moderator
+from .models import user, client, Admin, Moderator, NonUserToken
 from django.contrib.auth.hashers import make_password, check_password
 
-#this is an api to register a client into the db , alon with its user instance and creating its token
+
+# this is an api to register a client into the db , alon with its user instance and creating its token
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def signup(request):
     existing_user = client.objects.filter(userName=request.data.get('userName', ''))
-
     if existing_user.exists():
         return Response({'error': 'Username already exists. Please choose a different username.'})
     serializer = ClientSerializer(data=request.data)
-    #the userName field must be unique , if not a message will appear telling the user to change it
+    # the userName field must be unique , if not a message will appear telling the user to change it
     if serializer.is_valid():
         serializer.save()
         actualClient = client.objects.get(userName=request.data['userName'])
-        actualClient.password = make_password(request.data['password']) #hash the password provided by the user
-        userClient = user(userName=actualClient.userName, password=actualClient.password, role='Client') #registering the user instance
+        actualClient.password = make_password(request.data['password'])  # hash the password provided by the user
+        userClient = user(userName=actualClient.userName, password=actualClient.password,
+                          role='Client')  # registering the user instance
         userClient.save()
-        actualClient.userId = userClient #linking the client to its user instance
+        actualClient.userId = userClient  # linking the client to its user instance
         actualClient.save()
-        token = NonUserToken.objects.create(user=userClient) #creating its token
+        token = NonUserToken.objects.create(user=userClient)  # creating its token
         return Response({'token': token.key})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#this api is used to login both the client and moderator , the difference is in the role attribute in their user instance
+# this api is used to login both the client and moderator , the difference is in the role attribute in their user instance
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def login(request):
-    #check if username exists in the request
+    # check if username exists in the request
     if 'userName' not in request.data:
-        return Response({'error':"missing username"})
+        return Response({'error': "missing username"})
 
-    #check if password exists in the request
+    # check if password exists in the request
     if 'password' not in request.data:
-        return Response({'error':"missing password"})
+        return Response({'error': "missing password"})
 
     try:
-        #récuperer the user
+        # récuperer the user
         user_client = get_object_or_404(user, userName=request.data['userName'])
     except Http404:
-        #if it doesnt exist
-        return Response({'error':"username does not exist"})
+        # if it doesnt exist
+        return Response({'error': "username does not exist"})
 
-    #check if the passowrd provided is correct
+    # check if the passowrd provided is correct
     if not check_password(request.data['password'], user_client.password):
-        return Response({'error':"incorrect password"})
-
+        return Response({'error': "incorrect password"})
     token, created = NonUserToken.objects.get_or_create(user=user_client)
     serializer = UserSerializer(user_client)
     return Response({'token': token.key, 'user': serializer.data})
@@ -67,6 +67,7 @@ def delete_user(request, id):
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
     userTodel.delete()
     return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
 
 @permission_classes((permissions.AllowAny,))
 def delete_client(request, id):
@@ -82,6 +83,7 @@ def users_list(request):
     users = user.objects.all()  # fetch the users from db
     response = UserSerializer(users, many=True)  # turning all of them into json
     return JsonResponse({"users": response.data})
+
 
 @permission_classes((permissions.AllowAny,))
 def clients_list(request):
@@ -100,7 +102,9 @@ def admins_list(request):
 def mods_list(request):
     mods = Moderator.objects.all()  # fetch the moderators from db
     response = ModeratorSerializer(mods, many=True)  # turning all of them into json
-    return JsonResponse({"mods": response.data})  # returning the response while setting safe to false to allow non dict objects to be serialized
+    return JsonResponse({
+        "mods": response.data})  # returning the response while setting safe to false to allow non dict objects to be serialized
+
 
 @authentication_classes([])
 @permission_classes([])
@@ -109,8 +113,6 @@ class modManipulation(APIView):
     @api_view(['POST'])
     def add_mod(request):
         connected = request.user  # extracting the current user instance
-        if connected.id == None:
-            return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             existing_mod = Moderator.objects.filter(
                 userName=request.data['userName'])  # to find if the username already exists
@@ -137,8 +139,6 @@ class modManipulation(APIView):
     @api_view(['PUT'])
     def modify_mod(request, id):
         connected = request.user  # to get the instance of the actual active admin
-        if connected.id == None:
-            return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             try:
                 admin_connect = Admin.objects.get(userId=connected)
@@ -170,8 +170,6 @@ class modManipulation(APIView):
     @api_view(['DELETE'])
     def delete_mod(request, id):
         connected = request.user  # to get the instance of the actual active admin
-        if connected.id is None:
-            return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             try:
                 admin_connect = Admin.objects.get(userId=connected)
@@ -196,8 +194,6 @@ class modManipulation(APIView):
     @api_view(['GET'])
     def display_mods(request):
         connected = request.user
-        if connected.id == None:
-            return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             try:
                 adminConnected = Admin.objects.get(userId=connected)

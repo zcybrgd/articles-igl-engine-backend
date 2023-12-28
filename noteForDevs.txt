@@ -25,3 +25,5 @@ pip install -r requirements.txt
 python manage.py runserver
 
 Response.headers = {'Authorization': 'Token ', token}
+
+
