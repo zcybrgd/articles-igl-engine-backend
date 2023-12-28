@@ -90,3 +90,17 @@ class ArticlesApiView(APIView):
         article_id = request.data.get('articleId')
         reponse = self.mod_articles.validate_article(str(article_id))
         return Response({'message': 'Article validated successfully'}, status=status.HTTP_200_OK if reponse['success'] else status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(detail=False, methods=['patch'])
+    def patch(self, request, article_id):
+        article_data = self.mod_articles.get_article_data(str(article_id))
+        if article_data is None:
+            return Response({'message': 'Article not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = ArticleUnReviewedSerializer(data=request.data, partial=True)
+        if serializer.is_valid():
+            #update the article data in the json of the unreviewed articles
+            self.mod_articles.update_article(str(article_id), serializer.validated_data)
+            return Response({'message': 'Article updated successfully'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'Invalid data for update'}, status=status.HTTP_400_BAD_REQUEST)

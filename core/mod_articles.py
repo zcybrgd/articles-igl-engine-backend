@@ -18,7 +18,10 @@ class ModArticles:
     def update_article(self, article_id, updated_data):
         for article in self.articles:
             if article.get('id') == article_id:
-                article.update(updated_data)
+                print("\nupdated data: ", updated_data)
+                for key, value in updated_data.items():
+                    if key in article:
+                        article[key] = value
                 break
         self.save_articles()
 
@@ -33,7 +36,7 @@ class ModArticles:
 
     def validate_article(self, article_id):
         self.articles = self.load_articles()
-        article_to_validate = next((article for article in self.articles if article.get('id') == article_id), None)
+        article_to_validate = self.get_article_data(article_id)
         es_response = self.index_article(article_to_validate)
         if(es_response['success']):
             self.delete_article(article_id)
@@ -41,11 +44,13 @@ class ModArticles:
         else:
             return {'success': False, 'message': 'Unexpected error from server'}
 
+    def get_article_data(self, article_id):
+        article_data = next((article for article in self.articles if article.get('id') == article_id), None)
+        return article_data
 
     def index_article(self, article_data):
         es = Elasticsearch(['http://localhost:9200'],)
         index = ArticleIndex._index._name
-
         try:
             #the params to index
             action = {

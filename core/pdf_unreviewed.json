@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "title": "The Impact of Climate Change on Biodiversity",
+    "title": "The Impact of Climate Change on Biodiversity and Computer Science's role in that!",
     "authors": [
       "Dr. Alice Johnson",
       "Prof. Robert Davis"
@@ -61,7 +61,8 @@
     "abstract": "This article highlights recent medical breakthroughs in cancer treatment, with a focus on targeted therapies and immunotherapy. It discusses the promising results of clinical trials and their potential impact on cancer patients.",
     "text": "This is the text of Article 3.",
     "date": "2023-03-20"
-  },{
+  },
+  {
     "id": "4",
     "title": "Renewable Energy Sources: A Global Perspective",
     "authors": [
@@ -123,7 +124,8 @@
     "abstract": "This article discusses the challenges and opportunities in the future of space exploration. It addresses advancements in space technology, missions to distant planets, and the potential for human colonization beyond Earth.",
     "text": "This is the text of Article 6.",
     "date": "2023-06-30"
-  }, {
+  },
+  {
     "id": "7",
     "title": "Artificial Intelligence in Healthcare: Transformative Innovations",
     "authors": [
