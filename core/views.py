@@ -73,15 +73,20 @@ def home(request):
 @authentication_classes([])
 @permission_classes([])
 class ArticlesApiView(APIView):
+    mod_articles = ModArticles()
     @action(detail=False, methods=['get'])
     def get(self, request):
-        mod_articles = ModArticles()
-        articles = mod_articles.articles
+        articles = self.mod_articles.load_articles()
         serializer = ArticleUnReviewedSerializer(articles, many=True)
         return Response({'articles': serializer.data}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['delete'])
     def delete(self, request, article_id):
-        mod_articles = ModArticles()
-        mod_articles.delete_article(str(article_id))
+        self.mod_articles.delete_article(str(article_id))
         return Response({'message': 'Article deleted successfully'}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['post'])
+    def post(self, request):
+        article_id = request.data.get('articleId')
+        reponse = self.mod_articles.validate_article(str(article_id))
+        return Response({'message': 'Article validated successfully'}, status=status.HTTP_200_OK if reponse['success'] else status.HTTP_500_INTERNAL_SERVER_ERROR)

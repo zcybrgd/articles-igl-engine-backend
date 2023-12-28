@@ -22,4 +22,3 @@ class ArticleUnReviewedSerializer(serializers.Serializer):
     abstract = serializers.CharField()
     text = serializers.CharField()
     date = serializers.DateField()
-    status = serializers.CharField()

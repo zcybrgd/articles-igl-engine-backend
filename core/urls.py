@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, UploadPDFView, ArticlesApiView # Import the home view
+from .views import home, UploadPDFView, ArticlesApiView
 
 
 
