@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-^vh4u6b1y*k31-4%%u6guj2siv&8gkq#8@mhy(gwj9qe8k*t3y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 SELENIUM_WEBDRIVER_PATH = '../chromedriver_win32'
 
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'core',
     'search',
+    'Articles',
+    'Users',
     'elasticsearch_dsl',
 ]
 
@@ -84,8 +86,13 @@ WSGI_APPLICATION = 'articles_igl_engine.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ArticlesBDD',
+        'USER': 'postgres',
+        'PASSWORD': 'TPIGL062023@//@',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+
     }
 }
 
@@ -116,11 +123,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'Users.authentication.TokenAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+
 }
 
 # Internationalization
@@ -144,6 +154,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+LOGIN_URL = '/us/login/'
 # settings.py
 

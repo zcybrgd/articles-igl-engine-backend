@@ -6,6 +6,7 @@
     "keywords": "Keyword1, Keyword2, Keyword3",
     "pdf_url": "https://example.com/article1.pdf",
     "bibliographie": ["Reference 1", "Reference 2"],
+    "abstract": "azul",
     "text": "This is the text of Article 1.",
     "date": "2023-01-01"
   },
@@ -16,6 +17,7 @@
     "keywords": "Keyword4, Keyword5, Keyword6",
     "pdf_url": "https://example.com/article2.pdf",
     "bibliographie": ["Reference 3", "Reference 4"],
+    "abstract": "azul",
     "text": "This is the text of Article 2.",
     "date": "2023-02-15"
   },
@@ -26,6 +28,7 @@
     "keywords": "Keyword7, Keyword8, Keyword9",
     "pdf_url": "https://example.com/article3.pdf",
     "bibliographie": ["Reference 5", "Reference 6"],
+    "abstract": "azul",
     "text": "This is the text of Article 3.",
     "date": "2023-03-20"
   }

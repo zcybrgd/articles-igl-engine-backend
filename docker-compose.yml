@@ -4,7 +4,7 @@ version: '3'
 services:
   frontend:
     build:
-      context: ./frontend/articles-igl-engine-frontend
+      context: ./frontend/Articles-igl-engine-frontend
     ports:
       - "5173:5173"
 

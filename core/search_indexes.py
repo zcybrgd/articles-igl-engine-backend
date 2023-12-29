@@ -8,4 +8,4 @@ class ArticleIndex(Document):
     uploaded_at = Date()
 
     class Index:
-        name = 'articles'
+        name = 'Articles'

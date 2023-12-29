@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
         #es.indices.delete(index=index) Décommenter cette instruction en cas de dupplications(permet de supprimer l'index existant)
         # Lecture des données par
-        with open('search/articles.json') as json_file:
+        with open('search/Articles.json') as json_file:
             articles_data = json.load(json_file)
 
         #Préparation des paramètres à indexer
@@ -36,6 +36,7 @@ class Command(BaseCommand):
                     'keywords': data.get('keywords', ''),
                     'pdf_url': data.get('pdf_url', ''),
                     'bibliographie': data.get('bibliographie', ''),
+                    'abstract': data.get('abstract',''),
                     'text': data.get('text', ''),
                     'date': data.get('date', ''),
                 }
