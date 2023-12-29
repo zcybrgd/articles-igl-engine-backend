@@ -113,6 +113,8 @@ class modManipulation(APIView):
     @api_view(['POST'])
     def add_mod(request):
         connected = request.user  # extracting the current user instance
+        if connected.id == None:
+            return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             existing_mod = Moderator.objects.filter(
                 userName=request.data['userName'])  # to find if the username already exists
@@ -139,6 +141,8 @@ class modManipulation(APIView):
     @api_view(['PUT'])
     def modify_mod(request, id):
         connected = request.user  # to get the instance of the actual active admin
+        if connected.id == None:
+            return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             try:
                 admin_connect = Admin.objects.get(userId=connected)
@@ -170,6 +174,8 @@ class modManipulation(APIView):
     @api_view(['DELETE'])
     def delete_mod(request, id):
         connected = request.user  # to get the instance of the actual active admin
+        if connected.id is None:
+            return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             try:
                 admin_connect = Admin.objects.get(userId=connected)
@@ -194,6 +200,8 @@ class modManipulation(APIView):
     @api_view(['GET'])
     def display_mods(request):
         connected = request.user
+        if connected.id == None:
+            return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             try:
                 adminConnected = Admin.objects.get(userId=connected)
