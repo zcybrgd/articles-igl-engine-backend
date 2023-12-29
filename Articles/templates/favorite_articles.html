@@ -1,0 +1,26 @@
+<!-- search/templates/favorite_articles.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Articles</title>
+</head>
+<body>
+    <h1>Your Favorite Articles</h1>
+    {% for article in favorite_articles %}
+        <div>
+            <h2>{{ article.title }}</h2>
+            <p>Authors: {{ article.authors }}</p>
+            <p>Institutions: {{ article.institutions }}</p>
+            <p>Keywords: {{ article.keywords }}</p>
+            <p>PDF URL: {{ article.pdf_url }}</p>
+            <p>Bibliographie: {{ article.bibliographie }}</p>
+            <p>Text: {{ article.text }}</p>
+            <p>Date: {{ article.date }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+</body>
+</html>
