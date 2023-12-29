@@ -21,4 +21,4 @@ class ArticleUnReviewedSerializer(serializers.Serializer):
     bibliographie = serializers.ListField(child=serializers.CharField())
     abstract = serializers.CharField()
     text = serializers.CharField()
-    date = serializers.DateField()
+    date = serializers.CharField()

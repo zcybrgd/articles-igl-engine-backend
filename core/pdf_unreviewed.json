@@ -17,7 +17,7 @@
       "Brown, M. (2021). Biodiversity in a Warming World."
     ],
     "abstract": "This article explores the intricate relationship between climate change and biodiversity. It analyzes the current state of biodiversity, the impact of climate change on various ecosystems, and proposes strategies for conservation.",
-    "text": "This is the text of Article 1.",
+    "text": "This is the text of Article 1., and the voices that implore, you should be doing more",
     "date": "2023-01-01"
   },
   {
@@ -101,29 +101,8 @@
       "White, S. (2021). Microbiology: From Basics to Frontiers."
     ],
     "abstract": "This article explores the fascinating world of microorganisms, emphasizing the diversity of microbial life. It delves into the role of microorganisms in various ecosystems and their significance in biological research.",
-    "text": "This is the text of Article 5.",
+    "text": "This is the text of Article 5. i missed you so badddd",
     "date": "2023-05-22"
-  },
-  {
-    "id": "6",
-    "title": "The Future of Space Exploration: Challenges and Opportunities",
-    "authors": [
-      "Prof. Andrew Taylor",
-      "Dr. Jessica Lee"
-    ],
-    "institutions": [
-      "Space Research Institute",
-      "Astronomy Department"
-    ],
-    "keywords": "space exploration, space technology, astronomy",
-    "pdf_url": "https://example.com/article6.pdf",
-    "bibliographie": [
-      "Smith, J. et al. (2022). Challenges in Deep Space Exploration.",
-      "Brown, A. (2021). Space Technologies: A Comprehensive Review."
-    ],
-    "abstract": "This article discusses the challenges and opportunities in the future of space exploration. It addresses advancements in space technology, missions to distant planets, and the potential for human colonization beyond Earth.",
-    "text": "This is the text of Article 6.",
-    "date": "2023-06-30"
   },
   {
     "id": "7",
@@ -155,7 +134,8 @@
     ],
     "institutions": [
       "Climate Research Center",
-      "Environmental Science Department"
+      "Environmental Science Department",
+      "Tupelo institute of tech"
     ],
     "keywords": "climate change, sustainability, environmental conservation",
     "pdf_url": "https://example.com/article8.pdf",

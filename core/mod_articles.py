@@ -18,7 +18,6 @@ class ModArticles:
     def update_article(self, article_id, updated_data):
         for article in self.articles:
             if article.get('id') == article_id:
-                print("\nupdated data: ", updated_data)
                 for key, value in updated_data.items():
                     if key in article:
                         article[key] = value
@@ -45,6 +44,7 @@ class ModArticles:
             return {'success': False, 'message': 'Unexpected error from server'}
 
     def get_article_data(self, article_id):
+        self.articles = self.load_articles()
         article_data = next((article for article in self.articles if article.get('id') == article_id), None)
         return article_data
 

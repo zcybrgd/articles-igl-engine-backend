@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = Admin
-        fields = ['id', 'userId','created_moderators']
+        fields = ['id', 'userId']
 
 
 class ClientSerializer(serializers.ModelSerializer):

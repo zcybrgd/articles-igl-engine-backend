@@ -1,8 +1,9 @@
 from django.http import HttpResponse, JsonResponse, Http404
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
+from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer
 from .models import user, client, NonUserToken, Admin, Moderator
@@ -101,3 +102,111 @@ def mods_list(request):
     response = ModeratorSerializer(mods, many=True)  # turning all of them into json
     return JsonResponse({"mods": response.data})  # returning the response while setting safe to false to allow non dict objects to be serialized
 
+@authentication_classes([])
+@permission_classes([])
+class modManipulation(APIView):
+    # api to add a moderator , the user must be an administrator
+    @api_view(['POST'])
+    def add_mod(request):
+        connected = request.user  # extracting the current user instance
+        if connected.id == None:
+            return Response({'error':"User non authenticated"})
+        if connected.role == "Administrator":
+            existing_mod = Moderator.objects.filter(
+                userName=request.data['userName'])  # to find if the username already exists
+            if existing_mod.exists():
+                return Response({'error': 'Username already exists. Please choose a different username.'})
+            password = make_password(request.data['password'])  # hashing the password
+            userInstance = user(userName=request.data['userName'], password=password,
+                                role='Moderator')  # to create the user instance of the mod
+            userInstance.save()
+            try:
+                admin_bdd = Admin.objects.get(
+                    userId=connected)  # to get the admin instance from the db and adding it to the mod as adminId
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            instanceMod = Moderator(adminId=admin_bdd, userId=userInstance, userName=request.data['userName'],
+                                    firstName=request.data['firstName'], familyName=request.data['familyName'],
+                                    email=request.data['email'], password=password)  # creating the moderator instance
+            instanceMod.save()
+            mod = ModeratorSerializer(instanceMod)
+            return Response({"Mod added succesfully!!": mod.data})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+    @api_view(['PUT'])
+    def modify_mod(request, id):
+        connected = request.user  # to get the instance of the actual active admin
+        if connected.id == None:
+            return Response({'error':"User non authenticated"})
+        if connected.role == "Administrator":
+            try:
+                admin_connect = Admin.objects.get(userId=connected)
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            try:
+                mod = Moderator.objects.get(pk=id)  # getting the mod instance based on the id in the url
+            except Moderator.DoesNotExist:
+                return Response({'error': "the moderator doesn't exist "})
+            if mod.adminId == admin_connect:  # to check if the admin who created the mod is actually the onec currently connected
+                Moderator.objects.filter(pk=id).update(**request.data)
+                try:
+                    instanceMod = Moderator.objects.get(
+                        pk=id)  # to get the mod again after updating , and to check if the password didn't change , if changed we hash it again
+                except Moderator.DoesNotExist:
+                    return Response({'error': "the moderator doesn't exist "})
+                if not (instanceMod.password == make_password(request.data['password'])):
+                    instanceMod.password = make_password(request.data['password'])
+                instanceMod.save()
+                user.objects.filter(pk=instanceMod.userId.pk).update(userName=instanceMod.userName,
+                                                                     password=instanceMod.password)  # to update the user instance of the mod too
+                mod = ModeratorSerializer(instanceMod)
+                return Response({"Mod modified succesfully!!": mod.data})
+            else:
+                return Response({'error': "This is an unauthorized action"})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+    @api_view(['DELETE'])
+    def delete_mod(request, id):
+        connected = request.user  # to get the instance of the actual active admin
+        if connected.id is None:
+            return Response({'error':"User non authenticated"})
+        if connected.role == "Administrator":
+            try:
+                admin_connect = Admin.objects.get(userId=connected)
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            try:
+                mod = Moderator.objects.get(pk=id)  # getting the mod instance based on the id in the url
+            except Moderator.DoesNotExist:
+                return Response({'error': "the moderator doesn't exist "})
+            if mod.adminId == admin_connect:  # to check if the admin who created the mod is actually the onec currently connected
+                try:
+                    userInstance = user.objects.get(pk=mod.userId.id) # to get the user instance of the mod the admin wants to delete
+                except user.DoesNotExist:
+                    return Response({'error': "the user instance doesn't exist "})
+                userInstance.delete()  # the userId of the mod have a delete on cascade property , so if its user instance is deleted , it will be
+                return Response({"Mod deleted succesfully!!"})
+            else:
+                return Response({'error': "This is an unauthorized action"})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+    @api_view(['GET'])
+    def display_mods(request):
+        connected = request.user
+        if connected.id == None:
+            return Response({'error':"User non authenticated"})
+        if connected.role == "Administrator":
+            try:
+                adminConnected = Admin.objects.get(userId=connected)
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            mods = Moderator.objects.filter(
+                adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            response = ModeratorSerializer(mods, many=True)  # turning all of them into json
+            return JsonResponse(
+                {"mods": response.data})
+        else:
+            return Response({'error': "the user is not an administrator "})

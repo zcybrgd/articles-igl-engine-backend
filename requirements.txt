@@ -11,6 +11,7 @@ elastic-transport==8.10.0
 elasticsearch==8.11.0
 elasticsearch-dsl==8.11.0
 django-debug-toolbar==4.2.0
+spacy~=3.7.2
 django-elasticsearch-dsl==8.0
 djangorestframework-simplejwt==5.3.1
 pyjwt==2.8.0

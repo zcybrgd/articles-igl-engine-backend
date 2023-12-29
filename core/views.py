@@ -34,14 +34,14 @@ class UploadPDFView(APIView):
             else:
                 pdf_files = request.FILES.getlist('pdf_file')
 
-            # Extract text from PDF and update the content field
+            # extract text from PDF and update the content field
             for pdf_file in pdf_files:
                 text, first_page = pdf_manipulator.extract_text_from_pdf(pdf_file)
+
                 article_data = {
                     'content': text,
                     'url_pdf': pdf_url,
                 }
-                print("\n\nfirst page: \n", first_page)
                 serializer = ArticleSerializer(data=article_data)
                 if serializer.is_valid():
                     serializer.save()
