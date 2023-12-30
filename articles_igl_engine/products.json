@@ -1,0 +1,52 @@
+[
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "title": "Amazon Brand - Spotted Zebra Boys' Zip-Pocket Fleece Jogger Pants",
+            "description": "60% Cotton, 40% Polyester Imported Machine Wash Get ready to play in these soft french terry jogger pants with a fun zip pocket detail A covered elastic waistband keeps these pants secure for day-long comfort",
+            "timestamp": "2018-09-18T19:29:03.347Z",
+            "publish": "2019-09-18T19:29:03.347Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 3,
+        "fields": {
+            "title": "Simple Joys by Carter's Baby Girls' 7-Pack Teething Bibs",
+            "description": "100% Cotton Imported Machine Wash Pack of seven teething bibs in assorted colors with one-shoulder snap-button closure Three-layer lining with a waterproof barrier Trusted Carter’s quality, everyday low prices, and hassle-free packaging",
+            "timestamp": "2018-09-18T19:29:03.347Z",
+            "publish": "2019-09-18T19:29:03.347Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 4,
+        "fields": {
+            "title": "Sweat pants",
+            "description": "50% Cotton, 50% Polyester\nImported\nMachine Wash\n50 percent cotton/50 percent polyester fleece, with up to 5 percent made from recycled plastic bottles\nConvenient side seam pockets\nInside draw cord for secure fit\nOpen hem pant legs for a relaxed look\nMachine wash cold with like colors; non chlorine bleach when needed; tumble dry medium\n",
+            "timestamp": "2018-09-18T19:29:03.347Z",
+            "publish": "2019-09-18T19:29:03.347Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 5,
+        "fields": {
+            "title": "تيشرت احمر",
+            "description": "تيشرت احمر مقاس كبير رياضي",
+            "timestamp": "2018-09-18T19:29:03.347Z",
+            "publish": "2021-05-18T19:29:03.347Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 6,
+        "fields": {
+            "title": "قميص ابيض",
+            "description": "قميص ابيض مقاس صغير للاطفال",
+            "timestamp": "2021-01-16T00:04:55.698Z",
+            "publish": null
+        }
+    }
+  ]
