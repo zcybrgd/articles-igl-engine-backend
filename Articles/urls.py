@@ -1,7 +1,6 @@
 # articles_igl_engine/core/urls.py
-from django.urls import path, re_path
+from django.urls import path
 from .views import FavoritesManipulation
-from Users.views import login
 
 urlpatterns = [
     path('', FavoritesManipulation.display_favorite_articles, name='display_favorite_articles'),

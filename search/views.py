@@ -10,9 +10,6 @@ def search_articles(request):
     multi_match_query = MultiMatch(query=query, fields=fields, type='phrase')
     s = Search(index='article_index').query(multi_match_query)
     response = s.execute()
-    for hit in response:
-        ids = hit.meta.id
-        print(ids)
     # Convert Elasticsearch results to a list of dictionaries
     results = [{'title': hit.title,
                 'authors': list(hit.authors) if isinstance(hit.authors, AttrList) else hit.authors,

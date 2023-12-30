@@ -42,7 +42,7 @@ class FavoritesManipulation(APIView):
                         'text': hit.text,
                         'date': hit.date} for hit in response]
 
-            # Return JSON response response.to_dict()
+            # Return JSON response
             return JsonResponse({'favorite_articles': results})
         else:
             return Response({'error': 'Action accessible only for Client users'})
@@ -84,7 +84,7 @@ class FavoritesManipulation(APIView):
             except client.DoesNotExist:
                 return Response({'error': "the client user doesn't exist "})
 
-            # Check if the article_id is not already in the favorite_articles array
+            # Check if the article_id is in the favorite_articles array
             if article_id in clientConnected.favorite_articles:
                 # Remove the article_id from the favorite_articles array
                 clientConnected.favorite_articles.remove(article_id)

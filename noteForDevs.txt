@@ -26,4 +26,8 @@ python manage.py runserver
 
 Response.headers = {'Authorization': 'Token ', token}
 
+bach nejbed l ids
+for hit in response:
+        ids = hit.meta.id
+        print(ids)
 
