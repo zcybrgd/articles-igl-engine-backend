@@ -1,34 +1,29 @@
 <!-- search/templates/search_articles.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Articles</title>
-</head>
-<body>
-    <h1>Search Results for "{{ query }}"</h1>
-    <ul>
-        {% for result in results %}
-        <br>
-            <li>{{ result.title }}
-                <br>
-                {{ result.authors }}
-                <br>
-                {{ result.institutions }}
-                <br>
-                {{ result.keywords }}
-                <br>
-                {{ result.pdf_url }}
-                <br>
-                {{ result.text }}
-                <br>
-                {{ result.bibliographie }}
-                <br>
-                {{ result.date }}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Search Articles</title>
+    </head>
+    <body>
+        <h1>Search Results for "{{ query }}"</h1>
+        <ul>
+            {% for result in results %}
+            <li>
+                <strong>Title:</strong> {{ result.title }}<br>
+                <strong>Authors:</strong> {{ result.authors }}<br>
+                <strong>Institutions:</strong> {{ result.institutions }}<br>
+                <strong>Keywords:</strong> {{ result.keywords }}<br>
+                <strong>PDF URL:</strong> {{ result.pdf_url }}<br>
+                <strong>Text:</strong> {{ result.text }}<br>
+                <strong>Bibliography:</strong> {{ result.bibliographie }}<br>
+                <strong>Date:</strong> {{ result.date }}<br>
+                <strong>Summary:</strong> {{ result.summary }}<br>
             </li>
-        {% endfor %}
-    </ul>
+            <br> <!-- Optional line break between results -->
+            {% endfor %}
+        </ul>
 </body>
 </html>

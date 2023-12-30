@@ -11,6 +11,8 @@ class ArticleIndex(Document):
     bibliographie = Keyword()
     text = Text()
     date = Date()
+    summary= Text()
 
     class Index:
-        name = 'article_index'
+        name = "scientific_articles"
+

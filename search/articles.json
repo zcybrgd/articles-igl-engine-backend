@@ -1,32 +1,2319 @@
 [
-  {
-    "title": "Article Title 1",
-    "authors": ["Author 1", "Author 2"],
-    "institutions": ["Institution 1", "Institution 2"],
-    "keywords": "Keyword1, Keyword2, Keyword3",
-    "pdf_url": "https://example.com/article1.pdf",
-    "bibliographie": ["Reference 1", "Reference 2"],
-    "text": "This is the text of Article 1.",
-    "date": "2023-01-01"
-  },
-  {
-    "title": "Article Title 2",
-    "authors": ["Author 3", "Author 4"],
-    "institutions": ["Institution 3", "Institution 4"],
-    "keywords": "Keyword4, Keyword5, Keyword6",
-    "pdf_url": "https://example.com/article2.pdf",
-    "bibliographie": ["Reference 3", "Reference 4"],
-    "text": "This is the text of Article 2.",
-    "date": "2023-02-15"
-  },
-  {
-    "title": "Article Title 3",
-    "authors": ["Author 3", "Author 5"],
-    "institutions": ["Institution 2", "Institution 9"],
-    "keywords": "Keyword7, Keyword8, Keyword9",
-    "pdf_url": "https://example.com/article3.pdf",
-    "bibliographie": ["Reference 5", "Reference 6"],
-    "text": "This is the text of Article 3.",
-    "date": "2023-03-20"
-  }
+    {
+        "title": "Sample Title 1",
+        "authors": [
+            "Jonathan Coleman",
+            "John Wilson",
+            "Sara Jones"
+        ],
+        "summary": "Above create particularly loss.",
+        "institutions": [
+            "Brown, Martinez and Stout",
+            "Jordan-Taylor"
+        ],
+        "keywords": [
+            "new",
+            "around"
+        ],
+        "content": "Material treatment own government. Campaign his almost right give maybe pay.",
+        "releaseDate": "2023-04-30",
+        "pdfUrl": "https://example.com/article1.pdf",
+        "references": [
+            "Maybe anyone home performance.",
+            "Ever professor analysis Democrat him western tell quickly."
+        ]
+    },
+    {
+        "title": "Sample Title 2",
+        "authors": [
+            "Daniel Johnson",
+            "Johnny Phillips",
+            "Richard Campbell"
+        ],
+        "summary": "Both he serious.",
+        "institutions": [
+            "Perry Group",
+            "Pratt, Henderson and Frye"
+        ],
+        "keywords": [
+            "sometimes",
+            "also",
+            "to"
+        ],
+        "content": "Across cold deal field hot consider hope. Item week Republican this democratic.",
+        "releaseDate": "2023-11-15",
+        "pdfUrl": "https://example.com/article2.pdf",
+        "references": [
+            "Make enter manager."
+        ]
+    },
+    {
+        "title": "Sample Title 3",
+        "authors": [
+            "Carolyn Stuart"
+        ],
+        "summary": "See option place during because.",
+        "institutions": [
+            "Fields LLC",
+            "Perry-Green"
+        ],
+        "keywords": [
+            "matter",
+            "class",
+            "instead"
+        ],
+        "content": "Action everything put manage.",
+        "releaseDate": "2023-11-14",
+        "pdfUrl": "https://example.com/article3.pdf",
+        "references": [
+            "Establish car action address movie sense.",
+            "Social crime recently marriage free according."
+        ]
+    },
+    {
+        "title": "Sample Title 4",
+        "authors": [
+            "Joseph Bell",
+            "Patricia Jones",
+            "Charles Mason"
+        ],
+        "summary": "Behind minute either another deep.",
+        "institutions": [
+            "Hicks Group"
+        ],
+        "keywords": [
+            "quality",
+            "he",
+            "Congress",
+            "few"
+        ],
+        "content": "Material cup network letter can surface peace. Writer consumer society above word. Senior protect which stuff great picture care two.",
+        "releaseDate": "2023-11-13",
+        "pdfUrl": "https://example.com/article4.pdf",
+        "references": [
+            "Executive arm month morning speak."
+        ]
+    },
+    {
+        "title": "Sample Title 5",
+        "authors": [
+            "Ryan Johnson",
+            "Amanda Nunez"
+        ],
+        "summary": "Example idea collection for star decade.",
+        "institutions": [
+            "Gates PLC"
+        ],
+        "keywords": [
+            "keep",
+            "practice",
+            "decide"
+        ],
+        "content": "Population appear art trip memory. South sort argue reach increase upon.",
+        "releaseDate": "2023-03-19",
+        "pdfUrl": "https://example.com/article5.pdf",
+        "references": [
+            "Interest join affect ready feeling forward.",
+            "At already medical wish subject choose difference drug."
+        ]
+    },
+    {
+        "title": "Sample Title 6",
+        "authors": [
+            "Emily Lowe",
+            "John Erickson"
+        ],
+        "summary": "Oil different question protect discussion mission process true.",
+        "institutions": [
+            "Shannon, Obrien and Rivera"
+        ],
+        "keywords": [
+            "kitchen",
+            "mean"
+        ],
+        "content": "Personal exactly also financial who. Special second make interview.",
+        "releaseDate": "2023-06-02",
+        "pdfUrl": "https://example.com/article6.pdf",
+        "references": [
+            "Hand understand someone."
+        ]
+    },
+    {
+        "title": "Sample Title 7",
+        "authors": [
+            "Amber Ruiz",
+            "Craig Gonzales",
+            "Karen Rogers"
+        ],
+        "summary": "Seat high bar attack.",
+        "institutions": [
+            "King-Young",
+            "Spencer, Jones and Freeman"
+        ],
+        "keywords": [
+            "sure",
+            "everybody",
+            "still"
+        ],
+        "content": "If short risk imagine. Leave sense society city.",
+        "releaseDate": "2023-03-15",
+        "pdfUrl": "https://example.com/article7.pdf",
+        "references": [
+            "Coach along finish attention."
+        ]
+    },
+    {
+        "title": "Sample Title 8",
+        "authors": [
+            "John Williams",
+            "Scott Davis MD",
+            "Kimberly Williams"
+        ],
+        "summary": "Happen fact school especially member.",
+        "institutions": [
+            "Smith LLC",
+            "Nelson Group"
+        ],
+        "keywords": [
+            "together",
+            "set",
+            "physical"
+        ],
+        "content": "Write form act walk. Strong himself so.",
+        "releaseDate": "2023-04-23",
+        "pdfUrl": "https://example.com/article8.pdf",
+        "references": [
+            "Week attack senior moment now education brother."
+        ]
+    },
+    {
+        "title": "Sample Title 9",
+        "authors": [
+            "Tammy Austin",
+            "Jonathan Smith",
+            "Keith Townsend"
+        ],
+        "summary": "School through you.",
+        "institutions": [
+            "Weber, Rivera and Flynn"
+        ],
+        "keywords": [
+            "accept",
+            "company",
+            "business"
+        ],
+        "content": "Subject true city. Never discover beautiful draw state green. Close you local Congress group need pull.",
+        "releaseDate": "2023-10-05",
+        "pdfUrl": "https://example.com/article9.pdf",
+        "references": [
+            "Door you that check staff wish course."
+        ]
+    },
+    {
+        "title": "Sample Title 10",
+        "authors": [
+            "Amber Ruiz",
+            "Tyler Beck"
+        ],
+        "summary": "Hold back rise north good second.",
+        "institutions": [
+            "Martin-Morgan",
+            "Acosta-Spencer"
+        ],
+        "keywords": [
+            "manager",
+            "south",
+            "his",
+            "both"
+        ],
+        "content": "Game look already adult run property. Possible network true allow. House hundred little conference.",
+        "releaseDate": "2023-08-25",
+        "pdfUrl": "https://example.com/article10.pdf",
+        "references": [
+            "Brother keep speak under my child.",
+            "Product analysis set issue everybody daughter range."
+        ]
+    },
+    {
+        "title": "Sample Title 11",
+        "authors": [
+            "Sherry Jennings",
+            "Amanda Anderson"
+        ],
+        "summary": "Thus economic back once road join image reduce.",
+        "institutions": [
+            "Gould-Cabrera"
+        ],
+        "keywords": [
+            "head",
+            "bill",
+            "let"
+        ],
+        "content": "Hair magazine seat seek might. Range term option although relationship.",
+        "releaseDate": "2023-05-03",
+        "pdfUrl": "https://example.com/article11.pdf",
+        "references": [
+            "National create effort meeting quite firm nearly.",
+            "Author me American recognize model number people."
+        ]
+    },
+    {
+        "title": "Sample Title 12",
+        "authors": [
+            "Anthony Douglas"
+        ],
+        "summary": "Its population behind shake pressure.",
+        "institutions": [
+            "Lee PLC",
+            "Fernandez and Sons"
+        ],
+        "keywords": [
+            "car",
+            "alone",
+            "piece"
+        ],
+        "content": "Know wife use light themselves. Agreement against room parent choose. Pull go minute both. Deal your box yes entire seven particularly.",
+        "releaseDate": "2022-12-21",
+        "pdfUrl": "https://example.com/article12.pdf",
+        "references": [
+            "Themselves discover instead physical alone coach.",
+            "Budget professor such."
+        ]
+    },
+    {
+        "title": "Sample Title 13",
+        "authors": [
+            "Jenna Bradley",
+            "Maurice Ward",
+            "Kathleen Woods"
+        ],
+        "summary": "Senior perhaps as federal.",
+        "institutions": [
+            "Wright and Sons"
+        ],
+        "keywords": [
+            "stuff",
+            "director"
+        ],
+        "content": "Drop discuss by sign Mrs fill ask beat. Talk charge picture history but family.",
+        "releaseDate": "2023-10-06",
+        "pdfUrl": "https://example.com/article13.pdf",
+        "references": [
+            "State here TV."
+        ]
+    },
+    {
+        "title": "Sample Title 14",
+        "authors": [
+            "Timothy Lee"
+        ],
+        "summary": "Foreign finally move act weight already whose fill.",
+        "institutions": [
+            "Nielsen, Miller and Williams"
+        ],
+        "keywords": [
+            "attorney",
+            "old",
+            "lead",
+            "natural"
+        ],
+        "content": "Pass include with product agent artist.",
+        "releaseDate": "2023-05-05",
+        "pdfUrl": "https://example.com/article14.pdf",
+        "references": [
+            "Personal class their experience.",
+            "Next others speech matter hotel visit style goal."
+        ]
+    },
+    {
+        "title": "Sample Title 15",
+        "authors": [
+            "Jessica Robertson",
+            "Karen Branch",
+            "Jonathan Patel"
+        ],
+        "summary": "Continue single two tell foot face.",
+        "institutions": [
+            "Conrad, Gillespie and Arnold",
+            "Wall, Rowe and Sharp"
+        ],
+        "keywords": [
+            "contain",
+            "fact"
+        ],
+        "content": "Summer guess at trouble more design. Task magazine become alone film throughout under. Cover wish part cover.",
+        "releaseDate": "2023-10-11",
+        "pdfUrl": "https://example.com/article15.pdf",
+        "references": [
+            "Action just believe agent realize toward."
+        ]
+    },
+    {
+        "title": "Sample Title 16",
+        "authors": [
+            "Lori Williams MD",
+            "Sheila Rodriguez"
+        ],
+        "summary": "Tax view maintain also ability three.",
+        "institutions": [
+            "Grimes, Zuniga and Miller"
+        ],
+        "keywords": [
+            "less",
+            "what",
+            "story",
+            "operation"
+        ],
+        "content": "Purpose choice go scene allow traditional. In president hold then.",
+        "releaseDate": "2023-12-14",
+        "pdfUrl": "https://example.com/article16.pdf",
+        "references": [
+            "Everyone analysis material class level.",
+            "Stock sea nor quality toward less."
+        ]
+    },
+    {
+        "title": "Sample Title 17",
+        "authors": [
+            "Linda Baker",
+            "Rebekah Anderson"
+        ],
+        "summary": "Yard respond skin each.",
+        "institutions": [
+            "Hughes PLC",
+            "Young LLC"
+        ],
+        "keywords": [
+            "discover",
+            "room",
+            "job"
+        ],
+        "content": "Nation beat next memory trouble. Rule group culture despite major inside garden. Region live wife step life deal product study.",
+        "releaseDate": "2023-02-21",
+        "pdfUrl": "https://example.com/article17.pdf",
+        "references": [
+            "Maintain artist through down Mr.",
+            "Visit face benefit ago field prove into just."
+        ]
+    },
+    {
+        "title": "Sample Title 18",
+        "authors": [
+            "Frank Cooper",
+            "Lori Bennett",
+            "Donna Wilcox"
+        ],
+        "summary": "Figure significant push every.",
+        "institutions": [
+            "Andrews, Smith and Adkins",
+            "Flores Ltd"
+        ],
+        "keywords": [
+            "blood",
+            "keep"
+        ],
+        "content": "Animal skill better Republican officer. Behavior improve floor no result someone far.",
+        "releaseDate": "2023-06-22",
+        "pdfUrl": "https://example.com/article18.pdf",
+        "references": [
+            "View media explain mind figure safe build.",
+            "Question imagine soldier teach."
+        ]
+    },
+    {
+        "title": "Sample Title 19",
+        "authors": [
+            "Bradley Andrews",
+            "Michele Moran"
+        ],
+        "summary": "Adult grow whose position soon.",
+        "institutions": [
+            "Sherman, Beard and Green"
+        ],
+        "keywords": [
+            "sing",
+            "how",
+            "health"
+        ],
+        "content": "Change cell section audience less cup cover. Box individual draw staff coach late. Here meet job dinner commercial end individual spring.",
+        "releaseDate": "2023-07-09",
+        "pdfUrl": "https://example.com/article19.pdf",
+        "references": [
+            "Cover house result low kid why build."
+        ]
+    },
+    {
+        "title": "Sample Title 20",
+        "authors": [
+            "Timothy Fisher",
+            "Mr. William Chandler II"
+        ],
+        "summary": "Effort reality strong.",
+        "institutions": [
+            "Burch, Keith and Walker"
+        ],
+        "keywords": [
+            "reflect",
+            "clear",
+            "center",
+            "ready"
+        ],
+        "content": "Crime improve attorney artist. Also ten water up. Election customer official father.",
+        "releaseDate": "2023-01-20",
+        "pdfUrl": "https://example.com/article20.pdf",
+        "references": [
+            "Science chair themselves upon name method.",
+            "Break always page tonight."
+        ]
+    },
+    {
+        "title": "Sample Title 21",
+        "authors": [
+            "Nathan West"
+        ],
+        "summary": "Occur particularly on ability.",
+        "institutions": [
+            "Quinn, Wallace and Mcintosh"
+        ],
+        "keywords": [
+            "after",
+            "rather"
+        ],
+        "content": "Keep trial public me realize rise body. Fear phone money development likely. Majority old fish light person while.",
+        "releaseDate": "2023-10-16",
+        "pdfUrl": "https://example.com/article21.pdf",
+        "references": [
+            "Read agent total anyone country begin blue lot."
+        ]
+    },
+    {
+        "title": "Sample Title 22",
+        "authors": [
+            "Pamela Fitzpatrick",
+            "Brett Baker"
+        ],
+        "summary": "Letter no choice you option chair.",
+        "institutions": [
+            "Gillespie Group"
+        ],
+        "keywords": [
+            "especially",
+            "after",
+            "modern",
+            "up"
+        ],
+        "content": "Author from check. Father art style bill food woman. Scientist mean future military.",
+        "releaseDate": "2023-01-09",
+        "pdfUrl": "https://example.com/article22.pdf",
+        "references": [
+            "Leader develop least.",
+            "Should traditional charge yet politics write under."
+        ]
+    },
+    {
+        "title": "Sample Title 23",
+        "authors": [
+            "Jaime Moody",
+            "Philip Thompson",
+            "Charlotte Fuller"
+        ],
+        "summary": "Time card result job sea well.",
+        "institutions": [
+            "Luna Ltd"
+        ],
+        "keywords": [
+            "so",
+            "recently"
+        ],
+        "content": "Rock choice cold evening care Mrs. Reason morning machine box play under control. Soon house young fill could heavy.",
+        "releaseDate": "2023-05-27",
+        "pdfUrl": "https://example.com/article23.pdf",
+        "references": [
+            "National address again apply program."
+        ]
+    },
+    {
+        "title": "Sample Title 24",
+        "authors": [
+            "Laura Cooper"
+        ],
+        "summary": "House heavy major continue.",
+        "institutions": [
+            "Hampton, Kline and Scott"
+        ],
+        "keywords": [
+            "heart",
+            "court",
+            "about",
+            "new"
+        ],
+        "content": "Alone poor sound for very through rather. Little actually effect conference drug.",
+        "releaseDate": "2023-10-24",
+        "pdfUrl": "https://example.com/article24.pdf",
+        "references": [
+            "Ask plant response.",
+            "Six media go individual respond crime site."
+        ]
+    },
+    {
+        "title": "Sample Title 25",
+        "authors": [
+            "Ariana Gonzales"
+        ],
+        "summary": "Loss see model hear someone sound impact.",
+        "institutions": [
+            "Garcia, Odonnell and Owens",
+            "Gray Inc"
+        ],
+        "keywords": [
+            "on",
+            "however",
+            "today"
+        ],
+        "content": "Stock time way. Face country group fire suffer. Situation upon radio capital.",
+        "releaseDate": "2023-08-09",
+        "pdfUrl": "https://example.com/article25.pdf",
+        "references": [
+            "Space city message green."
+        ]
+    },
+    {
+        "title": "Sample Title 26",
+        "authors": [
+            "John Knight",
+            "Abigail Schmidt",
+            "Daniel Tucker"
+        ],
+        "summary": "Stage determine president shake.",
+        "institutions": [
+            "Tucker, Smith and Davis",
+            "Aguilar-Mcfarland"
+        ],
+        "keywords": [
+            "generation",
+            "pull",
+            "once",
+            "way"
+        ],
+        "content": "North sort you base word foot. Or fine realize once wind child international. Both possible special or enjoy. Hundred thank red light another arm nature.",
+        "releaseDate": "2023-10-28",
+        "pdfUrl": "https://example.com/article26.pdf",
+        "references": [
+            "Bank theory share beautiful organization use."
+        ]
+    },
+    {
+        "title": "Sample Title 27",
+        "authors": [
+            "Brett Collier",
+            "James Lewis MD",
+            "Vincent Wood"
+        ],
+        "summary": "Senior speak city measure.",
+        "institutions": [
+            "Henry, Anderson and Morgan"
+        ],
+        "keywords": [
+            "call",
+            "open"
+        ],
+        "content": "Put little yourself interest. Large successful fear.",
+        "releaseDate": "2023-02-09",
+        "pdfUrl": "https://example.com/article27.pdf",
+        "references": [
+            "Enjoy pay activity service they.",
+            "Model author business TV general suffer."
+        ]
+    },
+    {
+        "title": "Sample Title 28",
+        "authors": [
+            "Christian Sims"
+        ],
+        "summary": "Need use everything discuss.",
+        "institutions": [
+            "Nelson, Wang and Donaldson",
+            "Estrada-Campbell"
+        ],
+        "keywords": [
+            "dream",
+            "view"
+        ],
+        "content": "Consumer only tax though beyond billion space. Get couple series manager its listen. Drop wrong standard ahead foot.",
+        "releaseDate": "2023-07-26",
+        "pdfUrl": "https://example.com/article28.pdf",
+        "references": [
+            "Possible respond government."
+        ]
+    },
+    {
+        "title": "Sample Title 29",
+        "authors": [
+            "Jose Perez",
+            "Garrett Wright"
+        ],
+        "summary": "Firm cut star simple believe catch cover seven.",
+        "institutions": [
+            "Dougherty Inc"
+        ],
+        "keywords": [
+            "compare",
+            "hope"
+        ],
+        "content": "Drug respond mouth history set night history spring. Home training young red. Argue whom and movement.",
+        "releaseDate": "2023-09-22",
+        "pdfUrl": "https://example.com/article29.pdf",
+        "references": [
+            "Support ago first."
+        ]
+    },
+    {
+        "title": "Sample Title 30",
+        "authors": [
+            "Jason Lopez",
+            "Christina Stewart",
+            "Thomas Smith"
+        ],
+        "summary": "Floor society just.",
+        "institutions": [
+            "Owens PLC",
+            "Blake Ltd"
+        ],
+        "keywords": [
+            "team",
+            "social",
+            "identify"
+        ],
+        "content": "Different buy day management must. Sit knowledge space clearly.",
+        "releaseDate": "2023-09-14",
+        "pdfUrl": "https://example.com/article30.pdf",
+        "references": [
+            "Pass or school.",
+            "Manage fly thing build quite goal happy."
+        ]
+    },
+    {
+        "title": "Sample Title 31",
+        "authors": [
+            "Amber Ruiz",
+            "Stacey Landry",
+            "Samantha Burns"
+        ],
+        "summary": "Prevent arrive accept matter majority special.",
+        "institutions": [
+            "Long-Hays",
+            "Reed-Sosa"
+        ],
+        "keywords": [
+            "experience",
+            "ground",
+            "set",
+            "garden"
+        ],
+        "content": "Upon us office share anyone weight mouth. Reach source better less receive one feeling likely. Alone change administration capital structure expert question.",
+        "releaseDate": "2023-07-04",
+        "pdfUrl": "https://example.com/article31.pdf",
+        "references": [
+            "Health cultural hard shoulder capital student structure writer."
+        ]
+    },
+    {
+        "title": "Sample Title 32",
+        "authors": [
+            "Mary Cobb"
+        ],
+        "summary": "Front front sometimes eat dinner be.",
+        "institutions": [
+            "Valenzuela, Baker and Edwards",
+            "Martinez, Middleton and Franklin"
+        ],
+        "keywords": [
+            "lead",
+            "social",
+            "home",
+            "thus"
+        ],
+        "content": "Across professional pressure thought sit believe me cell. Industry style participant cultural imagine.",
+        "releaseDate": "2023-07-05",
+        "pdfUrl": "https://example.com/article32.pdf",
+        "references": [
+            "Focus control fire central lot agency happen."
+        ]
+    },
+    {
+        "title": "Sample Title 33",
+        "authors": [
+            "Phillip Miller",
+            "Mr. Nathan Ryan"
+        ],
+        "summary": "Represent sometimes small maintain develop the technology.",
+        "institutions": [
+            "Holloway, Lee and Berry"
+        ],
+        "keywords": [
+            "positive",
+            "moment",
+            "others"
+        ],
+        "content": "Scene fine smile security know. Opportunity account personal north great class.",
+        "releaseDate": "2023-05-16",
+        "pdfUrl": "https://example.com/article33.pdf",
+        "references": [
+            "Concern magazine indeed sign its involve water."
+        ]
+    },
+    {
+        "title": "Sample Title 34",
+        "authors": [
+            "Steven Lowe",
+            "Alexander Fisher",
+            "Christina Williamson"
+        ],
+        "summary": "Either relate police give mean.",
+        "institutions": [
+            "Jacobs PLC"
+        ],
+        "keywords": [
+            "claim",
+            "oil",
+            "move"
+        ],
+        "content": "Everyone much back blue this author. Animal her democratic lawyer why. Also floor back represent first.",
+        "releaseDate": "2023-11-02",
+        "pdfUrl": "https://example.com/article34.pdf",
+        "references": [
+            "Hard early hundred stop official country contain."
+        ]
+    },
+    {
+        "title": "Sample Title 35",
+        "authors": [
+            "Erik Young"
+        ],
+        "summary": "Traditional beat than much yeah within southern.",
+        "institutions": [
+            "Garcia PLC"
+        ],
+        "keywords": [
+            "institution",
+            "end",
+            "who"
+        ],
+        "content": "Early administration production already. Position whatever enter another.",
+        "releaseDate": "2023-08-13",
+        "pdfUrl": "https://example.com/article35.pdf",
+        "references": [
+            "Month official parent environmental."
+        ]
+    },
+    {
+        "title": "Sample Title 36",
+        "authors": [
+            "Michael Hawkins",
+            "Jeremy Hart",
+            "Robert Lopez"
+        ],
+        "summary": "Player space party size.",
+        "institutions": [
+            "Lewis Ltd",
+            "Daniel and Sons"
+        ],
+        "keywords": [
+            "voice",
+            "notice",
+            "radio",
+            "blue"
+        ],
+        "content": "Relationship so myself knowledge cold purpose tree. Imagine mother also behind leader theory. Least rate from drop wait.",
+        "releaseDate": "2023-04-01",
+        "pdfUrl": "https://example.com/article36.pdf",
+        "references": [
+            "Never technology through possible nearly.",
+            "Few be treat yes."
+        ]
+    },
+    {
+        "title": "Sample Title 37",
+        "authors": [
+            "Susan Myers",
+            "Rebecca Rice"
+        ],
+        "summary": "Speech travel coach dog.",
+        "institutions": [
+            "Rowe-Cox"
+        ],
+        "keywords": [
+            "thus",
+            "pressure",
+            "entire"
+        ],
+        "content": "Force social argue language page physical soon none. Tonight follow entire around.",
+        "releaseDate": "2023-05-29",
+        "pdfUrl": "https://example.com/article37.pdf",
+        "references": [
+            "Real side put again because enjoy subject."
+        ]
+    },
+    {
+        "title": "Sample Title 38",
+        "authors": [
+            "Mary Chang",
+            "Erica Schroeder"
+        ],
+        "summary": "Event commercial lose economy doctor although.",
+        "institutions": [
+            "Martin Ltd",
+            "Lopez Group"
+        ],
+        "keywords": [
+            "we",
+            "sometimes",
+            "issue"
+        ],
+        "content": "Study her clearly week first. His together bank activity look. Cultural town authority question thousand. Mention fine still image.",
+        "releaseDate": "2023-10-29",
+        "pdfUrl": "https://example.com/article38.pdf",
+        "references": [
+            "Group truth region three where."
+        ]
+    },
+    {
+        "title": "Sample Title 39",
+        "authors": [
+            "Samantha Tanner"
+        ],
+        "summary": "Teach especially use agreement fear.",
+        "institutions": [
+            "Clark, Wilson and Lin"
+        ],
+        "keywords": [
+            "each",
+            "across",
+            "which",
+            "experience"
+        ],
+        "content": "They fast cause hospital social. Task technology month ground item.",
+        "releaseDate": "2023-08-10",
+        "pdfUrl": "https://example.com/article39.pdf",
+        "references": [
+            "Draw many reflect behavior."
+        ]
+    },
+    {
+        "title": "Sample Title 40",
+        "authors": [
+            "Daniel Vincent",
+            "Andrew Elliott",
+            "Wayne Ortiz"
+        ],
+        "summary": "Peace natural total shoulder.",
+        "institutions": [
+            "Stevenson-Kennedy",
+            "Drake-Kelly"
+        ],
+        "keywords": [
+            "every",
+            "personal"
+        ],
+        "content": "Admit measure none purpose second feeling doctor. Pick bar write score section.",
+        "releaseDate": "2023-11-12",
+        "pdfUrl": "https://example.com/article40.pdf",
+        "references": [
+            "Certain never like employee.",
+            "Hour issue consumer argue marriage."
+        ]
+    },
+    {
+        "title": "Sample Title 41",
+        "authors": [
+            "Kevin Martin",
+            "Betty Adams",
+            "Marvin Ward"
+        ],
+        "summary": "Character former government crime important statement turn teach.",
+        "institutions": [
+            "Valencia Ltd",
+            "Rice-Aguirre"
+        ],
+        "keywords": [
+            "yes",
+            "add",
+            "sort"
+        ],
+        "content": "Loss to future management choice goal. Sport interview worker station house. Ground energy best sign reason.",
+        "releaseDate": "2023-11-17",
+        "pdfUrl": "https://example.com/article41.pdf",
+        "references": [
+            "Road science employee effect."
+        ]
+    },
+    {
+        "title": "Sample Title 42",
+        "authors": [
+            "Melissa Taylor",
+            "Jason Andrade"
+        ],
+        "summary": "But rate there girl last.",
+        "institutions": [
+            "Hicks Inc"
+        ],
+        "keywords": [
+            "strategy",
+            "method",
+            "research",
+            "until"
+        ],
+        "content": "Media two protect wear nearly arrive kind write. Allow prepare character under great relate.",
+        "releaseDate": "2023-05-20",
+        "pdfUrl": "https://example.com/article42.pdf",
+        "references": [
+            "Blue fear mean."
+        ]
+    },
+    {
+        "title": "Sample Title 43",
+        "authors": [
+            "Amber Ruiz",
+            "Daniel Mercer"
+        ],
+        "summary": "Leader explain down name across arm.",
+        "institutions": [
+            "Hanson, Gonzales and Williamson",
+            "Reyes Group"
+        ],
+        "keywords": [
+            "mean",
+            "decide",
+            "tax",
+            "enjoy"
+        ],
+        "content": "Necessary lose agent play. Interview see check young.",
+        "releaseDate": "2023-05-15",
+        "pdfUrl": "https://example.com/article43.pdf",
+        "references": [
+            "Hospital action born public news large.",
+            "Good drop send four entire election."
+        ]
+    },
+    {
+        "title": "Sample Title 44",
+        "authors": [
+            "Annette Miller",
+            "Dr. Nicole Sullivan",
+            "Tracy Blankenship"
+        ],
+        "summary": "Point know back spring listen general.",
+        "institutions": [
+            "Hernandez, Harris and Savage",
+            "Roach Group"
+        ],
+        "keywords": [
+            "fine",
+            "law",
+            "wide",
+            "available"
+        ],
+        "content": "If hand off ahead. Source health indeed word company professional.",
+        "releaseDate": "2023-04-24",
+        "pdfUrl": "https://example.com/article44.pdf",
+        "references": [
+            "Art month raise indeed.",
+            "Represent sense nor manage both about."
+        ]
+    },
+    {
+        "title": "Sample Title 45",
+        "authors": [
+            "William Boyd",
+            "Timothy Vasquez",
+            "John Howard"
+        ],
+        "summary": "Loss pass movie his.",
+        "institutions": [
+            "Thomas, Brandt and Hernandez"
+        ],
+        "keywords": [
+            "wish",
+            "this"
+        ],
+        "content": "Something save force body government keep. Month writer idea support itself poor stop.",
+        "releaseDate": "2023-10-10",
+        "pdfUrl": "https://example.com/article45.pdf",
+        "references": [
+            "Share kitchen fact available."
+        ]
+    },
+    {
+        "title": "Sample Title 46",
+        "authors": [
+            "Andrew Johnson",
+            "James Perez",
+            "Ryan Brown"
+        ],
+        "summary": "Lose near perform add worker sometimes.",
+        "institutions": [
+            "White, Ward and Carpenter",
+            "Thomas and Sons"
+        ],
+        "keywords": [
+            "big",
+            "fly"
+        ],
+        "content": "Public direction join conference claim arrive sport. Speak high specific change specific standard.",
+        "releaseDate": "2023-11-19",
+        "pdfUrl": "https://example.com/article46.pdf",
+        "references": [
+            "World do difficult base.",
+            "Thousand man whether charge never claim mention."
+        ]
+    },
+    {
+        "title": "Sample Title 47",
+        "authors": [
+            "Jerry Carroll",
+            "Ruth Robertson"
+        ],
+        "summary": "City five staff four daughter ready.",
+        "institutions": [
+            "Dodson-Morris"
+        ],
+        "keywords": [
+            "find",
+            "under"
+        ],
+        "content": "Whom above design exist property. South president avoid. Language claim surface step policy.",
+        "releaseDate": "2023-11-25",
+        "pdfUrl": "https://example.com/article47.pdf",
+        "references": [
+            "Red type entire clearly middle key."
+        ]
+    },
+    {
+        "title": "Sample Title 48",
+        "authors": [
+            "Garrett Hernandez"
+        ],
+        "summary": "Whatever matter hospital develop attorney.",
+        "institutions": [
+            "Smith, Mitchell and Smith",
+            "Martinez LLC"
+        ],
+        "keywords": [
+            "many",
+            "end"
+        ],
+        "content": "Trial from record sit would language. Front word fight college economy he difficult day.",
+        "releaseDate": "2023-09-29",
+        "pdfUrl": "https://example.com/article48.pdf",
+        "references": [
+            "School remain than spring."
+        ]
+    },
+    {
+        "title": "Sample Title 49",
+        "authors": [
+            "Laura Moore"
+        ],
+        "summary": "Everyone ago my song car seven TV remember.",
+        "institutions": [
+            "Sanchez-Wyatt"
+        ],
+        "keywords": [
+            "identify",
+            "finally"
+        ],
+        "content": "Every beautiful player. Eight maintain back image picture brother. Two make majority join wall land more.",
+        "releaseDate": "2023-06-26",
+        "pdfUrl": "https://example.com/article49.pdf",
+        "references": [
+            "Figure sometimes friend mention ahead."
+        ]
+    },
+    {
+        "title": "Sample Title 50",
+        "authors": [
+            "Steven Johnson",
+            "Lisa Paul"
+        ],
+        "summary": "Building sit business measure.",
+        "institutions": [
+            "Cook LLC",
+            "Pineda, Ramos and Park"
+        ],
+        "keywords": [
+            "detail",
+            "reduce",
+            "watch",
+            "bill"
+        ],
+        "content": "Maybe smile amount risk sell. Letter generation worry total me exist fly strategy.",
+        "releaseDate": "2023-06-07",
+        "pdfUrl": "https://example.com/article50.pdf",
+        "references": [
+            "Knowledge modern crime day no practice fine."
+        ]
+    },
+    {
+        "title": "Sample Title 51",
+        "authors": [
+            "Gloria Lam"
+        ],
+        "summary": "Consider culture success four different because able.",
+        "institutions": [
+            "Henry Inc",
+            "Scott PLC"
+        ],
+        "keywords": [
+            "until",
+            "firm"
+        ],
+        "content": "Consumer news prepare floor green work series. Year enjoy once material use. Toward economy far look general themselves lose.",
+        "releaseDate": "2023-04-07",
+        "pdfUrl": "https://example.com/article51.pdf",
+        "references": [
+            "Rise organization political across loss final watch.",
+            "Show exist may computer Mrs."
+        ]
+    },
+    {
+        "title": "Sample Title 52",
+        "authors": [
+            "Yvette Kane"
+        ],
+        "summary": "Bit between western when impact answer billion.",
+        "institutions": [
+            "Warner Inc"
+        ],
+        "keywords": [
+            "forget",
+            "seven",
+            "case",
+            "anyone"
+        ],
+        "content": "Safe opportunity become. Discover employee write conference site mission ever sing. Area nature than in special.",
+        "releaseDate": "2023-01-09",
+        "pdfUrl": "https://example.com/article52.pdf",
+        "references": [
+            "Truth election song party probably more college several.",
+            "Company into ever join."
+        ]
+    },
+    {
+        "title": "Sample Title 53",
+        "authors": [
+            "Andrea Harris",
+            "Andrea Harris",
+            "Miss Heather Turner"
+        ],
+        "summary": "Particularly admit either.",
+        "institutions": [
+            "Williams-Dodson",
+            "Adams LLC"
+        ],
+        "keywords": [
+            "off",
+            "change",
+            "myself",
+            "hour"
+        ],
+        "content": "Bring hit everyone occur weight over. Shoulder think study kid. Home news much beyond big.",
+        "releaseDate": "2023-09-21",
+        "pdfUrl": "https://example.com/article53.pdf",
+        "references": [
+            "Big oil often hard along final it.",
+            "Finish eye development cell cut exist."
+        ]
+    },
+    {
+        "title": "Sample Title 54",
+        "authors": [
+            "Christina Romero",
+            "Alexis Navarro"
+        ],
+        "summary": "South light individual film central push.",
+        "institutions": [
+            "Lucas, Williams and Williams"
+        ],
+        "keywords": [
+            "trade",
+            "side",
+            "into",
+            "push"
+        ],
+        "content": "Score son season require. Cost their cover mention state yeah despite. Eight office happy charge. Society stuff state test beat.",
+        "releaseDate": "2023-11-27",
+        "pdfUrl": "https://example.com/article54.pdf",
+        "references": [
+            "Threat from real bank.",
+            "City especially reality through."
+        ]
+    },
+    {
+        "title": "Sample Title 55",
+        "authors": [
+            "Rebecca Anderson",
+            "Ana Simmons"
+        ],
+        "summary": "Prevent there put question.",
+        "institutions": [
+            "Walker and Sons"
+        ],
+        "keywords": [
+            "left",
+            "let",
+            "time",
+            "start"
+        ],
+        "content": "Sport many chance make green present. Interest partner find need table turn policy bad.",
+        "releaseDate": "2023-05-02",
+        "pdfUrl": "https://example.com/article55.pdf",
+        "references": [
+            "Small black bring follow town become.",
+            "Standard suggest whether hold three explain example."
+        ]
+    },
+    {
+        "title": "Sample Title 56",
+        "authors": [
+            "Amber Ruiz",
+            "Sharon Roberts"
+        ],
+        "summary": "Last everyone financial poor perhaps building.",
+        "institutions": [
+            "Pitts, Perry and Sanchez"
+        ],
+        "keywords": [
+            "law",
+            "somebody",
+            "others"
+        ],
+        "content": "Anyone institution talk attack door read. Economic even individual research. Box politics material through fill instead.",
+        "releaseDate": "2023-08-16",
+        "pdfUrl": "https://example.com/article56.pdf",
+        "references": [
+            "Try material draw performance character grow approach.",
+            "One daughter hit big out."
+        ]
+    },
+    {
+        "title": "Sample Title 57",
+        "authors": [
+            "Diana Morales",
+            "Shannon Miller",
+            "Jessica White"
+        ],
+        "summary": "Region two watch might much shake bit.",
+        "institutions": [
+            "Cain, Price and Rodriguez",
+            "Foster-Harvey"
+        ],
+        "keywords": [
+            "peace",
+            "feeling",
+            "summer"
+        ],
+        "content": "Class institution catch future meeting yeah. Factor forget room hospital. Pressure why agent word painting. Night give article like lawyer.",
+        "releaseDate": "2023-03-26",
+        "pdfUrl": "https://example.com/article57.pdf",
+        "references": [
+            "Five author east also space my whether.",
+            "Like everyone range throughout many nothing."
+        ]
+    },
+    {
+        "title": "Sample Title 58",
+        "authors": [
+            "Jessica Mcmillan",
+            "Richard Schneider",
+            "Darin Anderson"
+        ],
+        "summary": "Deal knowledge argue interview learn system.",
+        "institutions": [
+            "Smith-Wood"
+        ],
+        "keywords": [
+            "site",
+            "serious",
+            "yourself"
+        ],
+        "content": "Do majority help could human. Place water account city contain. Nothing entire create everybody coach fund. Sometimes wrong wrong fly this science.",
+        "releaseDate": "2023-04-23",
+        "pdfUrl": "https://example.com/article58.pdf",
+        "references": [
+            "Kind hundred mother should direction third Mrs remember."
+        ]
+    },
+    {
+        "title": "Sample Title 59",
+        "authors": [
+            "Jeffrey Perez",
+            "Stephanie Le",
+            "Michelle Hernandez"
+        ],
+        "summary": "Central require pass build increase.",
+        "institutions": [
+            "Carter LLC"
+        ],
+        "keywords": [
+            "begin",
+            "hour",
+            "western"
+        ],
+        "content": "Stand may early service middle current end program. Successful foot feeling language radio go. Treatment oil strong stock until identify left.",
+        "releaseDate": "2023-05-08",
+        "pdfUrl": "https://example.com/article59.pdf",
+        "references": [
+            "Than worker bill yet contain."
+        ]
+    },
+    {
+        "title": "Sample Title 60",
+        "authors": [
+            "Scott Burke",
+            "Kyle Henry"
+        ],
+        "summary": "Major morning scientist pick leg.",
+        "institutions": [
+            "Baker Ltd",
+            "Garza, Phelps and Walker"
+        ],
+        "keywords": [
+            "why",
+            "outside",
+            "stage"
+        ],
+        "content": "Happen business own step yes society. Address few year compare. Guy easy police.",
+        "releaseDate": "2023-08-13",
+        "pdfUrl": "https://example.com/article60.pdf",
+        "references": [
+            "Nice exist cut feeling house low test.",
+            "Couple discussion indicate."
+        ]
+    },
+    {
+        "title": "Sample Title 61",
+        "authors": [
+            "Sharon Griffin",
+            "Susan Crawford"
+        ],
+        "summary": "Better indeed believe often subject involve.",
+        "institutions": [
+            "Johnson-Huber"
+        ],
+        "keywords": [
+            "conference",
+            "body",
+            "report",
+            "high"
+        ],
+        "content": "Run buy offer. Or provide good general best change.",
+        "releaseDate": "2023-07-18",
+        "pdfUrl": "https://example.com/article61.pdf",
+        "references": [
+            "Read model total former popular from no.",
+            "One firm story radio hot today."
+        ]
+    },
+    {
+        "title": "Sample Title 62",
+        "authors": [
+            "John Johnson",
+            "Jeremy Jones MD",
+            "Samuel Nelson"
+        ],
+        "summary": "History go price still state.",
+        "institutions": [
+            "Calderon-Mcdonald",
+            "Alvarez, Bryant and Mays"
+        ],
+        "keywords": [
+            "technology",
+            "partner"
+        ],
+        "content": "Democratic billion win easy strong theory. Leave mean another painting occur single police organization. National whatever option bag result perhaps dark bank.",
+        "releaseDate": "2023-02-15",
+        "pdfUrl": "https://example.com/article62.pdf",
+        "references": [
+            "Southern sport art range involve."
+        ]
+    },
+    {
+        "title": "Sample Title 63",
+        "authors": [
+            "Jonathan Hayes",
+            "Madison Rogers",
+            "Andre Pearson"
+        ],
+        "summary": "Down our picture without certain film.",
+        "institutions": [
+            "Ortiz, White and Woods"
+        ],
+        "keywords": [
+            "anyone",
+            "just",
+            "why"
+        ],
+        "content": "Almost yourself compare church kitchen wish.",
+        "releaseDate": "2023-10-26",
+        "pdfUrl": "https://example.com/article63.pdf",
+        "references": [
+            "Simply woman same health practice measure."
+        ]
+    },
+    {
+        "title": "Sample Title 64",
+        "authors": [
+            "Scott Flores"
+        ],
+        "summary": "Charge majority possible land imagine involve consumer.",
+        "institutions": [
+            "Ramos-Bell"
+        ],
+        "keywords": [
+            "recently",
+            "lead",
+            "south",
+            "would"
+        ],
+        "content": "Whose state woman author ahead since. Health choice common between science. Third many save sign learn.",
+        "releaseDate": "2023-09-16",
+        "pdfUrl": "https://example.com/article64.pdf",
+        "references": [
+            "Town level that common financial we."
+        ]
+    },
+    {
+        "title": "Sample Title 65",
+        "authors": [
+            "Heather Bennett"
+        ],
+        "summary": "Word next great with give soon.",
+        "institutions": [
+            "Johnson, Garner and Duran",
+            "Stafford, Patton and Glass"
+        ],
+        "keywords": [
+            "nearly",
+            "clearly"
+        ],
+        "content": "Case anyone seem reach offer. Lawyer few have charge perhaps approach tree box.",
+        "releaseDate": "2023-02-07",
+        "pdfUrl": "https://example.com/article65.pdf",
+        "references": [
+            "Test take off case walk son matter.",
+            "Later item face community begin wait state."
+        ]
+    },
+    {
+        "title": "Sample Title 66",
+        "authors": [
+            "Ashley Smith",
+            "Patrick Williams",
+            "Brian Hernandez"
+        ],
+        "summary": "Season worker if experience fund throw she while.",
+        "institutions": [
+            "Miller-Harrison",
+            "Johns-Peterson"
+        ],
+        "keywords": [
+            "home",
+            "particular",
+            "soon"
+        ],
+        "content": "Teach us weight former together sister performance stand. Final trial condition.",
+        "releaseDate": "2022-12-29",
+        "pdfUrl": "https://example.com/article66.pdf",
+        "references": [
+            "She rise few argue leg game discuss.",
+            "As close admit dinner later last."
+        ]
+    },
+    {
+        "title": "Sample Title 67",
+        "authors": [
+            "Sonya Young",
+            "Kimberly Thomas",
+            "Joel Montes"
+        ],
+        "summary": "Check yourself green cover about throughout.",
+        "institutions": [
+            "Marshall and Sons",
+            "Banks, Burnett and Moreno"
+        ],
+        "keywords": [
+            "world",
+            "shake",
+            "station",
+            "order"
+        ],
+        "content": "Major job million do can and score hair. Color mind actually design model each. Billion pressure former shoulder two great nature.",
+        "releaseDate": "2023-10-18",
+        "pdfUrl": "https://example.com/article67.pdf",
+        "references": [
+            "Cup require its upon marriage education most."
+        ]
+    },
+    {
+        "title": "Sample Title 68",
+        "authors": [
+            "Laura Rodriguez",
+            "Michael Alexander"
+        ],
+        "summary": "Point box walk.",
+        "institutions": [
+            "Anderson, Cooper and Smith"
+        ],
+        "keywords": [
+            "after",
+            "trial",
+            "cut"
+        ],
+        "content": "Ago learn answer foreign receive action. Family pattern ten culture join. Tree green strategy activity firm step study.",
+        "releaseDate": "2023-03-13",
+        "pdfUrl": "https://example.com/article68.pdf",
+        "references": [
+            "Agency none follow from.",
+            "Alone rather effort."
+        ]
+    },
+    {
+        "title": "Sample Title 700",
+        "authors": [
+            "Audrey Barajas"
+        ],
+        "summary": "Space the wife present against share security.",
+        "institutions": [
+            "Mason, Wells and Bennett",
+            "Hayes-Gomez"
+        ],
+        "keywords": [
+            "during",
+            "treatment",
+            "impact"
+        ],
+        "content": "Voice item into value source executive concern. Important reduce enough money. Item issue suggest office stand official technology.",
+        "releaseDate": "2023-09-13",
+        "pdfUrl": "https://example.com/article69.pdf",
+        "references": [
+            "Sit since us own reach note west former.",
+            "Camera into accept of can among skill owner."
+        ]
+    },
+    {
+        "title": "Sample Title 700",
+        "authors": [
+            "Amber Ruiz",
+            "Victoria Sullivan",
+            "Christine Davidson"
+        ],
+        "summary": "Party fire home if better school.",
+        "institutions": [
+            "Thomas-Paul",
+            "Whitehead LLC"
+        ],
+        "keywords": [
+            "live",
+            "doctor"
+        ],
+        "content": "If safe exactly another capital blood. Our great new.",
+        "releaseDate": "2023-11-13",
+        "pdfUrl": "https://example.com/article70.pdf",
+        "references": [
+            "Trade visit nothing throughout.",
+            "Management specific page friend this."
+        ]
+    },
+    {
+        "title": "Sample Title 71",
+        "authors": [
+            "Michael Johnson",
+            "Brenda Rose",
+            "Richard Bradshaw"
+        ],
+        "summary": "One explain next television stay.",
+        "institutions": [
+            "Thomas, Lowe and Jackson"
+        ],
+        "keywords": [
+            "student",
+            "require",
+            "attention"
+        ],
+        "content": "Common catch weight stop. Soon game political who democratic control happen. Should who bit across baby deep sport.",
+        "releaseDate": "2023-07-21",
+        "pdfUrl": "https://example.com/article71.pdf",
+        "references": [
+            "Environment conference anyone sometimes gun area."
+        ]
+    },
+    {
+        "title": "Sample Title 72",
+        "authors": [
+            "Mr. Michael Brown",
+            "Diana Hicks",
+            "Erika Harmon"
+        ],
+        "summary": "Quite leg course walk campaign fact.",
+        "institutions": [
+            "Munoz Group",
+            "Garner-Mcdonald"
+        ],
+        "keywords": [
+            "hit",
+            "daughter",
+            "political"
+        ],
+        "content": "Bag mention fall like edge Mr. Food land show coach.",
+        "releaseDate": "2023-11-06",
+        "pdfUrl": "https://example.com/article72.pdf",
+        "references": [
+            "Game sort condition shoulder president mind.",
+            "Clearly president apply past late."
+        ]
+    },
+    {
+        "title": "Sample Title 73",
+        "authors": [
+            "Ann Sutton"
+        ],
+        "summary": "Able fly few.",
+        "institutions": [
+            "Sims-Spence",
+            "Mcintyre, Davis and Glenn"
+        ],
+        "keywords": [
+            "environmental",
+            "president",
+            "whole"
+        ],
+        "content": "Near create American onto. Around short story interesting treatment plant church. Style challenge many writer.",
+        "releaseDate": "2023-05-02",
+        "pdfUrl": "https://example.com/article73.pdf",
+        "references": [
+            "Identify watch represent agree nice half push."
+        ]
+    },
+    {
+        "title": "Sample Title 700",
+        "authors": [
+            "Roberto Copeland"
+        ],
+        "summary": "Central service could strategy left.",
+        "institutions": [
+            "karou",
+            "Bailey-Brown",
+            "Vega-Christian"
+        ],
+        "keywords": [
+            "always",
+            "rich"
+        ],
+        "content": "Style through idea still right scene no. Concern analysis word some glass security they tell. Not us say teach service at direction.",
+        "releaseDate": "2023-09-18",
+        "pdfUrl": "https://example.com/article74.pdf",
+        "references": [
+            "Guess account full base then once race wait.",
+            "Military among for court prepare each car."
+        ]
+    },
+    {
+        "title": "Sample Title 75",
+        "authors": [
+            "Joshua Douglas",
+            "Jacqueline Brooks",
+            "Debbie Thomas"
+        ],
+        "summary": "Campaign bit why sister detail.",
+        "institutions": [
+            "Potts-Boyd"
+        ],
+        "keywords": [
+            "large",
+            "reduce"
+        ],
+        "content": "Imagine trouble process any off to training. Avoid reduce happy book agency song. Hotel leader instead. Market represent I including animal.",
+        "releaseDate": "2023-10-18",
+        "pdfUrl": "https://example.com/article75.pdf",
+        "references": [
+            "Interest blood street western actually manage."
+        ]
+    },
+    {
+        "title": "Sample Title 76",
+        "authors": [
+            "Amber Thompson"
+        ],
+        "summary": "She door she also any.",
+        "institutions": [
+            "Nguyen, Richardson and Long"
+        ],
+        "keywords": [
+            "we",
+            "weight",
+            "kind"
+        ],
+        "content": "Learn as quickly figure beyond. Development term law record member watch near social. Maybe cultural imagine eight name back course. Trade real spring game.",
+        "releaseDate": "2023-10-19",
+        "pdfUrl": "https://example.com/article76.pdf",
+        "references": [
+            "Would mind senior send."
+        ]
+    },
+    {
+        "title": "Sample Title 77",
+        "authors": [
+            "Michael Welch",
+            "Ashley Vasquez"
+        ],
+        "summary": "Animal station central large student gas reveal.",
+        "institutions": [
+            "Walker LLC",
+            "Rodriguez-Stephens"
+        ],
+        "keywords": [
+            "decade",
+            "large",
+            "too",
+            "store"
+        ],
+        "content": "Listen police likely heart sometimes firm. Method certainly indicate site economy kind. Worry reveal garden care within teach.",
+        "releaseDate": "2023-11-07",
+        "pdfUrl": "https://example.com/article77.pdf",
+        "references": [
+            "Deal clearly cultural fact sound."
+        ]
+    },
+    {
+        "title": "Sample Title 78",
+        "authors": [
+            "Brandon Chan"
+        ],
+        "summary": "People owner he focus check defense feeling animal.",
+        "institutions": [
+            "karou",
+            "Boyd Ltd"
+        ],
+        "keywords": [
+            "AI",
+            "whether",
+            "word",
+            "question"
+        ],
+        "content": "Population condition he husband glass. Should prevent future build offer increase back.",
+        "releaseDate": "2023-09-05",
+        "pdfUrl": "https://example.com/article78.pdf",
+        "references": [
+            "Not true determine citizen international couple leave.",
+            "Effect chance note manage when require."
+        ]
+    },
+    {
+        "title": "Sample Title 79",
+        "authors": [
+            "Miss Monica Short",
+            "Amanda Wilson",
+            "Regina Martinez"
+        ],
+        "summary": "Professor trip pull wear board civil.",
+        "institutions": [
+            "Nolan Ltd",
+            "Frank-Caldwell"
+        ],
+        "keywords": [
+            "AI",
+            "hear",
+            "stock",
+            "shoulder"
+        ],
+        "content": "Describe social great until matter read cover. Long painting structure simple.",
+        "releaseDate": "2023-06-02",
+        "pdfUrl": "https://example.com/article79.pdf",
+        "references": [
+            "Product face manager behind wife go cup past."
+        ]
+    },
+    {
+        "title": "Sample Title 80",
+        "authors": [
+            "Heather Edwards"
+        ],
+        "summary": "Lawyer fill unit property.",
+        "institutions": [
+            "Johnson-Wyatt"
+        ],
+        "keywords": [
+            "outside",
+            "chance",
+            "stage",
+            "add"
+        ],
+        "content": "Hand mean individual phone charge head. Offer eye college. Affect although me customer such subject be.",
+        "releaseDate": "2023-09-23",
+        "pdfUrl": "https://example.com/article80.pdf",
+        "references": [
+            "Pull card Mr current record."
+        ]
+    },
+    {
+        "title": "Sample Title 81",
+        "authors": [
+            "Felicia Bean",
+            "Amber Kennedy"
+        ],
+        "summary": "Beyond side election century add day offer detail.",
+        "institutions": [
+            "Moore-Johnson"
+        ],
+        "keywords": [
+            "certainly",
+            "help"
+        ],
+        "content": "Smile gun talk from hundred think. Enter model call particular industry present. Consider check month think federal.",
+        "releaseDate": "2023-02-25",
+        "pdfUrl": "https://example.com/article81.pdf",
+        "references": [
+            "Back free sound watch.",
+            "Administration health above."
+        ]
+    },
+    {
+        "title": "Sample Title 82",
+        "authors": [
+            "Justin Wood"
+        ],
+        "summary": "Care whether help represent price writer risk specific.",
+        "institutions": [
+            "Ortega-White",
+            "Nichols, Ellison and Alvarez"
+        ],
+        "keywords": [
+            "happen",
+            "part",
+            "small"
+        ],
+        "content": "Rule example difference strong. Gun or draw.",
+        "releaseDate": "2023-02-09",
+        "pdfUrl": "https://example.com/article82.pdf",
+        "references": [
+            "Weight you vote produce teach degree before."
+        ]
+    },
+    {
+        "title": "Sample Title 83",
+        "authors": [
+            "Lindsay Melton",
+            "Amanda Davis",
+            "Michael Michael"
+        ],
+        "summary": "Western western director case.",
+        "institutions": [
+            "Roberts, Carter and Evans",
+            "Bell, Fernandez and Carter"
+        ],
+        "keywords": [
+            "race",
+            "air",
+            "great",
+            "official"
+        ],
+        "content": "Decide send hospital test thus. Treat strong sea foreign peace learn. Then ago big behavior black social.",
+        "releaseDate": "2023-07-15",
+        "pdfUrl": "https://example.com/article83.pdf",
+        "references": [
+            "Start just little than then.",
+            "Fact mention catch no."
+        ]
+    },
+    {
+        "title": "Sample Title 84",
+        "authors": [
+            "Michelle Salazar",
+            "Ivan Bennett",
+            "Amanda Phillips"
+        ],
+        "summary": "Democratic anything save stand science medical.",
+        "institutions": [
+            "Patterson, Martin and Dodson"
+        ],
+        "keywords": [
+            "anything",
+            "age"
+        ],
+        "content": "Either involve cut pass five seat. Officer from represent write together.",
+        "releaseDate": "2023-04-25",
+        "pdfUrl": "https://example.com/article84.pdf",
+        "references": [
+            "Design size share throughout risk method.",
+            "There else gun two including."
+        ]
+    },
+    {
+        "title": "Sample Title 85",
+        "authors": [
+            "Cathy Rich"
+        ],
+        "summary": "Star education up effect wide order figure.",
+        "institutions": [
+            "Miller-Salazar",
+            "Miller Inc"
+        ],
+        "keywords": [
+            "wall",
+            "major"
+        ],
+        "content": "Bring choice most group mother. Star rather them defense often exactly inside. Raise there their nearly participant.",
+        "releaseDate": "2023-10-01",
+        "pdfUrl": "https://example.com/article85.pdf",
+        "references": [
+            "Note know buy gas painting onto.",
+            "Debate never no mission worry."
+        ]
+    },
+    {
+        "title": "Sample Title 86",
+        "authors": [
+            "Jennifer Brown"
+        ],
+        "summary": "Campaign writer analysis thought pretty fish.",
+        "institutions": [
+            "Wilcox, Jackson and Sanders"
+        ],
+        "keywords": [
+            "natural",
+            "able",
+            "page"
+        ],
+        "content": "Collection ago value nor let break. Morning ground defense nice degree instead. Feel long upon majority fish town.",
+        "releaseDate": "2022-12-23",
+        "pdfUrl": "https://example.com/article86.pdf",
+        "references": [
+            "Song Mr computer series lead know soon."
+        ]
+    },
+    {
+        "title": "Sample Title 87",
+        "authors": [
+            "Clayton Clark",
+            "Daniel James",
+            "Brian Burgess"
+        ],
+        "summary": "Five something lawyer if.",
+        "institutions": [
+            "Dean-Bernard"
+        ],
+        "keywords": [
+            "increase",
+            "result",
+            "those"
+        ],
+        "content": "Return family record through. Series member blue clearly media.",
+        "releaseDate": "2023-05-26",
+        "pdfUrl": "https://example.com/article87.pdf",
+        "references": [
+            "Skill and everybody physical same car.",
+            "List address establish show tax while move."
+        ]
+    },
+    {
+        "title": "Sample Title 88",
+        "authors": [
+            "Dorothy Miller MD",
+            "Julie Castro"
+        ],
+        "summary": "Democrat executive common range benefit themselves.",
+        "institutions": [
+            "Arnold, Ball and Scott",
+            "Miller, Gardner and Lee"
+        ],
+        "keywords": [
+            "turn",
+            "check",
+            "remember"
+        ],
+        "content": "Offer blue line course who alone. Why ready include face Congress various.",
+        "releaseDate": "2023-12-08",
+        "pdfUrl": "https://example.com/article88.pdf",
+        "references": [
+            "Hospital myself common run family another.",
+            "Service wish several subject young stuff."
+        ]
+    },
+    {
+        "title": "Sample Title 89",
+        "authors": [
+            "Robin Vasquez",
+            "Patricia White",
+            "Amanda Pratt"
+        ],
+        "summary": "At treatment truth factor where.",
+        "institutions": [
+            "Mcdowell, Sparks and Jones"
+        ],
+        "keywords": [
+            "question",
+            "president",
+            "short",
+            "especially"
+        ],
+        "content": "Actually attack individual woman story reason determine. Have blood head develop democratic realize. Church hold education fine yourself above.",
+        "releaseDate": "2023-10-02",
+        "pdfUrl": "https://example.com/article89.pdf",
+        "references": [
+            "Near yes support recognize soon success finish."
+        ]
+    },
+    {
+        "title": "Sample Title 90",
+        "authors": [
+            "Ryan Banks",
+            "Amanda Butler"
+        ],
+        "summary": "Indicate leave hundred stop still begin music support.",
+        "institutions": [
+            "Robles Inc"
+        ],
+        "keywords": [
+            "into",
+            "side",
+            "while"
+        ],
+        "content": "Happen thing now economic. War sit raise onto line space.",
+        "releaseDate": "2023-02-07",
+        "pdfUrl": "https://example.com/article90.pdf",
+        "references": [
+            "Cup everyone president owner song military program difference.",
+            "Through officer recent long century subject suffer."
+        ]
+    },
+    {
+        "title": "Sample Title 91",
+        "authors": [
+            "Steven Hendrix",
+            "Thomas Gamble"
+        ],
+        "summary": "Tough a decade pass stage kid.",
+        "institutions": [
+            "Hatfield-Walters",
+            "Cohen, Baker and Burns"
+        ],
+        "keywords": [
+            "bed",
+            "scene"
+        ],
+        "content": "Age not wind teach. Interview international inside big leave son.",
+        "releaseDate": "2023-04-16",
+        "pdfUrl": "https://example.com/article91.pdf",
+        "references": [
+            "Former resource then.",
+            "Very total way guess."
+        ]
+    },
+    {
+        "title": "Sample Title 92",
+        "authors": [
+            "Virginia Bridges",
+            "Elizabeth Benjamin"
+        ],
+        "summary": "Hour history apply century.",
+        "institutions": [
+            "Gomez, Hansen and Baker",
+            "Quinn, Weber and Carr"
+        ],
+        "keywords": [
+            "state",
+            "purpose",
+            "will"
+        ],
+        "content": "Arm agreement strong at trade. Anything manage be administration. Suffer could suggest kind night indicate.",
+        "releaseDate": "2023-02-13",
+        "pdfUrl": "https://example.com/article92.pdf",
+        "references": [
+            "Bit score when card sign seem name.",
+            "Continue high machine management."
+        ]
+    },
+    {
+        "title": "Sample Title 93",
+        "authors": [
+            "Justin Smith"
+        ],
+        "summary": "Card hand force president focus I.",
+        "institutions": [
+            "Stuart Group",
+            "Roberts, Johnson and Cervantes"
+        ],
+        "keywords": [
+            "response",
+            "administration",
+            "write"
+        ],
+        "content": "Television recent professor power conference cold floor. Issue however want beautiful tell. Successful approach service language state.",
+        "releaseDate": "2023-11-06",
+        "pdfUrl": "https://example.com/article93.pdf",
+        "references": [
+            "Consumer dream some knowledge."
+        ]
+    },
+    {
+        "title": "Sample Title 94",
+        "authors": [
+            "Lee Dixon",
+            "Lisa Hobbs",
+            "Andrew Mills"
+        ],
+        "summary": "About reality art assume fact.",
+        "institutions": [
+            "Williams-Day"
+        ],
+        "keywords": [
+            "offer",
+            "government",
+            "involve"
+        ],
+        "content": "Least possible change fight ahead first let develop. Magazine use again explain soldier.",
+        "releaseDate": "2023-01-27",
+        "pdfUrl": "https://example.com/article94.pdf",
+        "references": [
+            "Interview know our season some whatever fund line."
+        ]
+    },
+    {
+        "title": "Sample Title 95",
+        "authors": [
+            "Lori Booker"
+        ],
+        "summary": "One yeah popular sport as.",
+        "institutions": [
+            "Knapp, Trujillo and Valencia",
+            "Melton-Jones"
+        ],
+        "keywords": [
+            "somebody",
+            "hit"
+        ],
+        "content": "Both hospital Democrat yourself. Money send enter join arrive.",
+        "releaseDate": "2023-05-06",
+        "pdfUrl": "https://example.com/article95.pdf",
+        "references": [
+            "Moment yourself suffer democratic.",
+            "Perhaps international southern campaign necessary lot world southern."
+        ]
+    },
+    {
+        "title": "Sample Title 96",
+        "authors": [
+            "Julie Taylor"
+        ],
+        "summary": "Bring forward push play statement your.",
+        "institutions": [
+            "Wagner-Morales"
+        ],
+        "keywords": [
+            "expect",
+            "teach",
+            "best"
+        ],
+        "content": "Plant whatever west reveal appear pull operation environment. Beyond both hair feel surface audience edge. Case window business trial bring you.",
+        "releaseDate": "2023-05-02",
+        "pdfUrl": "https://example.com/article96.pdf",
+        "references": [
+            "Third best culture outside prove person he successful."
+        ]
+    },
+    {
+        "title": "Sample Title 97",
+        "authors": [
+            "Michelle Parker",
+            "Nancy Cole",
+            "William Osborne"
+        ],
+        "summary": "Nothing century base into.",
+        "institutions": [
+            "Jefferson-Mcmahon"
+        ],
+        "keywords": [
+            "answer",
+            "house",
+            "different"
+        ],
+        "content": "Resource surface cup another. Candidate throw time former art necessary.",
+        "releaseDate": "2023-11-25",
+        "pdfUrl": "https://example.com/article97.pdf",
+        "references": [
+            "Sing wear statement body though.",
+            "Score involve page knowledge."
+        ]
+    },
+    {
+        "title": "Sample Title 98",
+        "authors": [
+            "Diana Caldwell"
+        ],
+        "summary": "Area break defense commercial price every.",
+        "institutions": [
+            "Jackson PLC",
+            "Cohen-Baxter"
+        ],
+        "keywords": [
+            "size",
+            "case",
+            "another",
+            "guess"
+        ],
+        "content": "Rate chance couple sense.",
+        "releaseDate": "2023-02-15",
+        "pdfUrl": "https://example.com/article98.pdf",
+        "references": [
+            "About order page four.",
+            "Skill father once scientist alone someone."
+        ]
+    },
+    {
+        "title": "Sample Title 99",
+        "authors": [
+            "Mrs. Diane Bird"
+        ],
+        "summary": "Huge east somebody state loss student.",
+        "institutions": [
+            "Black Group"
+        ],
+        "keywords": [
+            "Democrat",
+            "left",
+            "adult"
+        ],
+        "content": "Argue couple themselves. Between eye rule first heavy small ask.",
+        "releaseDate": "2023-12-18",
+        "pdfUrl": "https://example.com/article99.pdf",
+        "references": [
+            "He south explain after firm politics."
+        ]
+    },
+    {
+        "title": "Sample Title 100",
+        "authors": [
+            "Megan Brown",
+            "Eric Carpenter",
+            "Kristen Harrison"
+        ],
+        "summary": "Often father drop bill.",
+        "institutions": [
+            "Rojas Ltd",
+            "Adkins and Sons"
+        ],
+        "keywords": [
+            "present",
+            "human",
+            "what",
+            "thing"
+        ],
+        "content": "Body at national turn address couple. Establish analysis top control much start. Sing leave music apply condition soldier.",
+        "releaseDate": "2023-03-26",
+        "pdfUrl": "https://example.com/article100.pdf",
+        "references": [
+            "Else position paper or.",
+            "Town simply always many improve condition."
+        ]
+    }
 ]

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Articles</title>
+</head>
+<body>
+    <ul>
+        {% for result in results %}
+        <br>
+            <li>{{ result.title }}
+                <br>
+                {{ result.authors }}
+                <br>
+                {{ result.institutions }}
+                <br>
+                {{ result.keywords }}
+                <br>
+                {{ result.pdf_url }}
+                <br>
+                {{ result.text }}
+                <br>
+                {{ result.bibliographie }}
+                <br>
+                {{ result.date }}
+                <br>
+                {{ result.summary }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
