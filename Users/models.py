@@ -1,5 +1,6 @@
 import binascii
 import os
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from rest_framework.authtoken.models import Token as BaseToken
 from django.utils.translation import gettext_lazy as _
@@ -13,6 +14,7 @@ class user(models.Model):  # the common and important attributes that the 3 type
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
     role = models.CharField(max_length=MAX_CHAR_LENGTH)
     is_active = models.BooleanField(_('active'),default=True,)
+    is_authenticated = models.BooleanField(default=True)
 
 
 #represents the admin in our database , he controls the Moderator model
@@ -40,6 +42,7 @@ class Moderator(models.Model):
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
     profile_picture = models.ImageField(upload_to='profile_pics', null=True, blank=True, default='media/profile_pics/default_profile_pic.jpg')
+    edit_count = models.IntegerField(default=0)  # New field to store edit count
 
     def __str__(self):
         return self.userName
@@ -58,6 +61,7 @@ class client(models.Model):
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH, default=" ")
     profile_picture = models.ImageField(upload_to='media/profile_pics', null=True, blank=True, default='media/profile_pics/')
+    favorite_articles = ArrayField(models.CharField(max_length=MAX_CHAR_LENGTH, blank=True), default=list)
 
 
 #The token model that we used to replace the token model defined in the User's auth app

@@ -1,101 +1,82 @@
 [
   {
-    "title": "Machine Learning Approaches for Image Recognition",
-    "authors": ["John A. Smith", "Mary L. Johnson"],
-    "institutions": ["Institution 1", "Institution 2"],
-    "keywords": "Machine Learning, Image Recognition, Deep Learning",
+    "title": "Article Title 1",
+    "authors": [
+      "Author 1",
+      "Author 2"
+    ],
+    "institutions": [
+      "Institution 1",
+      "Institution 2"
+    ],
+    "keywords": "Keyword1, Keyword2, Keyword3",
     "pdf_url": "https://example.com/article1.pdf",
-    "bibliography": ["Reference 1", "Reference 2"],
-    "abstract": "This paper explores various machine learning techniques for improving image recognition accuracy and performance.",
+    "bibliographie": [
+      "Reference 1",
+      "Reference 2"
+    ],
+    "abstract": "here is the abstract 1",
     "text": "This is the text of Article 1.",
     "date": "2023-01-01"
   },
   {
-    "title": "Blockchain Technology and its Applications in Cybersecurity",
-    "authors": ["Sarah K. Lee", "David M. Brown"],
-    "institutions": ["Institution 3", "Institution 4"],
-    "keywords": "Blockchain, Cybersecurity, Decentralization",
+    "title": "Article Title 2",
+    "authors": [
+      "Author 3",
+      "Author 4"
+    ],
+    "institutions": [
+      "Institution 3",
+      "Institution 4"
+    ],
+    "keywords": "Keyword4, Keyword5, Keyword6, Keyword7",
     "pdf_url": "https://example.com/article2.pdf",
-    "bibliography": ["Reference 3", "Reference 4"],
-    "abstract": "The paper discusses the use of blockchain in enhancing cybersecurity measures, focusing on its decentralized nature and cryptographic principles.",
+    "bibliographie": [
+      "Reference 3",
+      "Reference 4"
+    ],
+    "abstract": "here is the abstract 2",
     "text": "This is the text of Article 2.",
     "date": "2023-02-15"
   },
   {
-    "title": "Quantum Computing: A Comprehensive Review",
-    "authors": ["Robert J. Anderson", "Emily N. Garcia"],
-    "institutions": ["Institution 2", "Institution 9"],
-    "keywords": "Quantum Computing, Quantum Algorithms, Quantum Supremacy",
+    "title": "Article Title 3",
+    "authors": [
+      "Author 3",
+      "Author 5"
+    ],
+    "institutions": [
+      "Institution 2",
+      "Institution 9"
+    ],
+    "keywords": "Keyword7, Keyword8, Keyword9",
     "pdf_url": "https://example.com/article3.pdf",
-    "bibliography": ["Reference 5", "Reference 6"],
-    "abstract": "This review article provides an in-depth analysis of the current state of quantum computing, its potential applications, and challenges.",
+    "bibliographie": [
+      "Reference 5",
+      "Reference 6"
+    ],
+    "abstract": "here is the abstract 3",
     "text": "This is the text of Article 3.",
     "date": "2023-03-20"
   },
   {
-    "title": "Natural Language Processing for Sentiment Analysis: A Survey",
-    "authors": ["Lisa M. Patel", "Michael R. Clark"],
-    "institutions": ["Institution 3", "Institution 4"],
-    "keywords": "Natural Language Processing, Sentiment Analysis, Machine Learning",
+    "title": "Article Title 2 Test",
+    "authors": [
+      "Author 3",
+      "Author 4"
+    ],
+    "institutions": [
+      "Institution 3",
+      "Institution 4"
+    ],
+    "keywords": "Keyword4, Keyword5, Keyword6, Keyword7",
     "pdf_url": "https://example.com/article2.pdf",
-    "bibliography": ["Reference 3", "Reference 4"],
-    "abstract": "The paper surveys recent advancements in natural language processing techniques for sentiment analysis, covering methodologies and applications.",
+    "bibliographie": [
+      "Reference 3",
+      "Reference 4"
+    ],
+    "abstract": "here is the abstract 2",
     "text": "This is the text of Article 2.",
     "date": "2023-02-15"
-  },
-  {
-    "title": "The Evolution of Cyber-Physical Systems: Challenges and Opportunities",
-    "authors": ["James P. Miller", "Anna R. White"],
-    "institutions": ["Institution 3", "Institution 4"],
-    "keywords": "Cyber-Physical Systems, Internet of Things, Smart Cities",
-    "pdf_url": "https://example.com/article2.pdf",
-    "bibliography": ["Reference 3", "Reference 4"],
-    "abstract": "This article explores the evolution of cyber-physical systems, addressing challenges and opportunities in the context of IoT and smart city development.",
-    "text": "This is the text of Article 2.",
-    "date": "2023-02-15"
-  },
-  {
-    "title": "Artificial Intelligence in Healthcare: Current Trends and Future Prospects",
-    "authors": ["Emma R. Davis", "Michael J. Harris"],
-    "institutions": ["Institution 5", "Institution 6"],
-    "keywords": "Artificial Intelligence, Healthcare, Medical Imaging",
-    "pdf_url": "https://example.com/article4.pdf",
-    "bibliography": ["Reference 7", "Reference 8"],
-    "abstract": "This article reviews the current trends and future prospects of artificial intelligence applications in the healthcare domain, with a focus on medical imaging.",
-    "text": "This is the text of Article 4.",
-    "date": "2023-04-10"
-  },
-  {
-    "title": "Cybersecurity Threats in the Age of IoT: A Comprehensive Analysis",
-    "authors": ["Alexandra N. Taylor", "Christopher M. Roberts"],
-    "institutions": ["Institution 7", "Institution 8"],
-    "keywords": "Cybersecurity, Internet of Things, Threat Analysis",
-    "pdf_url": "https://example.com/article5.pdf",
-    "bibliography": ["Reference 9", "Reference 10"],
-    "abstract": "This paper provides a comprehensive analysis of cybersecurity threats in the era of IoT, addressing challenges and proposing mitigation strategies.",
-    "text": "This is the text of Article 5.",
-    "date": "2023-05-22"
-  },
-  {
-    "title": "Augmented Reality Applications: A Survey of Current Technologies and Future Directions",
-    "authors": ["Daniel W. Miller", "Olivia S. Brown"],
-    "institutions": ["Institution 9", "Institution 10"],
-    "keywords": "Augmented Reality, Virtual Reality, Human-Computer Interaction",
-    "pdf_url": "https://example.com/article6.pdf",
-    "bibliography": ["Reference 11", "Reference 12"],
-    "abstract": "This survey explores the current technologies and potential future directions of augmented reality applications, emphasizing their impact on human-computer interaction.",
-    "text": "This is the text of Article 6.",
-    "date": "2023-06-15"
-  },
-  {
-    "title": "Cloud Computing Security: Challenges and Solutions",
-    "authors": ["Ryan J. Wilson", "Sophia L. Martinez"],
-    "institutions": ["Institution 11", "Institution 12"],
-    "keywords": "Cloud Computing, Security, Data Privacy",
-    "pdf_url": "https://example.com/article7.pdf",
-    "bibliography": ["Reference 13", "Reference 14"],
-    "abstract": "This article discusses the challenges associated with cloud computing security and proposes solutions to address issues related to data privacy and protection.",
-    "text": "This is the text of Article 7.",
-    "date": "2023-07-30"
   }
 ]

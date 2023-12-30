@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'elasticsearch_dsl',
     'Users',
     'Articles',
+    'search',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -95,7 +96,7 @@ DATABASES = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200',  # Adjust the host and port based on my Elasticsearch setup
+        'hosts': 'localhost:9200',# Adjust the host and port based on my Elasticsearch setup
     },
 }
 

@@ -174,7 +174,7 @@ class modManipulation(APIView):
     @api_view(['DELETE'])
     def delete_mod(request, id):
         connected = request.user  # to get the instance of the actual active admin
-        if connected.id is None:
+        if connected.id == None:
             return Response({'error':"User non authenticated"})
         if connected.role == "Administrator":
             try:

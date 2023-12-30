@@ -14,7 +14,6 @@ class ArticleIndex(Document):
     abstract = Text()
     text = Text()
     date = Date()
-    status = Text()
 
 
     class Index:
