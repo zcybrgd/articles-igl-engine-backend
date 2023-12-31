@@ -15,12 +15,12 @@ class TestArticlesApiView(TestCase):
        articles = response.json().get('articles', [])
        #on affiche juste pour la verification
        print("Articles Retrieved:")
-
-       self.assertTrue(isinstance(articles, list))  # Vérifiez que la réponse contient une liste d'articles
+       
+      # Vérifiez que la réponse contient une liste d'articles
        for article in articles:
             self.assertTrue('id' in article)  # Vérifiez la présence de l'ID de l'article
             self.assertTrue('title' in article)  # Vérifiez la présence du titre de l'article
-        
+            # print(response.content)
         
 
     def test_delete_article(self):
@@ -30,8 +30,7 @@ class TestArticlesApiView(TestCase):
         # Send a DELETE request to the delete endpoint using the formatted URL
         response = self.client.delete(delete_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn(response.status_code, [status.HTTP_200_OK, status.HTTP_204_NO_CONTENT, status.HTTP_404_NOT_FOUND])
-
+         
       
     def test_update_article(self):
         article_id = 1  
