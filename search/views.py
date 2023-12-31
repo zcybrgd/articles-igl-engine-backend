@@ -1,7 +1,8 @@
 # myapp/views.py
 from django.http import JsonResponse
 from django.shortcuts import render
-from elasticsearch_dsl import AttrList, Search, Q
+from elasticsearch_dsl import Search, Q
+from elasticsearch_dsl.utils import AttrList
 from elasticsearch_dsl.query import MultiMatch
 from search.search_indexes import ArticleIndex
 
