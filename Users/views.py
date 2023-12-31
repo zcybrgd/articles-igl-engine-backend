@@ -28,7 +28,8 @@ def signup(request):
         actualClient.userId = userClient #linking the client to its user instance
         actualClient.save()
         token = NonUserToken.objects.create(user=userClient) #creating its token
-        return Response({'token': token.key})
+        return Response({'token': token.key}, status=status.HTTP_201_CREATED)  # Return 201 Created
+#I changed this line
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

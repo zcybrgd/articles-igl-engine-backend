@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "title": "The Impact of Climate Change on Biodiversity and Computer Science's role in that!",
+    "title": "The Impact of Climate Change on Biodiversity and Computer Sciences role in that! //Added this //",
     "authors": [
       "Dr. Alice Johnson",
       "Prof. Robert Davis"
@@ -61,27 +61,6 @@
     "abstract": "This article highlights recent medical breakthroughs in cancer treatment, with a focus on targeted therapies and immunotherapy. It discusses the promising results of clinical trials and their potential impact on cancer patients.",
     "text": "This is the text of Article 3.",
     "date": "2023-03-20"
-  },
-  {
-    "id": "4",
-    "title": "Renewable Energy Sources: A Global Perspective",
-    "authors": [
-      "Prof. Maria Rodriguez",
-      "Dr. William Chen"
-    ],
-    "institutions": [
-      "Renewable Energy Research Institute",
-      "Global Sustainability Council"
-    ],
-    "keywords": "renewable energy, solar power, wind energy",
-    "pdf_url": "https://example.com/article4.pdf",
-    "bibliographie": [
-      "Gupta, R. et al. (2022). Advances in Solar Photovoltaics.",
-      "Anderson, B. (2021). Wind Energy: Harnessing the Power of the Wind."
-    ],
-    "abstract": "This article provides a global perspective on the current state of renewable energy sources. It discusses advancements in solar power, wind energy, and their potential to address the world's energy needs sustainably.",
-    "text": "This is the text of Article 4.",
-    "date": "2023-04-10"
   },
   {
     "id": "5",

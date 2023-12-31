@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'articles_igl_engine.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ArticlesBDD',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'TPIGL062023@//@',
         'HOST': '127.0.0.1',
