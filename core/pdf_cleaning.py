@@ -8,7 +8,7 @@ class TextCleaner:
 
     def __init__(self):
         # Load the spaCy English model
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy.load("en_core_web_lg")
 
     def cleaning_text(self, text):
         # Step 1: Delete successive lines with only numbers

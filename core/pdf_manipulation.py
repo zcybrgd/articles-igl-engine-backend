@@ -28,6 +28,7 @@ class PDFManipulation():
         return text, first_page
 
 
+
     def get_drive_direct_link(self, gdrive_link):
         # Extract the file ID from the shareable link
         file_id = gdrive_link.split("/")[-2]

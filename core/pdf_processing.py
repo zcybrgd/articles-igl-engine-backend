@@ -20,38 +20,40 @@ class PDFProcessing():
             spacy.cli.download("en_core_web_lg")
             self.nlp = spacy.load("en_core_web_lg")
 
+
+    def analyze_extract_data(self,text, first_page, pdf_url):
+        abstract, text_without_abstract = self.extract_abstract(text)
+        references, text_without_references = self.extract_references(text_without_abstract)
+        keywords = self.extract_keywords(first_page)
+        print(self.spacyNER(first_page),"\n\n")
+
+    #extract abstract
+    #extract references
+    #extract keywords
+    #extract institutions
+    #extract title
+    #extract date
+    #extract texte
+    #extract auteurs
+
     def spacyNER(self, text):
         doc = self.nlp(text)
         persons = []
-        organizations = []
-        locations = []
-        geopolitical_entities = []
+        institutions = []
         dates = []
-
         for ent in doc.ents:
-            if ent.label_ == "PERSON" and ent.text not in persons:
-                # Check if the person's name has two or more words, this is what came to mind for improving the perf
-                if 2 <= len(ent.text.split()) < 4:
-                    persons.append(ent.text)
-            elif ent.label_ == "ORG" and ent.text not in organizations:
-                # Check if all characters are uppercase or at least 90% of characters are uppercase
-                is_all_caps = all(char.isupper() for char in ent.text) or (sum(char.isupper() for char in ent.text) / len(ent.text) >= 0.9)
-                if is_all_caps:
-                 organizations.append(ent.text)
-            elif ent.label_ == "LOC" and ent.text not in locations:
-                locations.append(ent.text)
-            elif ent.label_ == "GPE" and ent.text not in geopolitical_entities:
+            if ent.label_ == "PERSON":
                 persons.append(ent.text)
-            elif ent.label_ == "DATE" and ent.text not in dates:
+            elif ent.label_ == "ORG":
+                institutions.append(ent.text)
+            elif ent.label_ == "DATE":
                 dates.append(ent.text)
 
         return {
             "persons": persons,
-            "organizations": organizations,
-            "locations": locations,
+            "institutions": institutions,
             "dates": dates
         }
-
 
     def is_title(self, token):
         # Customize this function based on your specific data and title characteristics
@@ -59,83 +61,87 @@ class PDFProcessing():
 
     def should_stop_extraction(self, token):
         # Customize this function to specify conditions to stop extraction
-        stop_conditions = ["keywords", "index", "terms", "figure", "table"]
-        return self.is_title(token) and token.text.lower() in stop_conditions
+        stop_conditions = ["keywords", "index", "key", "figure", "table","introduction","ccs"]
+        return token.text.lower() in stop_conditions
 
     def contains_date(self, text):
         # Check if the text contains a date-like entity using SpaCy's Named Entity Recognition (NER)
         doc = self.nlp(text)
         return any(ent.label_ == "DATE" for ent in doc.ents)
 
+    def is_mostly_capitalized(self, text, threshold=0.7):
+        words = text.split()
+        capitalized_words = [word.capitalize() if word[0].isupper() else word for word in words]
+        capitalized_count = sum(1 for word in capitalized_words if word[0].isupper())
+        ratio_capitalized = capitalized_count / len(words)
+        return ratio_capitalized >= threshold
+
+    def doc_collection_of_mostly_capitalized(self, doc):
+        mostly_capitalized_lines = []
+        for sentence in doc.sents:
+            if self.is_mostly_capitalized(sentence.text):
+                cleaned_line = sentence.text.strip()
+                if ',' not in cleaned_line:
+                    mostly_capitalized_lines.append(cleaned_line)
+        return mostly_capitalized_lines
+
     def extract_abstract(self, text):
         doc = self.nlp(text)
-        abstract_start = None
-        abstract_end = len(doc)
-
-        # Define alternative terms for the abstract
+        abstract_start = 0
+        abstract_end = len(doc)-1
+        #Defining alt terms for the abstract (it might be one of them and they all mean the same)
         abstract_synonyms = ["abstract", "summary", "summary of findings", "executive summary", "highlights"]
-
+        consecutive_uppercase_text = ""
         for i, token in enumerate(doc):
-            if token.text.lower() in abstract_synonyms:
-                abstract_start = i   # Start extraction after the word "abstract"
-            elif abstract_start is not None and (self.should_stop_extraction(token) or self.contains_date(token.text)):
-                # Stop extraction when a title-like token or date-like entity is encountered
+            if token.text.lower() in abstract_synonyms or consecutive_uppercase_text.lower() in abstract_synonyms:
+                abstract_start = i  # Start extraction after the word "abstract"
+            if token.text.isupper() and len(token.text) == 1 and len(token.text)>0:
+                consecutive_uppercase_text += token.text
+            elif abstract_start is not None and abstract_start!=0 and (self.should_stop_extraction(token)):
+                # Stop extraction
                 abstract_end = i
                 break
-
-        # Extract the abstract
+            else:
+                consecutive_uppercase_text = ""
+        # we defined where it begins and where it ends, now it's time to extract
         abstract = doc[abstract_start:abstract_end].text.strip()
         text_without_abstract = text[:doc[abstract_start].idx] + text[doc[abstract_end].idx:].strip()
 
         return abstract, text_without_abstract
 
     def extract_references(self, text):
-        # Split the text into lines
         lines = text.split('\n')
-
-        # Flag to indicate when to start extracting references
         start_extraction = False
-
-        # Define patterns for references
         reference_patterns = [
-            r'^\d+\.',  # Numerical labeling like '1.'
-            r'^\[\d+\]',  # Numerical labeling like '[1]'
-            r'^[A-Z][A-Za-z\s]*,\s[A-Z][\w\s]*\d{4}',  # Author and year pattern, e.g., 'Author, J. 2000'
-            # Add more patterns as needed based on your specific data
+            r'^\d+\.',  # numbers like '1.'
+            r'^\[\d+\]',  # numbers like '[1]'
+            r'^[A-Z][A-Za-z\s]*,\s[A-Z][\w\s]*\d{4}',  # Author and year pattern, 'Author, J. 2000'
         ]
-
-        # Extract lines matching reference patterns
+        #and any(re.match(pattern, line) for pattern in reference_patterns)
         references = []
-        ref_synonyms = ["references", "bibliography"]
-        for line in lines:
-            # Check if the line contains a reference title
+        ref_synonyms = ["bibliography","references"]
+        successive_non_matching_lines = 0
+        start_index = 0
+        for i, line in enumerate(lines):
+            # Whenrever we meet a reference synonym
             if line.strip().lower() in ref_synonyms:
                 start_extraction = True
-                continue
-
-            # Start extracting references when the title is found
-            if start_extraction and any(re.match(pattern, line) for pattern in reference_patterns):
+                start_index = i
+            # We start extracting them when one of the synonyms is found
+            if start_extraction:
+                successive_non_matching_lines += 1
+                if any(re.match(pattern, line) for pattern in reference_patterns):
+                    successive_non_matching_lines = 0
+                if successive_non_matching_lines >= 15:
+                    break
                 references.append(line.strip())
 
         if len(references) < 7:
-            # Find the index of the line containing "references" or "bibliography"
             ref_title_index = next((i for i, line in enumerate(lines) if line.strip().lower() in ref_synonyms), None)
-
             if ref_title_index is not None:
-                # Extract references from the line containing "references" or "bibliography" to the end of the article
                 references += [line.strip() for line in lines[ref_title_index + 1:]]
-
-        # Find the index of the first line after references
-        first_line_after_references = len(text)
-        for reference in references:
-            reference_index = text.find(reference)
-            if reference_index != -1:
-                first_line_after_references = min(first_line_after_references, reference_index)
-
-        # Extract text without references using spaCy tokenization
-        doc = self.nlp(text[:first_line_after_references].strip())
-        text_without_references = ' '.join([token.text for token in doc])
-
+        first_line_after_references = len(text)-1
+        text_without_references = "\n".join(lines[:start_index] + lines[first_line_after_references:])
         return references, text_without_references
 
     def detect_article_title(self,text):
@@ -180,57 +186,27 @@ class PDFProcessing():
         else:
             return None, None
 
-    def extract_keywords(self, article_text):
-        # Define common indicators for keywords
+    def extract_keywords(self,text):
+        #the synonyms for keywords
         keyword_indicators = ['Keywords', 'Key Terms', 'Key Words', 'Index Terms',
                               'Phrases', 'Subjects', 'Topics']
-        # Convert the text to lowercase for case-insensitive matching
-        lower_text = article_text.lower()
+        #combine them to form a regex pattern to test on and check the article_text
+        keyword_pattern = '|'.join(re.escape(keyword) for keyword in keyword_indicators)
+        start_pattern = re.compile(fr'\b({keyword_pattern})\s*[:\-\—\n]\s*', re.IGNORECASE)
+        match_start = start_pattern.search(text)
+        if match_start:
+            start_index = match_start.end()
+            end_pattern = re.compile(r'(\.|^\d+\.\s|[IVXLCDM]+\.\s*[A-Z]|The|Reference)')
+            match_end = end_pattern.search(text, start_index)
+            # If the end pattern is found, extract the content
+            if match_end:
+                end_index = match_end.start()
+                return text[start_index:end_index].strip()
+            else:
+                return text[start_index:].strip()
+        return None
 
-        # Process the text with spaCy
-        doc = self.nlp(lower_text)
 
-        # Variable to store the extracted keywords
-        extracted_keywords = ""
-
-        # Variable to indicate whether we are currently extracting keywords
-        extracting_keywords = False
-
-        # Set of special characters
-        special_chars = set(string.punctuation)
-
-        # Iterate through spaCy tokens
-        for i, token in enumerate(doc):
-            # Check if the current token or the combination of the current and next token
-            # contains any of the keyword indicators
-            current_token_text = token.text.lower()
-            next_token_text = doc[i + 1].text.lower() if i + 1 < len(doc) else ''
-            combined_text = f"{current_token_text} {next_token_text}".strip()
-
-            # Check for both single-word and multi-word keyword indicators
-            if any(indicator.lower() in current_token_text or indicator.lower() in combined_text for indicator in keyword_indicators):
-                # Set the flag to start extracting keywords
-                extracting_keywords = True
-                print(f"Found indicator: {combined_text}")
-                # If the indicator is attached to special characters, start extracting from the next token
-                if combined_text[-1] in special_chars:
-                    continue
-                else:
-                    extracted_keywords += combined_text + ' '
-                # Exit the loop after extracting the first set of keywords
-                break
-
-        # If we found a keyword indicator, continue extracting until a period is encountered
-        if extracting_keywords:
-            for token in doc[i + 1:]:
-                # If the token is a period, stop extracting keywords
-                if token.text == '.':
-                    break
-                # Concatenate the token's text to the extracted_keywords variable
-                extracted_keywords += token.text + ' '
-
-        # Remove extra spaces and return the extracted keywords
-        return extracted_keywords.strip()
 
 
 

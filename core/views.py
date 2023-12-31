@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Article
 from django.middleware.csrf import get_token
+
+from .pdf_processing import PDFProcessing
 from .serializers import ArticleSerializer, ArticleUnReviewedSerializer
 from .pdf_manipulation import PDFManipulation
 from .mod_articles import ModArticles
@@ -26,7 +28,7 @@ class UploadPDFView(APIView):
             pdf_url = "NoneAtTheMoment"
             pdf_manipulator = PDFManipulation()
             pdf_files = []
-
+            pdf_processor = PDFProcessing()
             if 'pdf_url' in request.data:
                 pdf_url = request.data['pdf_url']
                 pdf_file = pdf_manipulator.download_pdf_from_drive(pdf_url)
@@ -37,7 +39,7 @@ class UploadPDFView(APIView):
             # extract text from PDF and update the content field
             for pdf_file in pdf_files:
                 text, first_page = pdf_manipulator.extract_text_from_pdf(pdf_file)
-
+                pdf_processor.analyze_extract_data(text, first_page, pdf_url)
                 article_data = {
                     'content': text,
                     'url_pdf': pdf_url,
