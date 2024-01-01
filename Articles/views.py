@@ -32,7 +32,9 @@ class FavoritesManipulation(APIView):
             # Execute the search
             response = s.execute()
             # Convert Elasticsearch results to a list of dictionaries
-            results = [{'title': hit.title,
+            results = [{
+                        'id': hit.meta.id,
+                        'title': hit.title,
                         'authors': list(hit.authors) if isinstance(hit.authors, AttrList) else hit.authors,
                         'institutions': list(hit.institutions) if isinstance(hit.institutions, AttrList) else hit.institutions,
                         'keywords': hit.keywords,
