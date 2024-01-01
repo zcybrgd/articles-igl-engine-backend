@@ -37,9 +37,9 @@ class UploadPDFView(APIView):
                 pdf_files = request.FILES.getlist('pdf_file')
             # extract text from PDF and update the content field
             for pdf_file in pdf_files:
-                text, first_page = pdf_manipulator.extract_text_from_pdf(pdf_file)
+                text, first_page, title = pdf_manipulator.extract_text_from_pdf(pdf_file)
                 #extract each field and form a json of this article
-                pdf_processor.analyze_extract_data(text, first_page, pdf_url)
+                articleJson = pdf_processor.analyze_extract_data(text, first_page, pdf_url, title, pdf_file)
                 #index this article into es with its status being unreviwed so the moderator would later correct wrong info
                 #modArt = ModArticles(), the articleJson should be returned by the analyze_extract_data
                 #response_of_indexing = modArt.index_article(articleJson)

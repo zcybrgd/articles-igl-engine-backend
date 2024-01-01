@@ -17,7 +17,6 @@ import os
 import re
 import string
 import subprocess
-import spacy
 import unidecode
 from PyPDF2 import PdfReader
 from pdfminer.pdfdocument import PDFDocument
@@ -231,43 +230,44 @@ def extract_figure_text(lt_obj, largest_text):
     return (largest_text, text)
 
 def pdf_text(filename):
-    fp = open(filename, 'rb')
-    parser = PDFParser(fp)
-    doc = PDFDocument(parser, '')
-    parser.set_document(doc)
-    rsrcmgr = PDFResourceManager()
-    laparams = LAParams()
-    device = PDFPageAggregator(rsrcmgr, laparams=laparams)
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    with open(filename, 'rb') as fp:
+        parser = PDFParser(fp)
+        doc = PDFDocument(parser, '')
+        parser.set_document(doc)
+        rsrcmgr = PDFResourceManager()
+        laparams = LAParams()
+        device = PDFPageAggregator(rsrcmgr, laparams=laparams)
+        interpreter = PDFPageInterpreter(rsrcmgr, device)
 
-    text = ''
-    largest_text = {
-        'contents': '',
-        'y0': 0,
-        'size': 0
-    }
-    for page in PDFPage.create_pages(doc):
-        interpreter.process_page(page)
-        layout = device.get_result()
-        for lt_obj in layout:
-            log('lt_obj: ' + str(lt_obj))
-            if isinstance(lt_obj, LTFigure):
-                (largest_text, figure_text) = extract_figure_text(lt_obj, largest_text)
-                text += figure_text
-            elif isinstance(lt_obj, (LTTextBox, LTTextLine)):
-                # Ignore body text blocks
-                stripped_to_chars = re.sub(r'[ \t\n]', '', lt_obj.get_text().strip())
-                if (len(stripped_to_chars) > MAX_CHARS * 2):
-                    continue
+        text = ''
+        largest_text = {
+            'contents': '',
+            'y0': 0,
+            'size': 0
+        }
+        for page in PDFPage.create_pages(doc):
+            interpreter.process_page(page)
+            layout = device.get_result()
+            for lt_obj in layout:
+                log('lt_obj: ' + str(lt_obj))
+                if isinstance(lt_obj, LTFigure):
+                    (largest_text, figure_text) = extract_figure_text(lt_obj, largest_text)
+                    text += figure_text
+                elif isinstance(lt_obj, (LTTextBox, LTTextLine)):
+                    # Ignore body text blocks
+                    stripped_to_chars = re.sub(r'[ \t\n]', '', lt_obj.get_text().strip())
+                    if (len(stripped_to_chars) > MAX_CHARS * 2):
+                        continue
 
-                largest_text = extract_largest_text(lt_obj, largest_text)
-                text += lt_obj.get_text() + '\n'
+                    largest_text = extract_largest_text(lt_obj, largest_text)
+                    text += lt_obj.get_text() + '\n'
 
-        # Remove unprocessed CID text
-        largest_text['contents'] = re.sub(r'(\(cid:[0-9 \t-]*\))*', '', largest_text['contents'])
+            # Remove unprocessed CID text
+            largest_text['contents'] = re.sub(r'(\(cid:[0-9 \t-]*\))*', '', largest_text['contents'])
 
-        # Only parse the first page
-        return (largest_text, text)
+            # Only parse the first page
+            return (largest_text, text)
+
 
 def title_start(lines):
     for i, line in enumerate(lines):
@@ -312,17 +312,13 @@ def pdftotext_title(filename):
             stderr=subprocess.PIPE)
     out, err = process.communicate()
     lines = out.strip().split('\n')
-
     i = title_start(lines)
     j = title_end(lines, i)
     text = ' '.join(line.strip() for line in lines[i:j])
-
     # Strip dots, which conflict with os.path's splittext()
     text = re.sub(r'\.', '', text)
-
     # Strip extra whitespace
     text = re.sub(r'[\t\n]', '', text)
-
     return text
 
 def valid_title(title):
@@ -338,7 +334,6 @@ def pdf_title(filename):
     except Exception as e:
         print("*** Skipping invalid metadata for file %s! ***" % filename)
         print(e)
-
     try:
         title = text_title(filename)
         if valid_title(title):
@@ -346,9 +341,8 @@ def pdf_title(filename):
     except Exception as e:
         print("*** Skipping invalid parsing for file %s! ***" % filename)
         print(e)
-
     title = pdftotext_title(filename)
     if valid_title(title):
         return title
-
+    print("\nsinon: ", os.path.basename(os.path.splitext(filename)[0]))
     return os.path.basename(os.path.splitext(filename)[0])

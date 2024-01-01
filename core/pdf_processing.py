@@ -9,6 +9,8 @@ from datetime import datetime
 import spacy
 from dateutil import parser
 
+from core import pdf_title
+from core.pdf_manipulation import PDFManipulation
 
 
 class PDFProcessing():
@@ -21,7 +23,8 @@ class PDFProcessing():
             self.nlp = spacy.load("en_core_web_lg")
 
 
-    def analyze_extract_data(self,text, first_page, pdf_url):
+    def analyze_extract_data(self,text, first_page, pdf_url,title, pdf_file):
+        pdf_manipulator = PDFManipulation()
         abstract, text_without_abstract = self.extract_abstract(text)
         references, text_without_references = self.extract_references(text_without_abstract)
         keywords = self.extract_keywords(first_page)
@@ -32,7 +35,28 @@ class PDFProcessing():
         print("\n\nAuthors: ", authors)
         print("\n\nInstitutions: ", institutions)
         print("\n\ndates: ", dates)
-
+        title = pdf_manipulator.pdf_title_from_content(pdf_file)
+        print("title wlinaaa ta3 wlinaaaa: ", title)
+        title = title if title else ""
+        title = pdf_title.sanitize(' '.join(title.split()))
+        print("\n\ntitle: ", title)
+        abstract = abstract if abstract else ""
+        references = references if references else ""
+        keywords = keywords if keywords else ""
+        authors = authors if authors else []
+        institutions = institutions if institutions else []
+        article_data = {
+            'title': title,
+            'authors': authors,
+            'institutions': institutions,
+            'keywords': keywords,
+            'pdf_url': pdf_url,
+            'bibliographie': references,
+            'abstract': abstract,
+            'text': 'This is the text of the article.',
+            'date': dates[0],
+        }
+        return article_data
     #extract abstract
     #extract references
     #extract keywords
@@ -42,20 +66,23 @@ class PDFProcessing():
     #extract texte
     #extract auteurs
 
-    def clean_author_name(self, name):
-        cleaned_name = ' '.join(part for part in name.split() if not any(char.isdigit() or char == '/' or not char.isprintable() for char in part))
-        return cleaned_name
+    def clean_text(self, text):
+        cleaned_text = ''.join(char for char in text if char.isprintable())
+        cleaned_text = re.sub(r'[^\w\s]', '', cleaned_text)
+        return cleaned_text.split('\n')[0]
     def extract_persons(self, text):
         doc = self.nlp(text)
-        authors = [self.clean_author_name(ent.text) for ent in doc.ents if ent.label_ == "PERSON"]
+        authors = [self.clean_text(ent.text) for ent in doc.ents if ent.label_ == "PERSON"]
         return authors
-    def clean_institution_name(self, name):
-        cleaned_name = ' '.join(part for part in name.split() if not any(char.isdigit() or char == '/' or not char.isprintable() for char in part))
-        return cleaned_name.split('\n')[0]
     def extract_institutions(self, text):
         doc = self.nlp(text)
-        institutions = [self.clean_institution_name(ent.text) for ent in doc.ents if ent.label_ == "ORG"]
-        return institutions
+        institutions = [self.clean_text(ent.text) for ent in doc.ents if ent.label_ == "ORG"]
+        # just a small filtering to improve results of the NLP model :)
+        filter_keywords = ["univ", "departement", "college", "school","cole","departement","tech","institut"]
+        filtered_institutions = [inst for inst in institutions if
+                                 any(keyword in inst.lower() for keyword in filter_keywords)]
+        return filtered_institutions if filtered_institutions else institutions
+
     def extract_dates(self, text):
         doc = self.nlp(text)
         dates = [ent.text for ent in doc.ents if ent.label_ == "DATE"]
