@@ -8,7 +8,7 @@ def search_articles(request):
     query = request.GET.get('q', '')
     fields = ['title', 'authors', 'keywords', 'text', 'abstract']
     multi_match_query = MultiMatch(query=query, fields=fields, type='phrase')
-    s = Search(index='article_index').query(multi_match_query)
+    s = Search(index='article_index').query(multi_match_query).filter('term', status='validated')
     response = s.execute()
 
     # Convert Elasticsearch results to a list of dictionaries

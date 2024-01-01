@@ -39,6 +39,7 @@ class Command(BaseCommand):
                     'abstract': data.get('abstract', ''),
                     'text': data.get('text', ''),
                     'date': data.get('date', ''),
+                    'status':'unreviewed'
                 }
             }
             for data in articles_data

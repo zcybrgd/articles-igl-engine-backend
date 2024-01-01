@@ -78,31 +78,32 @@ class ArticlesApiView(APIView):
     mod_articles = ModArticles()
     @action(detail=False, methods=['get'])
     def get(self, request):
-        articles = self.mod_articles.load_articles()
-        serializer = ArticleUnReviewedSerializer(articles, many=True)
-        return Response({'articles': serializer.data}, status=status.HTTP_200_OK)
+        documents = self.mod_articles.get_unreviewed_documents()
+        return Response({'articles': documents}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['delete'])
     def delete(self, request, article_id):
-        self.mod_articles.delete_article(str(article_id))
+        self.mod_articles.delete_from_elastic_search(article_id)
         return Response({'message': 'Article deleted successfully'}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['post'])
     def post(self, request):
-        article_id = request.data.get('articleId')
-        reponse = self.mod_articles.validate_article(str(article_id))
-        return Response({'message': 'Article validated successfully'}, status=status.HTTP_200_OK if reponse['success'] else status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+        try:
+            article_id = request.data.get('id')
+            if article_id is None:
+                raise ValueError("'articleId' field is required.")
+            response = self.mod_articles.update_to_elastic_search(article_id)
+            if response['success']:
+                return Response({'message': 'Article validate successfully'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'message': 'Failed to validate article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+            return Response({'message': 'Failed to validate article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     @action(detail=False, methods=['patch'])
     def patch(self, request, article_id):
-        article_data = self.mod_articles.get_article_data(str(article_id))
-        if article_data is None:
-            return Response({'message': 'Article not found'}, status=status.HTTP_404_NOT_FOUND)
-
-        serializer = ArticleUnReviewedSerializer(data=request.data, partial=True)
-        if serializer.is_valid():
-            #update the article data in the json of the unreviewed articles
-            self.mod_articles.update_article(str(article_id), serializer.validated_data)
-            return Response({'message': 'Article updated successfully'}, status=status.HTTP_200_OK)
+        article_data = request.data
+        response = self.mod_articles.modify_elastic_search(article_id, article_data)
+        if response['success']:
+            return Response({'message': 'Article modified successfully'}, status=status.HTTP_200_OK)
         else:
-            return Response({'message': 'Invalid data for update'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Failed to modify article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
