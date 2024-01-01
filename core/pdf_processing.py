@@ -5,9 +5,9 @@
 # cleaning (equations, images, figures)
 # release date extraction
 import re
-import string
-
+from datetime import datetime
 import spacy
+from dateutil import parser
 
 
 
@@ -25,7 +25,13 @@ class PDFProcessing():
         abstract, text_without_abstract = self.extract_abstract(text)
         references, text_without_references = self.extract_references(text_without_abstract)
         keywords = self.extract_keywords(first_page)
-        print(self.spacyNER(first_page),"\n\n")
+        authors = self.extract_persons(first_page)
+        institutions = self.extract_institutions(first_page)
+        dates = self.extract_dates(text)
+        print("\n\nkeywords: ", keywords)
+        print("\n\nAuthors: ", authors)
+        print("\n\nInstitutions: ", institutions)
+        print("\n\ndates: ", dates)
 
     #extract abstract
     #extract references
@@ -36,24 +42,36 @@ class PDFProcessing():
     #extract texte
     #extract auteurs
 
-    def spacyNER(self, text):
+    def clean_author_name(self, name):
+        cleaned_name = ' '.join(part for part in name.split() if not any(char.isdigit() or char == '/' or not char.isprintable() for char in part))
+        return cleaned_name
+    def extract_persons(self, text):
         doc = self.nlp(text)
-        persons = []
-        institutions = []
-        dates = []
-        for ent in doc.ents:
-            if ent.label_ == "PERSON":
-                persons.append(ent.text)
-            elif ent.label_ == "ORG":
-                institutions.append(ent.text)
-            elif ent.label_ == "DATE":
-                dates.append(ent.text)
+        authors = [self.clean_author_name(ent.text) for ent in doc.ents if ent.label_ == "PERSON"]
+        return authors
+    def clean_institution_name(self, name):
+        cleaned_name = ' '.join(part for part in name.split() if not any(char.isdigit() or char == '/' or not char.isprintable() for char in part))
+        return cleaned_name.split('\n')[0]
+    def extract_institutions(self, text):
+        doc = self.nlp(text)
+        institutions = [self.clean_institution_name(ent.text) for ent in doc.ents if ent.label_ == "ORG"]
+        return institutions
+    def extract_dates(self, text):
+        doc = self.nlp(text)
+        dates = [ent.text for ent in doc.ents if ent.label_ == "DATE"]
+        valid_dates = [date for date in dates if self.is_valid_date(date)]
+        unique_dates = set(valid_dates)  # Remove duplicates
+        filtered_dates = [date for date in unique_dates if parser.parse(date).year <= 2023]
+        formatted_dates = sorted([parser.parse(date).strftime("%Y-%m-%d") for date in filtered_dates], reverse=True)
+        return formatted_dates
 
-        return {
-            "persons": persons,
-            "institutions": institutions,
-            "dates": dates
-        }
+    def is_valid_date(self, date_str):
+        try:
+            parser.parse(date_str)
+            return True
+        except ValueError:
+            return False
+
 
     def is_title(self, token):
         # Customize this function based on your specific data and title characteristics
