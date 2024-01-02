@@ -37,6 +37,7 @@ class Command(BaseCommand):
                     'pdf_url': data.get('pdf_url', ''),
                     'bibliographie': data.get('bibliographie', ''),
                     'text': data.get('text', ''),
+                    'abstract': data.get('abstract', ''),
                     'date': data.get('date', ''),
                 }
             }
