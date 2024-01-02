@@ -1,5 +1,3 @@
-import json
-import uuid
 import os
 import fitz
 import tempfile
@@ -12,7 +10,6 @@ from core.pdf_title import pdf_title
 
 class PDFManipulation():
     def extract_text_from_pdf(self, pdf_file):
-        title = ''
         # Save the InMemoryUploadedFile to a temporary file that we gonna get rid off it after extracting the text
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
             for chunk in pdf_file.chunks():
@@ -29,7 +26,7 @@ class PDFManipulation():
 
         doc.close()
         os.unlink(temp_file.name)
-        return text, first_page, title
+        return text, first_page
 
     def get_drive_direct_link(self, gdrive_link):
         file_id = gdrive_link.split("/")[-2]
