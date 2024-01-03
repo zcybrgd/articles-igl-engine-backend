@@ -125,8 +125,7 @@ class modManipulation(APIView):
                                 role='Moderator')  # to create the user instance of the mod
             userInstance.save()
             try:
-                admin_bdd = Admin.objects.get(
-                    userId=connected)  # to get the admin instance from the db and adding it to the mod as adminId
+                admin_bdd = Admin.objects.get(userId=connected)  # to get the admin instance from the db and adding it to the mod as adminId
             except Admin.DoesNotExist:
                 return Response({'error': "the admin user doesn't exist "})
             instanceMod = Moderator(adminId=admin_bdd, userId=userInstance, userName=request.data['userName'],
@@ -175,7 +174,7 @@ class modManipulation(APIView):
     def delete_mod(request, id):
         connected = request.user  # to get the instance of the actual active admin
         if connected.id == None:
-            return Response({'error':"User non authenticated"})
+            return Response({'error': "User non authenticated"})
         if connected.role == "Administrator":
             try:
                 admin_connect = Admin.objects.get(userId=connected)
@@ -191,7 +190,9 @@ class modManipulation(APIView):
                 except user.DoesNotExist:
                     return Response({'error': "the user instance doesn't exist "})
                 userInstance.delete()  # the userId of the mod have a delete on cascade property , so if its user instance is deleted , it will be
-                return Response({"Mod deleted succesfully!!"})
+                admin_connect.delete_mods = admin_connect.delete_mods+1
+                admin_connect.save()
+                return Response({"Moderator deleted succesfully!!"})
             else:
                 return Response({'error': "This is an unauthorized action"})
         else:
@@ -201,16 +202,116 @@ class modManipulation(APIView):
     def display_mods(request):
         connected = request.user
         if connected.id == None:
-            return Response({'error':"User non authenticated"})
+            return Response({'error': "User non authenticated"})
         if connected.role == "Administrator":
             try:
                 adminConnected = Admin.objects.get(userId=connected)
             except Admin.DoesNotExist:
                 return Response({'error': "the admin user doesn't exist "})
-            mods = Moderator.objects.filter(
-                adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            mods = Moderator.objects.filter(adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
             response = ModeratorSerializer(mods, many=True)  # turning all of them into json
+            return JsonResponse({"mods": response.data})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+
+@authentication_classes([])
+@permission_classes([])
+class adminStats(APIView):
+    @api_view(['GET'])
+    def deleted_articles(request):
+        connected = request.user
+        if connected.id == None: #the user is anonymous
+            return Response({'error': "User non authenticated"})
+        if connected.role == "Administrator":
+            try:
+                adminConnected = Admin.objects.get(userId=connected)
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            mods = Moderator.objects.filter(adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            total_deleted = 0
+            for mod in mods: # get the delete_count of each mod of the admin connected and sum them
+                total_deleted = total_deleted+mod.delete_count
             return JsonResponse(
-                {"mods": response.data})
+                {"deleted_articles": total_deleted})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+    @api_view(['GET'])
+    def validated_articles(request):
+        connected = request.user
+        if connected.id == None:
+            return Response({'error': "User non authenticated"})
+        if connected.role == "Administrator":
+            try:
+                adminConnected = Admin.objects.get(userId=connected)
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            mods = Moderator.objects.filter(adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            total_validated = 0
+            for mod in mods:  # get the validate_count of each mod of the admin connected and sum them
+                total_validated = total_validated+mod.validate_count
+            return JsonResponse(
+                {"validated_articles": total_validated})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+    @api_view(['GET'])
+    def modified_articles(request):
+        connected = request.user
+        if connected.id == None:
+            return Response({'error': "User non authenticated"})
+        if connected.role == "Administrator":
+            try:
+                adminConnected = Admin.objects.get(userId=connected)
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            mods = Moderator.objects.filter(adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            total_modified = 0
+            for mod in mods:  # get the number of edits of each mod of the admin connected and sum them
+                total_modified = total_modified+mod.edit_count
+            return JsonResponse(
+                {"modified_articles": total_modified})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+    @api_view(['GET'])
+    def added_mods(request):
+        connected = request.user
+        if connected.id == None:
+            return Response({'error': "User non authenticated"})
+        if connected.role == "Administrator":
+            try:
+                adminConnected = Admin.objects.get(userId=connected)
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            mods = Moderator.objects.filter(adminId=adminConnected).count()  # fetch the numbers of moderators that are created by this admin
+            return JsonResponse({"added_mods": mods})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+    @api_view(['GET'])
+    def deleted_mods(request):
+        connected = request.user
+        if connected.id == None:
+            return Response({'error': "User non authenticated"})
+        if connected.role == "Administrator":
+            try:
+                adminConnected = Admin.objects.get(userId=connected)
+            except Admin.DoesNotExist:
+                return Response({'error': "the admin user doesn't exist "})
+            mods = adminConnected.delete_mods  # fetch the number of mods deleted by this admin
+            return JsonResponse({"deleted_mods": mods})
+        else:
+            return Response({'error': "the user is not an administrator "})
+
+    @api_view(['GET'])
+    def total_mods(request):
+        connected = request.user
+        if connected.id == None:
+            return Response({'error': "User non authenticated"})
+        if connected.role == "Administrator":
+            mods = Moderator.objects.all().count()  # fetch all the moderators contained in the db
+            return JsonResponse({"total_mods": mods})
         else:
             return Response({'error': "the user is not an administrator "})

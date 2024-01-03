@@ -67,7 +67,7 @@ class ModArticles:
                     'abstract': article_data.get('abstract', ''),
                     'text': article_data.get('text', ''),
                     'date': article_data.get('date', ''),
-                    'status':'unreviewed'
+                    'status': 'unreviewed'
                 }
             }
 

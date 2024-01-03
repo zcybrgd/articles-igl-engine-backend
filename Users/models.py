@@ -5,7 +5,6 @@ from django.db import models
 from rest_framework.authtoken.models import Token as BaseToken
 from django.utils.translation import gettext_lazy as _
 
-
 MAX_CHAR_LENGTH = 110  # constant to make the lengths of chars more maintainable
 
 
@@ -13,19 +12,20 @@ class user(models.Model):  # the common and important attributes that the 3 type
     userName = models.CharField(max_length=MAX_CHAR_LENGTH, unique=True)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
     role = models.CharField(max_length=MAX_CHAR_LENGTH)
-    is_active = models.BooleanField(_('active'),default=True,)
+    is_active = models.BooleanField(_('active'), default=True, )
     is_authenticated = models.BooleanField(default=True)
 
 
-#represents the admin in our database , he controls the Moderator model
+# represents the admin in our database , he controls the Moderator model
 class Admin(models.Model):
     id = models.IntegerField(primary_key=True)
+    delete_mods = models.IntegerField(default=0)
     userId = models.OneToOneField(
         user,
         on_delete=models.CASCADE,
         blank=True,
         null=True
-    )# to link the admin to its user instance
+    )  # to link the admin to its user instance
 
 
 class Moderator(models.Model):
@@ -41,13 +41,17 @@ class Moderator(models.Model):
     familyName = models.CharField(max_length=MAX_CHAR_LENGTH)
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
-    profile_picture = models.ImageField(upload_to='profile_pics', null=True, blank=True, default='media/profile_pics/default_profile_pic.jpg')
+    profile_picture = models.ImageField(upload_to='profile_pics', null=True, blank=True,
+                                        default='media/profile_pics/default_profile_pic.jpg')
     edit_count = models.IntegerField(default=0)  # New field to store edit count
+    delete_count = models.IntegerField(default=0)
+    validate_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.userName
 
-#the client is the main user of our website , he's the one who searches for articles , reads them , save them to favorites and so on
+
+# the client is the main user of our website , he's the one who searches for articles , reads them , save them to favorites and so on
 class client(models.Model):
     userId = models.OneToOneField(
         user,
@@ -60,11 +64,12 @@ class client(models.Model):
     familyName = models.CharField(max_length=MAX_CHAR_LENGTH)
     email = models.CharField(max_length=MAX_CHAR_LENGTH)
     password = models.CharField(max_length=MAX_CHAR_LENGTH, default=" ")
-    profile_picture = models.ImageField(upload_to='media/profile_pics', null=True, blank=True, default='media/profile_pics/')
+    profile_picture = models.ImageField(upload_to='media/profile_pics', null=True, blank=True,
+                                        default='media/profile_pics/')
     favorite_articles = ArrayField(models.CharField(max_length=MAX_CHAR_LENGTH, blank=True), default=list)
 
 
-#The token model that we used to replace the token model defined in the User's auth app
+# The token model that we used to replace the token model defined in the User's auth app
 class NonUserToken(BaseToken):
     key = models.CharField(_("Key"), max_length=40, primary_key=True)
     user = models.OneToOneField(

@@ -4,7 +4,7 @@ import hashlib
 from django.core.management.base import BaseCommand
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
-from search.search_indexes import ArticleIndex
+from ...search_indexes import ArticleIndex
 
 
 class Command(BaseCommand):
@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
         #es.indices.delete(index=index) Décommenter cette instruction en cas de dupplications(permet de supprimer l'index existant)
         # Lecture des données par
-        with open('Articles/articles.json') as json_file:
+        with open('search/articles.json') as json_file:
             articles_data = json.load(json_file)
 
         #Préparation des paramètres à indexer
@@ -39,6 +39,7 @@ class Command(BaseCommand):
                     'abstract': data.get('abstract', ''),
                     'text': data.get('text', ''),
                     'date': data.get('date', ''),
+                    'status': 'unreviewed'
                 }
             }
             for data in articles_data
