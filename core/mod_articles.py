@@ -3,50 +3,6 @@ import json
 from elasticsearch import Elasticsearch, TransportError, exceptions as es_exceptions
 from search.search_indexes import ArticleIndex
 class ModArticles:
-    def __init__(self, json_file_path='core/pdf_unreviewed.json'):
-        self.json_file_path = json_file_path
-        self.articles = self.load_articles()
-
-    def load_articles(self):
-        with open(self.json_file_path) as json_file:
-            return json.load(json_file)
-
-    def save_articles(self):
-        with open(self.json_file_path, 'w') as json_file:
-            json.dump(self.articles, json_file, indent=2)
-
-    def update_article(self, article_id, updated_data):
-        for article in self.articles:
-            if article.get('id') == article_id:
-                for key, value in updated_data.items():
-                    if key in article:
-                        article[key] = value
-                break
-        self.save_articles()
-
-    def delete_article(self, article_id):
-        self.articles = [article for article in self.articles if article.get('id') != article_id]
-        self.save_articles()
-
-    def add_article(self, new_article_data):
-        new_article_data['id'] = hashlib.md5(str(new_article_data).encode('utf-8')).hexdigest()
-        self.articles.append(new_article_data)
-        self.save_articles()
-
-    def validate_article(self, article_id):
-        self.articles = self.load_articles()
-        article_to_validate = self.get_article_data(article_id)
-        es_response = self.index_article(article_to_validate)
-        if(es_response['success']):
-            self.delete_article(article_id)
-            return es_response
-        else:
-            return {'success': False, 'message': 'Unexpected error from server'}
-
-    def get_article_data(self, article_id):
-        self.articles = self.load_articles()
-        article_data = next((article for article in self.articles if article.get('id') == article_id), None)
-        return article_data
 
     def index_article(self, article_data):
         es = Elasticsearch(['http://localhost:9200'],)

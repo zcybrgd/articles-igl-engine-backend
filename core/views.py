@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Article
 from django.middleware.csrf import get_token
+from Users.models import Moderator, NonUserToken
 
 from .pdf_processing import PDFProcessing
 from .serializers import ArticleSerializer, ArticleUnReviewedSerializer
@@ -76,27 +77,82 @@ class ArticlesApiView(APIView):
 
     @action(detail=False, methods=['delete'])
     def delete(self, request, article_id):
-        self.mod_articles.delete_from_elastic_search(article_id)
-        return Response({'message': 'Article deleted successfully'}, status=status.HTTP_200_OK)
+        key = request.headers['Authorization']
+        try:
+            token = NonUserToken.objects.get(key=key)
+        except NonUserToken.DoesNotExist:
+            return Response({'error': "User non authenticated"})
+        connected = token.user
+        print(connected)
+        if connected.id == None:
+            return Response({'error': "User non authenticated bel id"})
+        if connected.role == "Moderator":
+            try:
+                mod_connect = Moderator.objects.get(userId=connected)
+            except Moderator.DoesNotExist:
+                return Response({'error': "the mod user doesn't exist "})
+            self.mod_articles.delete_from_elastic_search(article_id)
+            mod_connect.delete_count = mod_connect.delete_count + 1  # to increment the delete_count of the mod connected
+            mod_connect.save()
+            return Response({'message': 'Article deleted successfully'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': "the user is not a moderator "})
 
     @action(detail=False, methods=['post'])
     def post(self, request):
+        key = request.headers['Authorization']
         try:
-            article_id = request.data.get('id')
-            if article_id is None:
-                raise ValueError("'id' field is required.")
-            response = self.mod_articles.update_to_elastic_search(article_id)
-            if response['success']:
-                return Response({'message': 'Article validate successfully'}, status=status.HTTP_200_OK)
-            else:
-                return Response({'message': 'Failed to validate article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        except Exception as e:
-            return Response({'message': 'Failed to validate article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            token = NonUserToken.objects.get(key=key)
+        except NonUserToken.DoesNotExist:
+            return Response({'error': "User non authenticated"})
+        connected = token.user
+        print(connected)
+        if connected.id == None:
+            return Response({'error': "User non authenticated"})
+        if connected.role == "Moderator":
+            try:
+                mod_connect = Moderator.objects.get(userId=connected)
+            except Moderator.DoesNotExist:
+                return Response({'error': "the mod user doesn't exist "})
+            try:
+                article_id = request.data.get('id')
+                if article_id is None:
+                    raise ValueError("'id' field is required.")
+                response = self.mod_articles.update_to_elastic_search(article_id)
+                if response['success']:
+                    mod_connect.validate_count = mod_connect.validate_count+1   # to increment the validated_count of the mod connected
+                    mod_connect.save()
+                    return Response({'message': 'Article validate successfully'}, status=status.HTTP_200_OK)
+                else:
+                    return Response({'message': 'Failed to validate article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            except Exception as e:
+                return Response({'message': 'Exception Failed to validate article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        else:
+            return Response({'error': "the user is not a moderator "})
+
     @action(detail=False, methods=['patch'])
     def patch(self, request, article_id):
-        article_data = request.data
-        response = self.mod_articles.modify_elastic_search(article_id, article_data)
-        if response['success']:
-            return Response({'message': 'Article modified successfully'}, status=status.HTTP_200_OK)
+        key = request.headers['Authorization']
+        try:
+            token = NonUserToken.objects.get(key=key)
+        except NonUserToken.DoesNotExist:
+            return Response({'error': "User non authenticated"})
+        connected = token.user
+        print(connected)
+        if connected.id == None:
+            return Response({'error': "User non authenticated"})
+        if connected.role == "Moderator":
+            try:
+                mod_connect = Moderator.objects.get(userId=connected)
+            except Moderator.DoesNotExist:
+                return Response({'error': "the mod user doesn't exist "})
+            article_data = request.data
+            response = self.mod_articles.modify_elastic_search(article_id, article_data)
+            if response['success']:
+                mod_connect.edit_count = mod_connect.edit_count+1   # to increment the edit_count of the mod connected
+                mod_connect.save()
+                return Response({'message': 'Article modified successfully'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'message': 'Failed to modify article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
-            return Response({'message': 'Failed to modify article'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': "the user is not a moderator "})

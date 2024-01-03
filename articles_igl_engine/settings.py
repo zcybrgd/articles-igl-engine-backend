@@ -34,6 +34,7 @@ SELENIUM_WEBDRIVER_PATH = '../chromedriver_win32'
 
 INSTALLED_APPS = [
     'Users',
+    'Articles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
