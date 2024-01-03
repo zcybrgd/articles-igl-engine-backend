@@ -6,7 +6,9 @@ from search.search_indexes import ArticleIndex
 from django.shortcuts import render
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.query import MultiMatch
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import permissions
+
 def search_articles(request):
     """_summary_
       Args:
@@ -80,6 +82,7 @@ def search_articles(request):
 
 
 @api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
 def total_articles(request):
     search = Search(index='article_index')
     total = search.count()
@@ -87,6 +90,7 @@ def total_articles(request):
 
 
 @api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
 def unreviewed_articles(request):
     search = Search(index='article_index').filter('term', status='unreviewed')
     # Count search results
