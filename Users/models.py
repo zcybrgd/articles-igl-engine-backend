@@ -12,7 +12,9 @@ class user(models.Model):  # the common and important attributes that the 3 type
     userName = models.CharField(max_length=MAX_CHAR_LENGTH, unique=True)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
     role = models.CharField(max_length=MAX_CHAR_LENGTH)
-    is_active = models.BooleanField(_('active'),default=True,)
+    is_active = models.BooleanField(_('active'),default=True)
+    is_authenticated = models.BooleanField(_('active'),default=True)
+
 
 
 #represents the admin in our database , he controls the Moderator model
