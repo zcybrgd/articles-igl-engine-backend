@@ -191,7 +191,7 @@ class modManipulation(APIView):
                 except user.DoesNotExist:
                     return Response({'error': "the user instance doesn't exist "})
                 userInstance.delete()  # the userId of the mod have a delete on cascade property , so if its user instance is deleted , it will be
-                return Response({"Mod deleted succesfully!!"})
+                return Response({"Mod deleted successfully!!"})
             else:
                 return Response({'error': "This is an unauthorized action"})
         else:
