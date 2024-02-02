@@ -1,3 +1,4 @@
+from django.contrib.auth import update_session_auth_hash
 from django.http import HttpResponse, JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -6,9 +7,11 @@ from rest_framework import status
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer
-from .models import user, client, Admin, Moderator, NonUserToken
+from .serializers import (UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer,
+                          ContactSerializer)
+from .models import user, client, Admin, Moderator, NonUserToken, contact
 from django.contrib.auth.hashers import make_password, check_password
+from rest_framework.decorators import api_view, permission_classes
 
 
 # this is an api to register a client into the db , alon with its user instance and creating its token
@@ -69,6 +72,7 @@ def delete_user(request, id):
     userTodel.delete()
     return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
+
 @permission_classes((permissions.AllowAny,))
 @csrf_exempt
 def delete_everything(request):
@@ -76,7 +80,6 @@ def delete_everything(request):
     for us in users:
         us.delete()
     return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
 
 
 @permission_classes((permissions.AllowAny,))
@@ -124,7 +127,7 @@ class modManipulation(APIView):
     def add_mod(request):
         connected = request.user  # extracting the current user instance
         if connected.id == None:
-            return Response({'error':"User non authenticated"})
+            return Response({'error': "User non authenticated"})
         if connected.role == "Administrator":
             existing_mod = Moderator.objects.filter(
                 userName=request.data['userName'])  # to find if the username already exists
@@ -135,7 +138,8 @@ class modManipulation(APIView):
                                 role='Moderator')  # to create the user instance of the mod
             userInstance.save()
             try:
-                admin_bdd = Admin.objects.get(userId=connected)  # to get the admin instance from the db and adding it to the mod as adminId
+                admin_bdd = Admin.objects.get(
+                    userId=connected)  # to get the admin instance from the db and adding it to the mod as adminId
             except Admin.DoesNotExist:
                 return Response({'error': "the admin user doesn't exist "})
             instanceMod = Moderator(adminId=admin_bdd, userId=userInstance, userName=request.data['userName'],
@@ -151,7 +155,7 @@ class modManipulation(APIView):
     def modify_mod(request, id):
         connected = request.user  # to get the instance of the actual active admin
         if connected.id == None:
-            return Response({'error':"User non authenticated"})
+            return Response({'error': "User non authenticated"})
         if connected.role == "Administrator":
             try:
                 admin_connect = Admin.objects.get(userId=connected)
@@ -196,11 +200,12 @@ class modManipulation(APIView):
                 return Response({'error': "the moderator doesn't exist "})
             if mod.adminId == admin_connect:  # to check if the admin who created the mod is actually the onec currently connected
                 try:
-                    userInstance = user.objects.get(pk=mod.userId.id) # to get the user instance of the mod the admin wants to delete
+                    userInstance = user.objects.get(
+                        pk=mod.userId.id)  # to get the user instance of the mod the admin wants to delete
                 except user.DoesNotExist:
                     return Response({'error': "the user instance doesn't exist "})
                 userInstance.delete()  # the userId of the mod have a delete on cascade property , so if its user instance is deleted , it will be
-                admin_connect.delete_mods = admin_connect.delete_mods+1
+                admin_connect.delete_mods = admin_connect.delete_mods + 1
                 admin_connect.save()
                 return Response({"Moderator deleted succesfully!!"})
             else:
@@ -218,7 +223,8 @@ class modManipulation(APIView):
                 adminConnected = Admin.objects.get(userId=connected)
             except Admin.DoesNotExist:
                 return Response({'error': "the admin user doesn't exist "})
-            mods = Moderator.objects.filter(adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            mods = Moderator.objects.filter(
+                adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
             response = ModeratorSerializer(mods, many=True)  # turning all of them into json
             return JsonResponse({"mods": response.data})
         else:
@@ -231,17 +237,18 @@ class adminStats(APIView):
     @api_view(['GET'])
     def deleted_articles(request):
         connected = request.user
-        if connected.id == None: #the user is anonymous
+        if connected.id == None:  # the user is anonymous
             return Response({'error': "User non authenticated"})
         if connected.role == "Administrator":
             try:
                 adminConnected = Admin.objects.get(userId=connected)
             except Admin.DoesNotExist:
                 return Response({'error': "the admin user doesn't exist "})
-            mods = Moderator.objects.filter(adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            mods = Moderator.objects.filter(
+                adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
             total_deleted = 0
-            for mod in mods: # get the delete_count of each mod of the admin connected and sum them
-                total_deleted = total_deleted+mod.delete_count
+            for mod in mods:  # get the delete_count of each mod of the admin connected and sum them
+                total_deleted = total_deleted + mod.delete_count
             return JsonResponse(
                 {"deleted_articles": total_deleted})
         else:
@@ -257,10 +264,11 @@ class adminStats(APIView):
                 adminConnected = Admin.objects.get(userId=connected)
             except Admin.DoesNotExist:
                 return Response({'error': "the admin user doesn't exist "})
-            mods = Moderator.objects.filter(adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            mods = Moderator.objects.filter(
+                adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
             total_validated = 0
             for mod in mods:  # get the validate_count of each mod of the admin connected and sum them
-                total_validated = total_validated+mod.validate_count
+                total_validated = total_validated + mod.validate_count
             return JsonResponse(
                 {"validated_articles": total_validated})
         else:
@@ -276,10 +284,11 @@ class adminStats(APIView):
                 adminConnected = Admin.objects.get(userId=connected)
             except Admin.DoesNotExist:
                 return Response({'error': "the admin user doesn't exist "})
-            mods = Moderator.objects.filter(adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
+            mods = Moderator.objects.filter(
+                adminId=adminConnected)  # fetch the moderators from db such as they are created by this admin
             total_modified = 0
             for mod in mods:  # get the number of edits of each mod of the admin connected and sum them
-                total_modified = total_modified+mod.edit_count
+                total_modified = total_modified + mod.edit_count
             return JsonResponse(
                 {"modified_articles": total_modified})
         else:
@@ -295,7 +304,8 @@ class adminStats(APIView):
                 adminConnected = Admin.objects.get(userId=connected)
             except Admin.DoesNotExist:
                 return Response({'error': "the admin user doesn't exist "})
-            mods = Moderator.objects.filter(adminId=adminConnected).count()  # fetch the numbers of moderators that are created by this admin
+            mods = Moderator.objects.filter(
+                adminId=adminConnected).count()  # fetch the numbers of moderators that are created by this admin
             return JsonResponse({"added_mods": mods})
         else:
             return Response({'error': "the user is not an administrator "})
@@ -326,3 +336,105 @@ class adminStats(APIView):
         else:
             return Response({'error': "the user is not an administrator "})
 
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def contactInfo(request):
+    serializer = ContactSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse({'message': 'Sent successfully ! Thank you for your feedback'},status=status.HTTP_201_CREATED)
+    return Response({'error': 'An Error occured'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def contactsMsgs(request):
+    contacts = contact.objects.all()  # fetch the messages from db
+    response = ContactSerializer(contacts, many=True)  # turning all of them into json
+    return JsonResponse({"contacts": response.data})
+
+@authentication_classes([])
+@permission_classes([])
+class userSettings(APIView):
+    @api_view(['PUT'])
+    def modifyClient(request, id):
+        connected = request.user # to get the instance of the actual active user
+        if connected.id is None:
+            return JsonResponse({'error': "User not authenticated"})
+
+        if connected.role == "Client":
+            try:
+                clientConnected = client.objects.get(userId=connected)
+            except client.DoesNotExist:
+                return JsonResponse({'error': "The client user doesn't exist "})
+
+            currentPassword = request.data.get('current_password', None)
+            newUsername = request.data.get('new_username', clientConnected.userName)
+            newPassword = request.data.get('new_password', clientConnected.password)
+            confirmNewPassword = request.data.get('confirmNewPassword', clientConnected.password)
+
+            # Verify current password
+            if not check_password(currentPassword, connected.password):
+                return Response({'error': 'Incorrect current password'}, status=status.HTTP_400_BAD_REQUEST)
+
+            if newPassword != confirmNewPassword:
+                return JsonResponse({'error': 'New password and confirmation do not match'})
+
+            # Update user Client fields
+            if newUsername:
+                connected.userName = newUsername
+            if newPassword:
+                connected.password = make_password(newPassword)
+
+            connected.save()
+
+            # Update the session auth hash to avoid logout after password change
+            update_session_auth_hash(request, connected)
+
+            # Apply the changes on the Client Serializer
+            serializer = ClientSerializer(clientConnected)
+            return JsonResponse({'message': 'Modifications applied successfully', 'data': serializer.data})
+
+        return JsonResponse({'error': "User is not a client"})
+
+    @api_view(['PUT'])
+    def modifyMod(request, id):
+        connected = request.user  # to get the instance of the actual active user
+        if connected.id is None:
+            return JsonResponse({'error': "User not authenticated"})
+
+        if connected.role == "Moderator":
+            try:
+                moderatorConnected = Moderator.objects.get(userId=connected)
+            except Moderator.DoesNotExist:
+                return JsonResponse({'error': "The moderator user doesn't exist "})
+
+            currentPassword = request.data.get('current_password', None)
+            newUsername = request.data.get('new_username', moderatorConnected.userName)
+            newPassword = request.data.get('new_password', moderatorConnected.password)
+            confirmNewPassword = request.data.get('confirmNewPassword', moderatorConnected.password)
+
+            # Verify current password
+            if not check_password(currentPassword, connected.password):
+                return JsonResponse({'error': 'Incorrect current password'})
+
+            if newPassword != confirmNewPassword:
+                return JsonResponse({'error': 'New password and confirmation do not match'})
+
+            # Update user moderator fields
+            if newUsername:
+                connected.userName = newUsername
+            if newPassword:
+                connected.password = make_password(newPassword)
+
+            connected.save()
+
+            # Update the session auth hash to avoid logout after password change
+            update_session_auth_hash(request, connected)
+
+            # Apply the changes on the Moderator Serializer
+            serializer = ModeratorSerializer(moderatorConnected)
+            return JsonResponse({'message': 'Modifications applied successfully', 'data': serializer.data})
+
+        return JsonResponse({'error': "User is not a moderator"})

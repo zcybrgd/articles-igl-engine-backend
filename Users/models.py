@@ -15,6 +15,9 @@ class user(models.Model):  # the common and important attributes that the 3 type
     is_active = models.BooleanField(_('active'), default=True, )
     is_authenticated = models.BooleanField(default=True)
 
+    def set_password(pswd):
+        password = pswd
+
 
 # represents the admin in our database , he controls the Moderator model
 class Admin(models.Model):
@@ -67,7 +70,17 @@ class client(models.Model):
     profile_picture = models.ImageField(upload_to='media/profile_pics', null=True, blank=True,
                                         default='media/profile_pics/')
     favorite_articles = ArrayField(models.CharField(max_length=MAX_CHAR_LENGTH, blank=True), default=list)
+    def set_password(self,password):
+        self.password = password
+#This is a class to handle the contact us section of our homepage
+class contact(models.Model):
 
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
 
 # The token model that we used to replace the token model defined in the User's auth app
 class NonUserToken(BaseToken):
