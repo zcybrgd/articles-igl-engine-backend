@@ -1,5 +1,3 @@
-import json
-import uuid
 import os
 import fitz
 import tempfile

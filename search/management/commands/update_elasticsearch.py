@@ -1,6 +1,5 @@
 # search/management/commands/update_elasticsearch.py
 import json
-import hashlib
 from django.core.management.base import BaseCommand
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
@@ -28,7 +27,6 @@ class Command(BaseCommand):
                 '_op_type': 'index',
                 '_index': index,
                 #Définition d'un Id automatique
-                '_id': hashlib.md5(f"{data['title']}_{data['authors']}_{data['date']}".encode('utf-8')).hexdigest(),
                 '_source': {
                     'title': data.get('title', ''),
                     'authors': data.get('authors', ''),

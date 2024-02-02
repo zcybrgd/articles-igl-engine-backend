@@ -56,7 +56,6 @@ class ModArticles:
             action = {
                 '_op_type': 'index',
                 '_index': index,
-                '_id': hashlib.md5(f"{article_data['title']}_{article_data['authors']}_{article_data['date']}".encode('utf-8')).hexdigest(),
                 '_source': {
                     'title': article_data.get('title', ''),
                     'authors': article_data.get('authors', ''),

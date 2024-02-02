@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer
 from .models import user, client, Admin, Moderator, NonUserToken
 from django.contrib.auth.hashers import make_password, check_password
+from django.db import connection
 
 
 # this is an api to register a client into the db , alon with its user instance and creating its token
@@ -58,6 +59,19 @@ def login(request):
     token, created = NonUserToken.objects.get_or_create(user=user_client)
     serializer = UserSerializer(user_client)
     return Response({'token': token.key, 'user': serializer.data})
+
+
+@api_view(['GET'])
+def client_login(request, id):
+    try:
+        userlogin= user.objects.get(pk=id)
+        clientlogin = client.objects.get(userId=userlogin)
+    except user.DoesNotExist:
+        return Response({'error': "the user doesn't exist "})
+    except client.DoesNotExist:
+        return Response({'error': "the client doesn't exist "})
+    response = ClientSerializer(clientlogin)  # turning all of them into json
+    return JsonResponse({"client": response.data})
 
 
 def delete_user(request, id):
