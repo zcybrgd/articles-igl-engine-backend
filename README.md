@@ -49,9 +49,12 @@ fb4415afab44ed37f7
 
 # Developement Tools
 <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>
+<p>      </p>
 <a><img src="https://static-00.iconduck.com/assets.00/django-icon-1606x2048-lwmw1z73.png" alt="Django Logo" width="40" height="40" /></a>
+<p>      </p>
 <a><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PGSQL Logo" width="40" height="40" /></a>
-<a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="90" height="50" /></a>
+<p>      </p>
+<a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="100" height="50" /></a>
 
 
 
