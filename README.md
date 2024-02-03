@@ -48,10 +48,10 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 - Monitor system statistics and analytics through a comprehensive dashboard.
 
 # Developement Tools
-<a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a><img src="https://static-00.iconduck.com/assets.00/django-icon-1606x2048-lwmw1z73.png" alt="Django Logo" width="40" height="40" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PGSQL Logo" width="40" height="40" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="110" height="50" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>&nbsp;&nbsp;
+<a><img src="https://static-00.iconduck.com/assets.00/django-icon-1606x2048-lwmw1z73.png" alt="Django Logo" width="40" height="40" /></a>&nbsp;&nbsp;
+<a><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PGSQL Logo" width="40" height="40" /></a>&nbsp;&nbsp;
+<a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="120" height="50" /></a>&nbsp;&nbsp;
 
 
 
