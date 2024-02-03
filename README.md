@@ -7,12 +7,12 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 
 
 # Key Features
-# # # API Endpoints:
+### API Endpoints:
 
 - Define RESTful endpoints to facilitate communication between the frontend and backend systems.
 - Implement CRUD (Create, Read, Update, Delete) operations for managing articles, users, and system configurations.
 - Ensure data integrity and security through authentication and authorization mechanisms.
-# # # Data Processing:
+### Data Processing:
 
 - Develop modules for parsing and extracting information from PDF articles.
 - Implement algorithms for text analysis and keyword extraction to enhance search capabilities.
@@ -48,13 +48,8 @@ fb4415afab44ed37f7
 - Monitor system statistics and analytics through a comprehensive dashboard.
 
 # Developement Tools
-<a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>
-<p>      </p>
-<a><img src="https://static-00.iconduck.com/assets.00/django-icon-1606x2048-lwmw1z73.png" alt="Django Logo" width="40" height="40" /></a>
-<p>      </p>
-<a><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PGSQL Logo" width="40" height="40" /></a>
-<p>      </p>
-<a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="100" height="50" /></a>
+<a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a><p> {&#09;}</p>
+<a><img src="https://static-00.iconduck.com/assets.00/django-icon-1606x2048-lwmw1z73.png" alt="Django Logo" width="40" height="40" /></a><p> {&#09;}</p><a><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PGSQL Logo" width="40" height="40" /></a><p> {&#09;}</p><a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="100" height="50" /></a>
 
 
 
