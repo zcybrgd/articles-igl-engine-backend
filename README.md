@@ -1,5 +1,5 @@
 # Savantia : Scientific Articles Search Engine - backend repository
-[link to the frontend repo]
+[frontend repository link](https://github.com/zcybrgd/articles-igl-engine-frontend)
 # Project Overview
 
 This project is a 2 month assignment that is apart of the "Introduction to Software Engineering" course that we take in our 3rd year at the Computer Science Enginnering school *Ecole nationale Supérieure d’Informatique, ESI Alger*
@@ -19,21 +19,21 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 - Integrate with Elasticsearch for efficient indexing and retrieval of article metadata.
 
 ### Database Management:
-fb4415afab44ed37f7
+
 
 - Use PostgreSQL for persistent storage of article metadata, user profiles, and system configurations.
 - Implement data modeling and schema design to accommodate the complex structure of scientific articles.
 
 
 ### For Moderators:
-46103ed1c074b3d846bd0fb4415afab44ed37f7
+
 
 - Manage the validation process of articles.
 - Modify, delete, and validate articles for publication.
 - Correct errors in the extracted information from PDF articles.
 - Monitor unvalidated articles and ensure quality control.
 ### For Clients (Authenticated Users):
-6103ed1c074b3d846bd0fb4415afab44ed37f7
+
 
 - Search for scientific articles based on keywords in the title, keywords, authors, and full text.
 - Filter search results based on keywords, authors, institutions, or publication date range.
@@ -41,15 +41,17 @@ fb4415afab44ed37f7
 - Save favorite articles for later consultation.
 - Access the list of previously saved favorite scientific articles.
 ### For Admins:
-03ed1c074b3d846bd0fb4415afab44ed37f7
+
 
 - Manage moderators.
 - Initiate upload operations of scientific articles.
 - Monitor system statistics and analytics through a comprehensive dashboard.
 
 # Developement Tools
-<a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a><p> {&#09;}</p>
-<a><img src="https://static-00.iconduck.com/assets.00/django-icon-1606x2048-lwmw1z73.png" alt="Django Logo" width="40" height="40" /></a><p> {&#09;}</p><a><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PGSQL Logo" width="40" height="40" /></a><p> {&#09;}</p><a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="100" height="50" /></a>
+<a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a><img src="https://static-00.iconduck.com/assets.00/django-icon-1606x2048-lwmw1z73.png" alt="Django Logo" width="40" height="40" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PGSQL Logo" width="40" height="40" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="110" height="50" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 
