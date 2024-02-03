@@ -65,13 +65,13 @@ def login(request):
 def client_login(request, id):
     try:
         userlogin= user.objects.get(pk=id)
-        clientlogin = client.objects.get(userId=userlogin)
+        clientlogin = client.objects.filter(userId=userlogin)
     except user.DoesNotExist:
         return Response({'error': "the user doesn't exist "})
-    except client.DoesNotExist:
-        return Response({'error': "the client doesn't exist "})
-    response = ClientSerializer(clientlogin)  # turning all of them into json
-    return JsonResponse({"client": response.data})
+    if clientlogin:
+        response = ClientSerializer(clientlogin)  # turning all of them into json
+        return JsonResponse({"client": response.data})
+    return JsonResponse({"client":"this is not a client"})
 
 
 def delete_user(request, id):
