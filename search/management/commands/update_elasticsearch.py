@@ -14,12 +14,12 @@ class Command(BaseCommand):
 
     #Definition du port, host et de l'index utilisés
     def handle(self, *args, **options):
-        es = Elasticsearch(['http://localhost:9200'],)
+        es = Elasticsearch(['http://localhost:9200','http://elasticsearch:9200'],)
         index = ArticleIndex._index._name
 
         #es.indices.delete(index=index) Décommenter cette instruction en cas de dupplications(permet de supprimer l'index existant)
         # Lecture des données par
-        with open('search/articles.json') as json_file:
+        with open('/app/backend/articles_igl_engine/search/articles.json') as json_file:
             articles_data = json.load(json_file)
 
         #Préparation des paramètres à indexer

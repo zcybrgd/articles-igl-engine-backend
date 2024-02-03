@@ -5,7 +5,7 @@ from search.search_indexes import ArticleIndex
 class ModArticles:
 
     def index_article(self, article_data):
-        es = Elasticsearch(['http://localhost:9200'],)
+        es = Elasticsearch(['http://localhost:9200', 'http://elasticsearch:9200'],)
         index = ArticleIndex._index._name
         try:
             #the params to index
@@ -40,7 +40,7 @@ class ModArticles:
             return {'success': False, 'message': f'Unexpected error: {error_message}'}
 
     def delete_from_elastic_search(self, article_id):
-        es = Elasticsearch(['http://localhost:9200'], )
+        es = Elasticsearch(['http://localhost:9200','http://elasticsearch:9200'], )
         index = ArticleIndex._index._name
         try:
             es.delete(index=index, id=article_id)
@@ -55,7 +55,7 @@ class ModArticles:
             return {'success': False, 'message': f'Unexpected error: {error_message}'}
 
     def update_to_elastic_search(self, article_id):
-        es = Elasticsearch(['http://localhost:9200'], )
+        es = Elasticsearch(['http://localhost:9200', 'http://elasticsearch:9200'], )
         index = ArticleIndex._index._name
         try:
             es_article = es.get(index=index, id=article_id)
@@ -72,7 +72,7 @@ class ModArticles:
             return {'success': False, 'message': f'Unexpected error: {error_message}'}
 
     def get_unreviewed_documents(self):
-        es = Elasticsearch(['http://localhost:9200'])
+        es = Elasticsearch(['http://localhost:9200','http://elasticsearch:9200'])
         index = ArticleIndex._index._name
         query = {
             "query": {
@@ -92,7 +92,7 @@ class ModArticles:
         return documents
 
     def modify_elastic_search(self,aid,data):
-        es = Elasticsearch(['http://localhost:9200'])
+        es = Elasticsearch(['http://localhost:9200','http://elasticsearch:9200'])
         index = ArticleIndex._index._name
         response = es.update(index=index, id=aid, body={"doc": data})
         if response['result'] == 'updated':

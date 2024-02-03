@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.db.models.signals import post_migrate
 
 
 class UsersConfig(AppConfig):
@@ -6,13 +7,21 @@ class UsersConfig(AppConfig):
     name = 'Users'
 
     def ready(self):
-        from django.contrib.auth.models import User
-        from Users.models import Admin, user
-        admins = User.objects.all()  # getting all the admins created using the createsuperuser command
+        pass
+
+
+def create_initial_admins(sender, **kwargs):
+    from django.contrib.auth.models import User
+    from Users.models import Admin, user
+
+    if sender.name == 'django.contrib.auth':
+        admins = User.objects.all()
         for ad in admins:
-            adBdd, created = Admin.objects.get_or_create(id=ad.id)  # checking if the admin ad is in our db yet
-            if created:  # if not , we create its user instance with role administrator
+            adBdd, created = Admin.objects.get_or_create(id=ad.id)
+            if created:
                 userAdmin = user(userName=ad.username, password=ad.password, role='Administrator')
                 userAdmin.save()
                 Admin.objects.filter(id=adBdd.id).update(userId=userAdmin.pk)
 
+
+post_migrate.connect(create_initial_admins, sender=UsersConfig)

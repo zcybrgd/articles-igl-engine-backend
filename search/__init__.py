@@ -2,4 +2,5 @@
 
 from elasticsearch_dsl import connections
 
-connections.create_connection(alias='default', hosts=['http://localhost:9200'])
+connections.create_connection(alias='default', hosts=['http://localhost:9200','http://elasticsearch:9200'])
+

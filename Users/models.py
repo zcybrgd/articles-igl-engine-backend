@@ -68,6 +68,19 @@ class client(models.Model):
                                         default='media/profile_pics/')
     favorite_articles = ArrayField(models.CharField(max_length=MAX_CHAR_LENGTH, blank=True), default=list)
 
+    def set_password(self,password):
+        self.password = password
+
+
+#This is a class to handle the contact us section of our welcome page
+class contact(models.Model):
+
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
 
 # The token model that we used to replace the token model defined in the User's auth app
 class NonUserToken(BaseToken):

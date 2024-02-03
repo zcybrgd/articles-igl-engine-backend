@@ -44,6 +44,7 @@ class UploadPDFView(APIView):
                 #index this article into es with its status being unreviwed so the moderator would later correct wrong info
                 modArt = ModArticles()
                 response_of_indexing = modArt.index_article(articleJson)
+                print("response of indexing: ", response_of_indexing)
             return Response({'message': 'Files uploaded successfully.'}, status=status.HTTP_201_CREATED)
 
         except MultiValueDictKeyError:

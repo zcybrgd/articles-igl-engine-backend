@@ -6,11 +6,11 @@ from rest_framework import status
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer
-from .models import user, client, Admin, Moderator, NonUserToken
+from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer, ContactSerializer
+from .models import user, client, Admin, Moderator, NonUserToken, contact
 from django.contrib.auth.hashers import make_password, check_password
-
-
+from django.contrib.auth import update_session_auth_hash
+from django.db import connection
 # this is an api to register a client into the db , alon with its user instance and creating its token
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
@@ -59,6 +59,18 @@ def login(request):
     token, created = NonUserToken.objects.get_or_create(user=user_client)
     serializer = UserSerializer(user_client)
     return Response({'token': token.key, 'user': serializer.data})
+
+@api_view(['GET'])
+def client_login(request, id):
+    try:
+        userlogin= user.objects.get(pk=id)
+        clientlogin = client.objects.get(userId=userlogin)
+    except user.DoesNotExist:
+        return Response({'error': "the user doesn't exist "})
+    except client.DoesNotExist:
+        return JsonResponse({"client": "this is not a client"})
+    response = ClientSerializer(clientlogin)
+    return JsonResponse({"client": response.data})
 
 
 def delete_user(request, id):
@@ -326,3 +338,67 @@ class adminStats(APIView):
         else:
             return Response({'error': "the user is not an administrator "})
 
+
+
+
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def contactInfo(request):
+    serializer = ContactSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse({'message': 'Sent successfully ! Thank you for your feedback'},status=status.HTTP_201_CREATED)
+    return Response({'error': 'An Error occured'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def contactsMsgs(request):
+    contacts = contact.objects.all()  # fetch the messages from db
+    response = ContactSerializer(contacts, many=True)  # turning all of them into json
+    return JsonResponse({"contacts": response.data})
+
+@authentication_classes([])
+@permission_classes([])
+class userSettings(APIView):
+    @api_view(['PUT'])
+    def modifyClient(request, id):
+        connected = request.user # to get the instance of the actual active user
+        if connected.id is None:
+            return JsonResponse({'error': "User not authenticated"})
+
+        if connected.role == "Client":
+            try:
+                clientConnected = client.objects.get(userId=connected)
+            except client.DoesNotExist:
+                return JsonResponse({'error': "The client user doesn't exist "})
+
+            currentPassword = request.data.get('current_password', None)
+            newUsername = request.data.get('new_username', clientConnected.userName)
+            newPassword = request.data.get('new_password', clientConnected.password)
+            confirmNewPassword = request.data.get('confirmNewPassword', clientConnected.password)
+
+            # Verify current password
+            if not check_password(currentPassword, connected.password):
+                return Response({'error': 'Incorrect current password'}, status=status.HTTP_400_BAD_REQUEST)
+
+            if newPassword != confirmNewPassword:
+                return JsonResponse({'error': 'New password and confirmation do not match'})
+
+            # Update user Client fields
+            if newUsername:
+                connected.userName = newUsername
+            if newPassword:
+                connected.password = make_password(newPassword)
+
+            connected.save()
+
+            # Update the session auth hash to avoid logout after password change
+            update_session_auth_hash(request, connected)
+
+            # Apply the changes on the Client Serializer
+            serializer = ClientSerializer(clientConnected)
+            return JsonResponse({'message': 'Modifications applied successfully', 'data': serializer.data})
+
+        return JsonResponse({'error': "User is not a client"})

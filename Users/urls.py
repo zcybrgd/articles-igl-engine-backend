@@ -1,13 +1,14 @@
 from django.urls import re_path, path
 from . import views
-from .views import users_list, clients_list, delete_user, delete_client, mods_list, admins_list, modManipulation, adminStats, delete_everything
+from .views import users_list, clients_list, userSettings,delete_user, delete_client, mods_list, admins_list, modManipulation, adminStats, delete_everything
 
 urlpatterns = [
     re_path('signup', views.signup),
     re_path('login', views.login),
+    path('client/<int:id>', views.client_login),
     path('users', users_list),  # view to all the users
     path('user/<int:id>', delete_user),  # view to delete a user using its id
-    path('client/<int:id>', delete_client),  # delete a client using its id
+    path('client/delete/<int:id>', delete_client),  # delete a client using its id
     path('clients', clients_list),  # view to all the clients
     path('mods', mods_list),  # view to all the mods
     path('admins', admins_list),  # view to all the admins
@@ -22,4 +23,7 @@ urlpatterns = [
     path('articles/deleted', adminStats.deleted_articles),  # returns the number of articles the admin connected's mods have deleted
     path('articles/validated', adminStats.validated_articles),  # returns the number of articles the admin connected's mods have validated
     path('articles/modified', adminStats.modified_articles),  # returns the number of edits the admin connected's mods have done on the articles
+    path('contactInfo/', views.contactInfo),  # AddContactInfo
+    path('Displaycontacts/', views.contactsMsgs),  # View all the Contacts Information
+    path('changeSettings/client/<int:id>', userSettings.modifyClient),  # Change settings info for a client
 ]

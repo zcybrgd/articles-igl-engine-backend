@@ -14,7 +14,6 @@ class PDFManipulation():
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
             for chunk in pdf_file.chunks():
                 temp_file.write(chunk)
-
         doc = fitz.open(temp_file.name)
         text = ''
         first_page = ''

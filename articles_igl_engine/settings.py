@@ -11,10 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -25,10 +24,10 @@ SECRET_KEY = 'django-insecure-^vh4u6b1y*k31-4%%u6guj2siv&8gkq#8@mhy(gwj9qe8k*t3y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# i added this for docker-compose
+ALLOWED_HOSTS = ['localhost','127.0.0.1','http://elasticsearch:9200']
 
 SELENIUM_WEBDRIVER_PATH = '../chromedriver_win32'
-
 
 # Application definition
 
@@ -47,7 +46,8 @@ INSTALLED_APPS = [
     'core',
     'search',
     'elasticsearch_dsl',
-    #'corsheaders',
+    'corsheaders',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -84,12 +84,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'articles_igl_engine.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+       'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ArticlesBDD',
         'USER': 'postgres',
@@ -97,13 +96,26 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
+
+}
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': os.environ.get('DB_DRIVER','django.db.backends.postgresql'),
+        'USER': os.environ.get('PG_USER','postgres'),
+        'PASSWORD':os.environ.get('PG_PASSWORD','TPIGL062023@//@'),
+        'NAME': os.environ.get('PG_DB','ArticlesBDD'),
+        'PORT': os.environ.get('PG_PORT','5432'),
+        'HOST': os.environ.get('PG_HOST','db'), # uses the container if set, otherwise it runs locally
+    }
 }
 
-
+'''
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200',  # Adjust the host and port based on my Elasticsearch setup
+        'hosts': ['http://localhost:9200', 'http://elasticsearch:9200'],
     },
 }
 
@@ -128,9 +140,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
 
-'DEFAULT_PERMISSION_CLASSES': (
-'rest_framework.permissions.IsAuthenticated',
-),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -148,7 +160,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

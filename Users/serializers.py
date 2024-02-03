@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Moderator, user, Admin, client
+from .models import Moderator, user, Admin, client, contact
 
 
 class ModeratorSerializer(serializers.ModelSerializer):
@@ -24,3 +24,9 @@ class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = client
         fields = ['id', 'userId', 'userName', 'firstName', 'familyName', 'email', 'password', 'profile_picture']
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = contact
+        fields = ['name', 'email', 'message']
