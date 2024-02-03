@@ -17,18 +17,23 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 - Develop modules for parsing and extracting information from PDF articles.
 - Implement algorithms for text analysis and keyword extraction to enhance search capabilities.
 - Integrate with Elasticsearch for efficient indexing and retrieval of article metadata.
+
 ### Database Management:
+fb4415afab44ed37f7
 
 - Use PostgreSQL for persistent storage of article metadata, user profiles, and system configurations.
 - Implement data modeling and schema design to accommodate the complex structure of scientific articles.
 
+
 ### For Moderators:
+46103ed1c074b3d846bd0fb4415afab44ed37f7
 
 - Manage the validation process of articles.
 - Modify, delete, and validate articles for publication.
 - Correct errors in the extracted information from PDF articles.
 - Monitor unvalidated articles and ensure quality control.
 ### For Clients (Authenticated Users):
+6103ed1c074b3d846bd0fb4415afab44ed37f7
 
 - Search for scientific articles based on keywords in the title, keywords, authors, and full text.
 - Filter search results based on keywords, authors, institutions, or publication date range.
@@ -36,6 +41,7 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 - Save favorite articles for later consultation.
 - Access the list of previously saved favorite scientific articles.
 ### For Admins:
+03ed1c074b3d846bd0fb4415afab44ed37f7
 
 - Manage moderators.
 - Initiate upload operations of scientific articles.
@@ -71,4 +77,5 @@ We welcome contributions to make this project even better. To contribute:
 
 # Deployement
 - Docker and Docker-compose 
+
 

@@ -11,10 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -25,14 +24,16 @@ SECRET_KEY = 'django-insecure-^vh4u6b1y*k31-4%%u6guj2siv&8gkq#8@mhy(gwj9qe8k*t3y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# i added this for docker-compose
+ALLOWED_HOSTS = ['localhost','127.0.0.1','http://elasticsearch:9200']
 
 SELENIUM_WEBDRIVER_PATH = '../chromedriver_win32'
-
 
 # Application definition
 
 INSTALLED_APPS = [
+    'Users',
+    'Articles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,8 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'debug_toolbar',
-    'core'
+    'core',
+    'search',
+    'elasticsearch_dsl',
+    'corsheaders',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -52,7 +58,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'crum.CurrentRequestUserMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'articles_igl_engine.urls'
@@ -76,21 +84,38 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'articles_igl_engine.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+       'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ArticlesBDD',
+        'USER': 'postgres',
+        'PASSWORD': 'TPIGL062023@//@',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+
+}
+'''
+
+DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get('DB_DRIVER','django.db.backends.postgresql'),
+        'USER': os.environ.get('PG_USER','postgres'),
+        'PASSWORD':os.environ.get('PG_PASSWORD','TPIGL062023@//@'),
+        'NAME': os.environ.get('PG_DB','ArticlesBDD'),
+        'PORT': os.environ.get('PG_PORT','5432'),
+        'HOST': os.environ.get('PG_HOST','db'), # uses the container if set, otherwise it runs locally
     }
 }
 
+'''
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200',  
+        'hosts': ['http://localhost:9200', 'http://elasticsearch:9200'],
     },
 }
 
@@ -114,11 +139,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'Users.authentication.TokenAuthentication'
+    ],
 }
 
 # Internationalization
@@ -132,7 +161,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -145,3 +173,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # settings.py
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
