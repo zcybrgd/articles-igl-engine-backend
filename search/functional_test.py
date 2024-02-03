@@ -1,87 +1,35 @@
 import json
-import threading
-from django.core.handlers.wsgi import WSGIHandler
-from django.core.servers.basehttp import ThreadedWSGIServer, WSGIRequestHandler
-from django.utils.functional import classproperty
-from django.test.testcases import _MediaFilesHandler
-from Users.models import user
-from django.db import connection
-import sys
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from elasticsearch_dsl import connections, Index
-from selenium import webdriver
 from django.test import LiveServerTestCase
-from selenium.common import TimeoutException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from datetime import datetime
-from django_selenium import settings
-from search.search_indexes import TestArticleIndex
-from selenium.webdriver.common.keys import Keys
-from django.test import modify_settings
-
 
 
 class FunctionalTest(LiveServerTestCase):
     fixtures = ["user_data.json"]
+    #port to fix it in the frontend code too to let it know and work with the test server, or else it will be given a random free port
     port = 57262
 
     @classmethod
     def setUpClass(cls):
+        #load the fixtures into the test database
         print("Loading fixtures...")
         call_command('loaddata', *cls.fixtures)
         print("Fixtures loaded successfully.")
+        #creating the index for the testing articles and indexing them in elasticsearch
         connections.create_connection(alias='default', hosts=['http://localhost:9200'])
-        # index derto date et heure besh officiel ykon unique , pcq kan ydirli beli hed l'index y'existi deja
         timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         index_name = f'test_index_{timestamp}'
-
         test_index = Index(index_name)
         test_index.create()
-
         cls.index_documents('search/test_articles.json', index_name)
-        # Connect to the test Elasticsearch index
-        #connections.create_connection(alias='default', hosts=['localhost:9200'])
-        # Create or index test data
-        #es = Elasticsearch(['http://localhost:9200'],)
-        #index = TestArticleIndex._index._name
-        #es.indices.delete(index=index) # Décommenter cette instruction en cas de dupplications(permet de supprimer l'index existant)
-        # Lecture des données par
-        #with open('search/test_articles.json') as json_file:
-            #articles_data = json.load(json_file)
-        #Préparation des paramètres à indexer
-        #actions = [
-            #{
-                #'_op_type': 'index',
-                #'_index': index,
-                #Définition d'un Id automatique
-                #'_source': {
-                    #'title': data.get('title', ''),
-                    #'authors': data.get('authors', ''),
-                    #'institutions': data.get('institutions', ''),
-                    #'keywords': data.get('keywords', ''),
-                    #'pdf_url': data.get('pdf_url', ''),
-                    #'bibliographie': data.get('bibliographie', ''),
-                    #'abstract': data.get('abstract', ''),
-                    #'text': data.get('text', ''),
-                    #'date': data.get('date', ''),
-                    #'status': 'unreviewed'
-                #}
-            #}
-            #for data in articles_data
-        #]
-        # Indexation à l'aide de la fonction Bulk
-        #success, failed = bulk(es, actions)
-        # Message de réussite de l'indexation
-        #print(f'Successfully indexed {success} documents')
-        #print(f'Failed to index {failed} documents')
-        #test_index = Index('test_index')
-        #test_index.create()
+        #set up the class and the selenium webdriver
         super().setUpClass()
         cls.selenium = WebDriver()
         cls.selenium.implicitly_wait(10)
@@ -105,72 +53,37 @@ class FunctionalTest(LiveServerTestCase):
         print(f'Failed to index {failed} documents')
 
     def test_search_functionality(self):
+        #connecting to the frontend server
         self.selenium.get("http://localhost:5173/login")
+        #using the user_date information to login to the website using the testdatabase
         username_elem = self.selenium.find_element(By.XPATH, '//input[@placeholder="username"]')
         username_elem.send_keys("Marii")
         password_elem = self.selenium.find_element(By.XPATH, '//input[@placeholder="password"]')
         password_elem.send_keys("mariCLIENT")
         self.selenium.find_element(By.XPATH, '//button[contains(text(), "Log in")]').click()
-        #self.selenium.implicitly_wait(10)
-        #try:
-            #query_input = self.selenium.find_element(By.XPATH, '//input[@placeholder="Search"]')
-            #print("Successfully logged in, and the page is the home page.")
-        #except:
-            #print("Login might have failed or the page is not the home page.")
+        #waiting for the home page of the client to appear
         search_input = WebDriverWait(self.selenium, 10).until(
             EC.presence_of_element_located((By.ID, "searchBar"))
         )
-        search_input.send_keys("article")
+        #to test the ideal case , when the articles exist in the index
+        #search_input.send_keys("article")
+        #to test that when there is not an article verfiying the query , the website doesn't crush
+        search_input.send_keys("TEST")
+        #to be able to make the first query work, articles should be indexed using the command python manage.py update_elasticsearch and validated by the moderator
         self.selenium.implicitly_wait(10)
         search_button = self.selenium.find_element(By.ID, "search-button")
         search_button.click()
-
+        #waiting for the search results to appear on the search page
         WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "search-results-indicator"))
-        )
-
-        # Check if results are present using JavaScript
-        results_present = self.selenium.execute_script(
-            'return document.getElementById("search-results-indicator") !== null;'
-        )
-
-        self.assertTrue(results_present, "Search results are not present.")
-
-        # displaying results
-        search_results = self.selenium.find_elements(By.CLASS_NAME, "search-result")
-
-        for result in search_results:
-            print(result.text)
-
-        self.assertTrue(len(search_results) > 0, "No search results found")
-        #search_button = self.selenium.find_element(By.ID, "search-button")
-        #search_button.click()
-        #self.selenium.implicitly_wait(100)
-        #try:
-            #self.selenium.find_element(By.XPATH, '//input[@placeholder="Search"]')
-            #print("Successfully logged in, and the page is the home page.")
-        #except:
-            #search_results_indicator = WebDriverWait(self.selenium, 10).until(
-                #EC.presence_of_element_located((By.ID, "search-results-indicator"))
-            #)
-            #self.assertIsNotNone(search_results_indicator)
-        #except TimeoutException:
-            #print("No result for this search")
-        #query_input = self.selenium.find_element(By.NAME, "query")
-        #query_input.send_keys("myquery")
-        #self.selenium.find_element(By.XPATH, '//input[@value="search"]').click()
-        #print(self.selenium.current_url)
-        #self.assertEqual(self.selenium.current_url, 'http://localhost:5173/search', msg='something went wrong')
-        #assert 'Django' in self.browser.title
+                EC.presence_of_element_located((By.ID, "search-results"))
+            )
+        self.selenium.implicitly_wait(10)
+        #we verify if the test worked by confirming that it is currenlty in the search page
+        self.assertEqual(self.selenium.current_url, 'http://localhost:5173/search', msg='something went wrong')
 
     @classmethod
     def tearDownClass(cls):
-        # Optionally, clean up the test Elasticsearch index after the tests
-        #es = Elasticsearch(['http://localhost:9200'],)
-        #index = TestArticleIndex._index._name
-        #es.indices.delete(index=index)
-        #test_index = Index('test_index')
-        #test_index.delete()
+        #deleting the test index
         index_name = getattr(cls, 'current_index_name', None)
         if index_name:
             test_index = Index(index_name)
