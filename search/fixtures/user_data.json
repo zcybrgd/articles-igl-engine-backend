@@ -1,0 +1,13 @@
+[
+    {
+        "fields": {
+            "userName": "Marii",
+            "password": "pbkdf2_sha256$600000$33RII6eaRwYQOVrhMcmZbp$DLJ5HAOFIvQcS38f0WniAXPp0cVzfPM9RW4whMKt+80=",
+            "role" : "Client",
+            "is_active" : "True",
+            "is_authenticated" : "True"
+        },
+        "model": "Users.user",
+        "pk": 1
+    }
+]

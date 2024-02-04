@@ -1,3 +1,7 @@
+"""
+This module defines database models for the application.
+"""
+
 import binascii
 import os
 from django.contrib.postgres.fields import ArrayField
@@ -9,6 +13,9 @@ MAX_CHAR_LENGTH = 110  # constant to make the lengths of chars more maintainable
 
 
 class user(models.Model):  # the common and important attributes that the 3 types of users have
+    """
+        Represents a common user with shared attributes across different roles.
+    """
     userName = models.CharField(max_length=MAX_CHAR_LENGTH, unique=True)
     password = models.CharField(max_length=MAX_CHAR_LENGTH)
     role = models.CharField(max_length=MAX_CHAR_LENGTH)
@@ -18,6 +25,9 @@ class user(models.Model):  # the common and important attributes that the 3 type
 
 # represents the admin in our database , he controls the Moderator model
 class Admin(models.Model):
+    """
+        Represents an administrator user with privileges to manage moderators.
+    """
     id = models.IntegerField(primary_key=True)
     userId = models.OneToOneField(
         user,
@@ -29,6 +39,9 @@ class Admin(models.Model):
 
 
 class Moderator(models.Model):
+    """
+        Represents a moderator user.
+    """
     userId = models.OneToOneField(
         user,
         on_delete=models.CASCADE,
@@ -53,6 +66,9 @@ class Moderator(models.Model):
 
 # the client is the main user of our website , he's the one who searches for articles , reads them , save them to favorites and so on
 class client(models.Model):
+    """
+        Represents a client user who interacts with the website.
+    """
     userId = models.OneToOneField(
         user,
         on_delete=models.CASCADE,
@@ -74,7 +90,9 @@ class client(models.Model):
 
 #This is a class to handle the contact us section of our welcome page
 class contact(models.Model):
-
+    """
+        Represents a message from the contact us section of the website.
+    """
     name = models.CharField(max_length=255)
     email = models.EmailField()
     message = models.TextField()
@@ -84,6 +102,9 @@ class contact(models.Model):
 
 # The token model that we used to replace the token model defined in the User's auth app
 class NonUserToken(BaseToken):
+    """
+        Represents a token for non-authenticated users.
+    """
     key = models.CharField(_("Key"), max_length=40, primary_key=True)
     user = models.OneToOneField(
         user, related_name='auth_token',

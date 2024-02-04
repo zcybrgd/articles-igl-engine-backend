@@ -6,25 +6,41 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Article
+
 from django.middleware.csrf import get_token
 from Users.models import Moderator, NonUserToken
 
 from .pdf_processing import PDFProcessing
-from .serializers import ArticleSerializer, ArticleUnReviewedSerializer
+
 from .pdf_manipulation import PDFManipulation
 from .mod_articles import ModArticles
 from rest_framework.decorators import authentication_classes, permission_classes
 
 
 class UploadPDFView(APIView):
-    serializer_class = ArticleSerializer
-    queryset = Article.objects.all()
+    """
+        API view for uploading PDF files and extracting data from them.
+
+        This class-based view provides endpoints for uploading PDF files and extracting data from them.
+
+        Methods:
+            post: POST request endpoint for uploading PDF files and extracting data.
+            get: GET request endpoint to set CSRF token.
+    """
     permission_classes = [AllowAny]
     parser_classes = [MultiPartParser]
 
     @action(detail=False, methods=['post'])
     def post(self, request):
+        """
+                Upload PDF files and extract data.
+
+                Args:
+                    request (HttpRequest): POST request object containing PDF files.
+
+                Returns:
+                    Response: HTTP response indicating success or failure of the operation.
+        """
         try:
             pdf_url = "NoneAtTheMoment"
             pdf_manipulator = PDFManipulation()
@@ -56,13 +72,22 @@ class UploadPDFView(APIView):
 
     @action(detail=False, methods=['get'])
     def get(self, request):
+        """
+                Set CSRF token.
+
+                Args:
+                    request (HttpRequest): GET request object.
+
+                Returns:
+                    Response: HTTP response indicating success or failure of the operation.
+        """
         csrf_token = get_token(request)
         response_data = {'detail': 'CSRF token set successfully', 'X-CSRFToken': csrf_token}
         return Response(response_data)
 
 
 
-
+#this is totally independent
 def home(request):
     return render(request, 'home.html')
 
@@ -70,14 +95,44 @@ def home(request):
 @authentication_classes([])
 @permission_classes([])
 class ArticlesApiView(APIView):
+    """
+        API view for handling articles. All done by the Moderator
+
+        This class-based view provides endpoints for retrieving, deleting, updating, and modifying articles.
+
+        Methods:
+            get: GET request endpoint to retrieve unreviewed documents.
+            delete: DELETE request endpoint to delete an article.
+            post: POST request endpoint to validate an article.
+            patch: PATCH request endpoint to modify an article.
+    """
     mod_articles = ModArticles()
     @action(detail=False, methods=['get'])
     def get(self, request):
+        """
+                Retrieve unreviewed documents.
+
+                Args:
+                    request (HttpRequest): GET request object.
+
+                Returns:
+                    Response: HTTP response containing unreviewed documents.
+        """
         documents = self.mod_articles.get_unreviewed_documents()
         return Response({'articles': documents}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['delete'])
     def delete(self, request, article_id):
+        """
+                Delete an article.
+
+                Args:
+                    request (HttpRequest): DELETE request object.
+                    article_id (int): ID of the article to be deleted.
+
+                Returns:
+                    Response: HTTP response indicating success or failure of the operation.
+        """
         key = request.headers['Authorization']
         try:
             token = NonUserToken.objects.get(key=key)
@@ -101,6 +156,15 @@ class ArticlesApiView(APIView):
 
     @action(detail=False, methods=['post'])
     def post(self, request):
+        """
+                Validate an article.
+
+                Args:
+                    request (HttpRequest): POST request object.
+
+                Returns:
+                    Response: HTTP response indicating success or failure of the operation.
+        """
         key = request.headers['Authorization']
         try:
             token = NonUserToken.objects.get(key=key)
@@ -133,6 +197,16 @@ class ArticlesApiView(APIView):
 
     @action(detail=False, methods=['patch'])
     def patch(self, request, article_id):
+        """
+                Modify an article.
+
+                Args:
+                    request (HttpRequest): PATCH request object.
+                    article_id (int): ID of the article to be modified.
+
+                Returns:
+                    Response: HTTP response indicating success or failure of the operation.
+        """
         key = request.headers['Authorization']
         try:
             token = NonUserToken.objects.get(key=key)

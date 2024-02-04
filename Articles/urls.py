@@ -2,6 +2,7 @@
 from django.urls import path
 from .views import FavoritesManipulation
 
+# the client's favorite articles manipulation endpoint
 urlpatterns = [
     path('', FavoritesManipulation.display_favorite_articles, name='display_favorite_articles'),
     path('add_to_favorite/<str:article_id>', FavoritesManipulation.add_to_favorite, name='add_to_favorite'),

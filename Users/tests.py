@@ -1,3 +1,22 @@
+"""
+Unit tests for the API endpoints related to adding, modifying, and deleting moderators.
+
+These tests cover scenarios for adding, modifying, and deleting moderators through the API endpoints.
+
+Test Cases:
+1. AddModAPITest: Test cases related to adding moderators.
+2. ModifyModViewTest: Test cases related to modifying moderators.
+3. DeleteModViewTest: Test cases related to deleting moderators.
+
+Each test class includes test methods covering various scenarios with setup and teardown methods for data management.
+
+Dependencies:
+- Django TestCase: Base class for Django tests.
+- APIClient: Test client for making API requests.
+- status: Constants representing HTTP status codes.
+- NonUserToken, Admin, user, Moderator: Models representing different entities.
+- make_password: Function for generating password hashes.
+"""
 from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
@@ -6,8 +25,13 @@ from .views import make_password
 
 
 class AddModAPITest(TestCase):
-
+    """
+       Unit tests for adding moderators via API endpoints.
+    """
     def setUp(self):
+        """
+               Set up test data and client authentication.
+        """
         self.user = user.objects.create(userName='admin', password='admin', role='Administrator')
         self.admin = Admin.objects.create(id='1', userId=self.user)
         self.token = NonUserToken.objects.create(user=self.user)
@@ -15,6 +39,9 @@ class AddModAPITest(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
     def test_add_mod_authenticated_admin(self):
+        """
+                Test case to ensure that an authenticated admin can successfully add a new moderator.
+        """
         data = {
             'userName': 'nehghw_mod',
             'password': 'mjgjodpass',
@@ -29,6 +56,9 @@ class AddModAPITest(TestCase):
         self.assertIn('Mod added succesfully!!', response_json.keys())
 
     def test_add_mod_existing_moderator(self):
+        """
+                Test case to ensure that adding a moderator with an existing username results in an error.
+                """
         # Create an existing moderator
         existing_mod = Moderator.objects.create(
             adminId=self.admin,
@@ -55,7 +85,10 @@ class AddModAPITest(TestCase):
         self.assertIn('Username already exists. Please choose a different username.', response_json['error'])
 
     def test_add_mod_user_not_authenticated(self):
-        # Ensure the user is not authenticated  # Remove authentication credentials
+        """
+               Test case to ensure that adding a moderator without authentication results in an unauthorized error.
+        """
+        # Remove authentication credentials
         self.client.logout()
         data = {
             'userName': 'new_mod',
@@ -72,6 +105,9 @@ class AddModAPITest(TestCase):
         response_json = response.json()
 
     def test_add_mod_admin_user_doesnt_exist(self):
+        """
+                Test case to ensure that adding a moderator when the admin user doesn't exist results in an error.
+        """
         # Remove the admin user from the database
         self.admin.delete()
 
@@ -90,6 +126,9 @@ class AddModAPITest(TestCase):
         self.assertIn("the admin user doesn't exist", response_json['error'])
 
     def test_add_mod_user_not_administrator(self):
+        """
+                Test case to ensure that adding a moderator with a non-administrator user results in an error.
+        """
         # Create a non-admin user
         non_admin_user = user.objects.create(userName='non_admin', password='non_admin_pass', role='Moderator')
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + NonUserToken.objects.create(user=non_admin_user).key)
@@ -109,7 +148,9 @@ class AddModAPITest(TestCase):
         self.assertIn("the user is not an administrator", response_json['error'])
 
     def tearDown(self):
-        # Clean up your test data
+        """
+               Clean up test data.
+        """
         Moderator.objects.all().delete()
         Admin.objects.all().delete()
         user.objects.all().delete()
@@ -117,8 +158,13 @@ class AddModAPITest(TestCase):
 
 
 class ModifyModViewTest(TestCase):
-
+    """
+       Unit tests for modifying moderators via API endpoints.
+    """
     def setUp(self):
+        """
+                Set up test data and client authentication.
+        """
         # Create an admin user and the mod
         self.user = user.objects.create(userName='admin', password='admin', role='Administrator')
         self.admin = Admin.objects.create(id='1', userId=self.user)
@@ -137,6 +183,9 @@ class ModifyModViewTest(TestCase):
         )
 
     def test_modify_mod_succeful(self):
+        """
+                Test case to ensure that an authenticated admin can successfully modify a moderator.
+        """
         data = {
             'userName': 'new_mod_username',
             'password': 'new_mod_password',
@@ -151,6 +200,9 @@ class ModifyModViewTest(TestCase):
         self.assertIn("Mod modified succesfully!!", response.content.decode())
 
     def test_modify_mod_admin_user_doesnt_exist(self):
+        """
+                Test case to ensure that modifying a moderator when the admin user doesn't exist results in an error.
+        """
         # Remove the admin user from the database
         self.admin.delete()
 
@@ -169,6 +221,9 @@ class ModifyModViewTest(TestCase):
         self.assertIn("the admin user doesn't exist", response.content.decode())
 
     def test_modify_mod_mod_doesnt_exist(self):
+        """
+                Test case to ensure that modifying a non-existing moderator results in an error.
+        """
         data = {
             'userName': 'new_mod',
             'password': 'new_mod_pass',
@@ -182,6 +237,9 @@ class ModifyModViewTest(TestCase):
         self.assertIn("the moderator doesn't exist", response.content.decode())
 
     def test_modify_mod_unauthorized_action(self):
+        """
+                Test case to ensure that unauthorized action results in an error.
+        """
         # login for another  admin not the one who created the moderator
 
         self.user = user.objects.create(userName='admin2', password='admin2', role='Administrator')
@@ -203,6 +261,9 @@ class ModifyModViewTest(TestCase):
         self.assertIn("This is an unauthorized action", response_json['error'])
 
     def test_modify_mod_user_not_administrator(self):
+        """
+                Test case to ensure that modifying a moderator with a non-administrator user results in an error.
+                """
         # Create a non-admin user
         non_admin_user = user.objects.create(userName='non_admin', password='non_admin_pass', role='Moderator')
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + NonUserToken.objects.create(user=non_admin_user).key)
@@ -221,6 +282,9 @@ class ModifyModViewTest(TestCase):
         self.assertIn("the user is not an administrator", response_json['error'])
 
     def test_modify_mod_unauthenticated(self):
+        """
+                Test case to ensure that modifying a moderator without authentication results in an unauthorized error.
+        """
         # Set client credentials to simulate an unauthenticated user
         self.client.credentials()
         data = {
@@ -235,9 +299,10 @@ class ModifyModViewTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         response_json = response.json()
 
-    # I am not sure if the teardow is down that way
     def tearDown(self):
-        # Clean up your test data
+        """
+               Clean up test data.
+             """
         Moderator.objects.all().delete()
         Admin.objects.all().delete()
         user.objects.all().delete()
@@ -245,7 +310,9 @@ class ModifyModViewTest(TestCase):
 
 
 class DeleteModViewTest(TestCase):
-
+    """
+        Unit tests for deleting moderators via API endpoints.
+        """
     def setUp(self):
         # Create an admin user
         self.admin_user = user.objects.create(userName='admin', password='admin', role='Administrator')
@@ -266,12 +333,18 @@ class DeleteModViewTest(TestCase):
         )
 
     def test_delete_mod_successful(self):
+        """
+                Test case to ensure that an authenticated admin can successfully delete a moderator.
+        """
         response = self.client.delete(f'/us/mod/delete/{self.mod.pk}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_json = response.json()
         self.assertIn("Mod deleted successfully!!", response_json[0])
 
     def test_delete_mod_non_authenticated_user(self):
+        """
+                Test case to ensure that deleting a moderator without authentication results in an unauthorized error.
+        """
         self.client.logout()
         # same here I couldn't get the custom answer
         response = self.client.delete(f'/us/mod/delete/{self.mod.pk}')
@@ -280,6 +353,9 @@ class DeleteModViewTest(TestCase):
         # self.assertIn("User non authenticated", response_json[0])
 
     def test_delete_mod_admin_user_doesnt_exist(self):
+        """
+                Test case to ensure that deleting a moderator when the admin user doesn't exist results in an error.
+        """
         # delete the admin
         self.admin.delete()
         response = self.client.delete(f'/us/mod/delete/{self.mod.pk}')
@@ -287,12 +363,18 @@ class DeleteModViewTest(TestCase):
         self.assertIn("the admin user doesn't exist", response_json['error'])
 
     def test_delete_mod_moderator_doesnt_exist(self):
+        """
+                Test case to ensure that deleting a non-existing moderator results in an error.
+        """
         # the id doesn't exist 99
         response = self.client.delete('/us/mod/delete/99')
         response_json = response.json()
         self.assertIn("the moderator doesn't exist", response_json['error'])
 
     def test_delete_mod_unauthorized_action(self):
+        """
+                Test case to ensure that unauthorized action results in an error.
+        """
         # login for a new admin not the one who created the moderator
         self.user = user.objects.create(userName='admin2', password='admin2', role='Administrator')
         self.admin = Admin.objects.create(id='2', userId=self.user)
@@ -305,6 +387,9 @@ class DeleteModViewTest(TestCase):
         self.assertIn("This is an unauthorized action", response_json['error'])
 
     def test_delete_mod_user_not_administrator(self):
+        """
+                Test case to ensure that deleting a moderator with a non-administrator user results in an error.
+        """
         # Create a non-admin user
         non_admin_user = user.objects.create(userName='non_admin', password='non_admin_pass', role='Moderator')
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + NonUserToken.objects.create(user=non_admin_user).key)
@@ -315,7 +400,9 @@ class DeleteModViewTest(TestCase):
         self.assertIn("the user is not an administrator", response_json['error'])
 
     def tearDown(self):
-        # Clean up your test data
+        """
+                Clean up test data.
+        """
         Moderator.objects.all().delete()
         Admin.objects.all().delete()
         user.objects.all().delete()

@@ -1,22 +1,20 @@
 from django.http import JsonResponse
-from elasticsearch_dsl import Search
-from elasticsearch_dsl.query import MultiMatch
 from elasticsearch_dsl.utils import AttrList
-from search.search_indexes import ArticleIndex
-from django.shortcuts import render
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.query import MultiMatch
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 
 def search_articles(request):
-    """_summary_
-      Args:
-          request (_type_): _description_
-      Returns:
-          _type_: _description_
-      """
+    """
+        Perform a search query on articles using various filters.
 
+        Args:
+            request (HttpRequest): The HTTP request object.
+
+        Returns:
+            JsonResponse: JSON response containing the search query and results.
+    """
     # query représente l'objet de la recherche effectuée par l'utilisateur
     query = request.GET.get("q", "")
 
@@ -84,6 +82,15 @@ def search_articles(request):
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
 def total_articles(request):
+    """
+        Get the total count of articles.
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+
+        Returns:
+            JsonResponse: JSON response containing the total count of articles.
+    """
     search = Search(index='article_index')
     total = search.count()
     return JsonResponse({'total': total})
@@ -92,6 +99,15 @@ def total_articles(request):
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
 def unreviewed_articles(request):
+    """
+        Get the count of unreviewed articles, that should be reviewed by Moderators
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+
+        Returns:
+            JsonResponse: JSON response containing the count of unreviewed articles.
+    """
     search = Search(index='article_index').filter('term', status='unreviewed')
     # Count search results
     total = search.count()

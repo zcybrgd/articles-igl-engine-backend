@@ -1,20 +1,42 @@
-from django.http import HttpResponse, JsonResponse, Http404
-from django.views.decorators.csrf import csrf_exempt
+"""
+This module contains API views and functionalities for user authentication, user settings, moderator manipulation, administrator statistics, and handling contact form submissions.
+
+It includes functionalities for user signup, login, modifying client settings, adding and modifying moderators, retrieving moderator information, retrieving administrator statistics, handling contact form submissions, and retrieving contact messages.
+
+The module provides API endpoints for these functionalities, with appropriate request methods and expected parameters.
+
+"""
+from django.http import JsonResponse, Http404
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-from .serializers import UserSerializer, ClientSerializer, AdminSerializer, ModeratorSerializer, ContactSerializer
+from .serializers import UserSerializer, ClientSerializer, ModeratorSerializer, ContactSerializer
 from .models import user, client, Admin, Moderator, NonUserToken, contact
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import update_session_auth_hash
-from django.db import connection
-# this is an api to register a client into the db , alon with its user instance and creating its token
+
+
+
+
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def signup(request):
+    """
+        Register a client into the database along with its user instance and create its token.
+
+        This API expects a POST request with the following parameters:
+        - userName: The unique username for the client.
+        - firstName, familyName, profile_picture and e-mail
+        - password: The password for the client's account.
+
+        Returns:
+        - If the registration is successful, it returns a JSON response with a token.
+        - If the provided username already exists, it returns an error message.
+        - If the provided data is invalid, it returns a 400 Bad Request error with validation errors.
+        """
     existing_user = client.objects.filter(userName=request.data.get('userName', ''))
     if existing_user.exists():
         return Response({'error': 'Username already exists. Please choose a different username.'})
@@ -38,6 +60,18 @@ def signup(request):
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def login(request):
+    """
+        Log in a client or moderator.
+
+        This API expects a POST request with the following parameters:
+        - userName: The username of the user trying to log in.
+        - password: The password of the user trying to log in.
+
+        Returns:
+        - If the login is successful, it returns a JSON response with a token and user details.
+        - If the provided username does not exist, it returns an error message.
+        - If the provided password is incorrect, it returns an error message.
+        """
     # check if username exists in the request
     if 'userName' not in request.data:
         return Response({'error': "missing username"})
@@ -47,7 +81,7 @@ def login(request):
         return Response({'error': "missing password"})
 
     try:
-        # récuperer the user
+        # here we are going to retrieve the user
         user_client = get_object_or_404(user, userName=request.data['userName'])
     except Http404:
         # if it doesnt exist
@@ -62,6 +96,15 @@ def login(request):
 
 @api_view(['GET'])
 def client_login(request, id):
+    """
+            Warning, this is not the login view for the client, it's just used to retrieve additional client infomation to give
+            the client the option to modify them in the profile settings (UI)
+            Retrieve client details by ID. needed for the Profile Settings by the user
+            This API expects a GET request with the client's ID.
+            Returns:
+            - If the client exists, it returns a JSON response with the client's details.
+            - If the client does not exist, it returns an error message.
+            """
     try:
         userlogin= user.objects.get(pk=id)
         clientlogin = client.objects.get(userId=userlogin)
@@ -73,67 +116,48 @@ def client_login(request, id):
     return JsonResponse({"client": response.data})
 
 
-def delete_user(request, id):
+@api_view(['PUT'])
+def modify_client(request):
+    """
+        Modify client information except the password. as it is modified only in the settings
+
+        This API expects a PUT request with the updated client data.
+
+        Returns:
+        - If the modification is successful, it returns a JSON response with the updated client data.
+        - If the user is not authenticated or the client does not exist, it returns an error message.
+        """
+    connected = request.user  # to get the instance of the actual active client
+    if connected.id is None:
+        return Response({'error': "User non authenticated"})
     try:
-        userTodel = user.objects.get(pk=id)
-    except user.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    userTodel.delete()
-    return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-@permission_classes((permissions.AllowAny,))
-@csrf_exempt
-def delete_everything(request):
-    users = user.objects.all()
-    for us in users:
-        us.delete()
-    return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-
-
-@permission_classes((permissions.AllowAny,))
-def delete_client(request, id):
-    try:
-        clientTodel = client.objects.get(pk=id)
+        client_connect = client.objects.get(userId=connected)
     except client.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    clientTodel.delete()
-    return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-
-def users_list(request):
-    users = user.objects.all()  # fetch the users from db
-    response = UserSerializer(users, many=True)  # turning all of them into json
-    return JsonResponse({"users": response.data})
-
-
-@permission_classes((permissions.AllowAny,))
-def clients_list(request):
-    clients = client.objects.all()  # fetch the clients from db
-    response = ClientSerializer(clients, many=True)  # turning all of them into json
-    return JsonResponse({"users": response.data})
-
-
-def admins_list(request):
-    admins = Admin.objects.all()  # fetch the moderators from db
-    response = AdminSerializer(admins, many=True)  # turning all of them into json
-    return JsonResponse({"admins": response.data})
-
-
-# getting the list of moderators
-def mods_list(request):
-    mods = Moderator.objects.all()  # fetch the moderators from db
-    response = ModeratorSerializer(mods, many=True)  # turning all of them into json
-    return JsonResponse({
-        "mods": response.data})  # returning the response while setting safe to false to allow non dict objects to be serialized
+        return Response({'error': "the client doesn't exist "})
+    client.objects.filter(pk=client_connect.id).update(**request.data)
+    instanceClient = client.objects.get(pk=client_connect.id)
+    user.objects.filter(pk=connected.id).update(userName=instanceClient.userName)  # to update the user instance of the client too
+    updated_client = ClientSerializer(instanceClient)
+    return Response({"data": updated_client.data})
 
 
 @authentication_classes([])
 @permission_classes([])
 class modManipulation(APIView):
+    """
+        API views for moderator manipulation. Done only by the administrator
+    """
     # api to add a moderator , the user must be an administrator
     @api_view(['POST'])
     def add_mod(request):
+        """
+                Add a new moderator.
+                This API expects a POST request with the moderator's information.
+
+                Returns:
+                - If the moderator is added successfully, it returns a JSON response with the moderator data.
+                - If the user is not an administrator or the username already exists, it returns an error message.
+        """
         connected = request.user  # extracting the current user instance
         if connected.id == None:
             return Response({'error':"User non authenticated"})
@@ -161,6 +185,18 @@ class modManipulation(APIView):
 
     @api_view(['PUT'])
     def modify_mod(request, id):
+        """
+           Modify a moderator's information.
+
+           This API expects a PUT request with the updated moderator data.
+
+           Parameters:
+           - id: The ID of the moderator to be modified.
+
+           Returns:
+           - If the modification is successful, it returns a JSON response with the updated moderator data.
+           - If the user is not authenticated, the moderator doesn't exist, or the user is not authorized, it returns an error message.
+           """
         connected = request.user  # to get the instance of the actual active admin
         if connected.id == None:
             return Response({'error':"User non authenticated"})
@@ -194,6 +230,19 @@ class modManipulation(APIView):
 
     @api_view(['DELETE'])
     def delete_mod(request, id):
+        """
+            Delete a moderator.
+
+            This API expects a DELETE request with the ID of the moderator to be deleted.
+
+            Parameters:
+            - id: The ID of the moderator to be deleted.
+
+            Returns:
+            - If the deletion is successful, it returns a JSON response indicating successful deletion.
+            - If the user is not authenticated, the moderator doesn't exist, or the user is not authorized, it returns an error message.
+            """
+
         connected = request.user  # to get the instance of the actual active admin
         if connected.id == None:
             return Response({'error': "User non authenticated"})
@@ -222,6 +271,15 @@ class modManipulation(APIView):
 
     @api_view(['GET'])
     def display_mods(request):
+        """
+           Retrieve all moderators created by the current administrator.
+
+           This API expects a GET request.
+
+           Returns:
+           - A JSON response containing all moderators created by the current administrator.
+           - If the user is not authenticated or is not an administrator, it returns an error message.
+           """
         connected = request.user
         if connected.id == None:
             return Response({'error': "User non authenticated"})
@@ -240,6 +298,10 @@ class modManipulation(APIView):
 @authentication_classes([])
 @permission_classes([])
 class adminStats(APIView):
+    """
+        API views for administrator statistics.
+        To be displayed in the administrator's dashboard
+    """
     @api_view(['GET'])
     def deleted_articles(request):
         connected = request.user
@@ -261,6 +323,15 @@ class adminStats(APIView):
 
     @api_view(['GET'])
     def validated_articles(request):
+        """
+           Retrieve the total number of validated articles by moderators under the current administrator.
+
+           This API expects a GET request.
+
+           Returns:
+           - A JSON response containing the total number of validated articles.
+           - If the user is not authenticated or is not an administrator, it returns an error message.
+           """
         connected = request.user
         if connected.id == None:
             return Response({'error': "User non authenticated"})
@@ -280,6 +351,15 @@ class adminStats(APIView):
 
     @api_view(['GET'])
     def modified_articles(request):
+        """
+            Retrieve the total number of modified articles by moderators under the current administrator.
+
+            This API expects a GET request.
+
+            Returns:
+            - A JSON response containing the total number of modified articles.
+            - If the user is not authenticated or is not an administrator, it returns an error message.
+            """
         connected = request.user
         if connected.id == None:
             return Response({'error': "User non authenticated"})
@@ -299,6 +379,16 @@ class adminStats(APIView):
 
     @api_view(['GET'])
     def added_mods(request):
+        """
+           Retrieve the total number of moderators added by the current administrator.
+
+           This API expects a GET request.
+
+           Returns:
+           - A JSON response containing the total number of moderators added.
+           - If the user is not authenticated or is not an administrator, it returns an error message.
+           """
+
         connected = request.user
         if connected.id == None:
             return Response({'error': "User non authenticated"})
@@ -314,6 +404,15 @@ class adminStats(APIView):
 
     @api_view(['GET'])
     def deleted_mods(request):
+        """
+            Retrieve the total number of moderators deleted by the current administrator.
+
+            This API expects a GET request.
+
+            Returns:
+            - A JSON response containing the total number of moderators deleted.
+            - If the user is not authenticated or is not an administrator, it returns an error message.
+            """
         connected = request.user
         if connected.id == None:
             return Response({'error': "User non authenticated"})
@@ -329,6 +428,15 @@ class adminStats(APIView):
 
     @api_view(['GET'])
     def total_mods(request):
+        """
+            Retrieve the total number of moderators in the system.
+
+            This API expects a GET request.
+
+            Returns:
+            - A JSON response containing the total number of moderators.
+            - If the user is not authenticated or is not an administrator, it returns an error message.
+            """
         connected = request.user
         if connected.id == None:
             return Response({'error': "User non authenticated"})
@@ -345,6 +453,17 @@ class adminStats(APIView):
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def contactInfo(request):
+    """
+        Handle contact form submission.
+
+        The contact form is present in the welcome page
+
+        This API expects a POST request with the contact form data.
+
+        Returns:
+        - If the submission is successful, it returns a JSON response with a success message.
+        - If there's an error in the submission, it returns an error message.
+        """
     serializer = ContactSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -355,6 +474,14 @@ def contactInfo(request):
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
 def contactsMsgs(request):
+    """
+        Retrieve all contact messages.
+
+        This API expects a GET request.
+
+        Returns:
+        - A JSON response containing all contact messages.
+        """
     contacts = contact.objects.all()  # fetch the messages from db
     response = ContactSerializer(contacts, many=True)  # turning all of them into json
     return JsonResponse({"contacts": response.data})
@@ -362,8 +489,25 @@ def contactsMsgs(request):
 @authentication_classes([])
 @permission_classes([])
 class userSettings(APIView):
+    """
+       API views for user settings.
+
+       This class provides endpoints for modifying user settings, specifically for clients.
+       """
     @api_view(['PUT'])
     def modifyClient(request, id):
+        """
+                Modify client settings.
+
+                This API expects a PUT request with the updated client data.
+
+                Parameters:
+                - id: The ID of the client to be modified.
+
+                Returns:
+                - If the modification is successful, it returns a JSON response with the updated client data.
+                - If the user is not authenticated or is not a client, it returns an error message.
+                """
         connected = request.user # to get the instance of the actual active user
         if connected.id is None:
             return JsonResponse({'error': "User not authenticated"})
