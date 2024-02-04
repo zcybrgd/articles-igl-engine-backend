@@ -5,7 +5,9 @@ from .views import users_list, clients_list, delete_user, delete_client, mods_li
 urlpatterns = [
     re_path('signup', views.signup),
     re_path('login', views.login),
-    path('client/<int:id>', views.client_login),
+    path('client/<int:id>', views.client_login),#view to get the info of the currently connected client
+    path('mods/delete/<int:id>', views.delete_modnull),
+    path('client/modify', views.modify_client), #view to modify the info of the currently connected client
     path('users', users_list),#view to all the users
     path('user/<int:id>', delete_user),#view to delete a user using its id
     path('client/delete/<int:id>', delete_client),#delete a client using its id

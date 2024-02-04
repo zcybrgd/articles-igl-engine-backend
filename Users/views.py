@@ -74,6 +74,21 @@ def client_login(request, id):
     return JsonResponse({"client": response.data})
 
 
+#modify the client information , without the password ,as it is modified only in the settings
+@api_view(['PUT'])
+def modify_client(request):
+    connected = request.user  # to get the instance of the actual active client
+    if connected.id is None:
+        return Response({'error': "User non authenticated"})
+    try:
+        client_connect = client.objects.get(userId=connected)
+    except client.DoesNotExist:
+        return Response({'error': "the client doesn't exist "})
+    client.objects.filter(pk=client_connect.id).update(**request.data)
+    instanceClient = client.objects.get(pk=client_connect.id)
+    user.objects.filter(pk=connected.id).update(userName=instanceClient.userName)  # to update the user instance of the client too
+    updated_client = ClientSerializer(instanceClient)
+    return Response({"data": updated_client.data})
 
 def delete_user(request, id):
     try:
@@ -93,6 +108,15 @@ def delete_client(request, id):
     clientTodel.delete()
     return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
+
+@permission_classes((permissions.AllowAny,))
+def delete_modnull(request, id):
+    try:
+        clientTodel = Moderator.objects.get(pk=id)
+    except Moderator.DoesNotExist:
+        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+    clientTodel.delete()
+    return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
 def users_list(request):
     users = user.objects.all()  # fetch the users from db
@@ -169,15 +193,13 @@ class modManipulation(APIView):
             if mod.adminId == admin_connect:  # to check if the admin who created the mod is actually the onec currently connected
                 Moderator.objects.filter(pk=id).update(**request.data)
                 try:
-                    instanceMod = Moderator.objects.get(
-                        pk=id)  # to get the mod again after updating , and to check if the password didn't change , if changed we hash it again
+                    instanceMod = Moderator.objects.get(pk=id)  # to get the mod again after updating , and to check if the password didn't change , if changed we hash it again
                 except Moderator.DoesNotExist:
                     return Response({'error': "the moderator doesn't exist "})
                 if not (instanceMod.password == make_password(request.data['password'])):
                     instanceMod.password = make_password(request.data['password'])
                 instanceMod.save()
-                user.objects.filter(pk=instanceMod.userId.pk).update(userName=instanceMod.userName,
-                                                                     password=instanceMod.password)  # to update the user instance of the mod too
+                user.objects.filter(pk=instanceMod.userId.pk).update(userName=instanceMod.userName,password=instanceMod.password)  # to update the user instance of the mod too
                 mod = ModeratorSerializer(instanceMod)
                 return Response({"Mod modified succesfully!!": mod.data})
             else:
