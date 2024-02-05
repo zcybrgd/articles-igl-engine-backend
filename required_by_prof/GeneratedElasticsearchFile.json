@@ -1,0 +1,622 @@
+[
+    {
+        "abstract": [
+          "This review explores recent breakthroughs in quantum computing, focusing on advancements in algorithms and the practical implications of superposition. The study provides a comprehensive overview of the current state of quantum computing research."
+        ],
+        "abstract.keyword": [
+          "This review explores recent breakthroughs in quantum computing, focusing on advancements in algorithms and the practical implications of superposition. The study provides a comprehensive overview of the current state of quantum computing research."
+        ],
+        "authors": [
+          "Dr. Alice Johnson",
+          "Prof. Robert Smith"
+        ],
+        "authors.keyword": [
+          "Dr. Alice Johnson",
+          "Prof. Robert Smith"
+        ],
+        "bibliographie": [
+          "Smith, R. et al. Quantum Algorithms for Optimization. J. Quantum Comput. 2023",
+          "Johnson, A. Quantum Superposition and Its Applications. Sci. Advances 2022"
+        ],
+        "bibliographie.keyword": [
+          "Smith, R. et al. Quantum Algorithms for Optimization. J. Quantum Comput. 2023",
+          "Johnson, A. Quantum Superposition and Its Applications. Sci. Advances 2022"
+        ],
+        "date": [
+          "2023-05-10T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Quantum Research Institute",
+          "Institute of Advanced Computing"
+        ],
+        "institutions.keyword": [
+          "Quantum Research Institute",
+          "Institute of Advanced Computing"
+        ],
+        "keywords": [
+          "Quantum Computing, Quantum Algorithms, Superposition"
+        ],
+        "keywords.keyword": [
+          "Quantum Computing, Quantum Algorithms, Superposition"
+        ],
+        "pdf_url": [
+          "https://example.com/article1.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article1.pdf"
+        ],
+        "text": [
+          "This is the text of Article 1."
+        ],
+        "text.keyword": [
+          "This is the text of Article 1."
+        ],
+        "title": [
+          "Advancements in Quantum Computing: A Comprehensive Review"
+        ],
+        "title.keyword": [
+          "Advancements in Quantum Computing: A Comprehensive Review"
+        ],
+        "_id": "9ef01d5c6ba37106296c2cdc27e10e9c",
+        "_index": "article_index",
+        "_score": 1
+      },
+      {
+        "abstract": [
+          "This comparative study evaluates the efficiency and precision of CRISPR and TALEN genome editing technologies. The research aims to provide insights into the strengths and limitations of each approach, aiding researchers in choosing the most suitable method for their applications."
+        ],
+        "abstract.keyword": [
+          "This comparative study evaluates the efficiency and precision of CRISPR and TALEN genome editing technologies. The research aims to provide insights into the strengths and limitations of each approach, aiding researchers in choosing the most suitable method for their applications."
+        ],
+        "authors": [
+          "Dr. Emily White",
+          "Prof. Michael Brown"
+        ],
+        "authors.keyword": [
+          "Dr. Emily White",
+          "Prof. Michael Brown"
+        ],
+        "bibliographie": [
+          "Brown, M. et al. TALEN-Mediated Genome Modifications. Nat. Rev. Genet. 2021",
+          "White, E. CRISPR: A Revolutionary Tool for Genome Editing. Sci. Transl. Med. 2022"
+        ],
+        "bibliographie.keyword": [
+          "Brown, M. et al. TALEN-Mediated Genome Modifications. Nat. Rev. Genet. 2021",
+          "White, E. CRISPR: A Revolutionary Tool for Genome Editing. Sci. Transl. Med. 2022"
+        ],
+        "date": [
+          "2023-07-22T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Genetics Research Center",
+          "Biotechnology Institute"
+        ],
+        "institutions.keyword": [
+          "Genetics Research Center",
+          "Biotechnology Institute"
+        ],
+        "keywords": [
+          "CRISPR, TALEN, Genome Editing, Genetic Engineering"
+        ],
+        "keywords.keyword": [
+          "CRISPR, TALEN, Genome Editing, Genetic Engineering"
+        ],
+        "pdf_url": [
+          "https://example.com/article2.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article2.pdf"
+        ],
+        "text": [
+          "This is the text of Article 2."
+        ],
+        "text.keyword": [
+          "This is the text of Article 2."
+        ],
+        "title": [
+          "Genome Editing Technologies: CRISPR vs. TALEN"
+        ],
+        "title.keyword": [
+          "Genome Editing Technologies: CRISPR vs. TALEN"
+        ],
+        "_id": "7cb0be79174702bd1909d3af24ce670b",
+        "_index": "article_index",
+        "_score": 1
+      },
+      {
+        "abstract": [
+          "This article delves into the intricate mechanisms of neuroplasticity, exploring how the brain adapts to experiences and environmental changes. The study investigates the role of synaptic plasticity and its implications for learning and memory."
+        ],
+        "abstract.keyword": [
+          "This article delves into the intricate mechanisms of neuroplasticity, exploring how the brain adapts to experiences and environmental changes. The study investigates the role of synaptic plasticity and its implications for learning and memory."
+        ],
+        "authors": [
+          "Prof. Jennifer Turner",
+          "Dr. Samuel Rodriguez"
+        ],
+        "authors.keyword": [
+          "Prof. Jennifer Turner",
+          "Dr. Samuel Rodriguez"
+        ],
+        "bibliographie": [
+          "Turner, J. et al. The Dynamic Nature of Synaptic Plasticity. Trends Neurosci. 2020",
+          "Rodriguez, S. Neuroplasticity in Learning and Memory. Front. Psychol. 2021"
+        ],
+        "bibliographie.keyword": [
+          "Turner, J. et al. The Dynamic Nature of Synaptic Plasticity. Trends Neurosci. 2020",
+          "Rodriguez, S. Neuroplasticity in Learning and Memory. Front. Psychol. 2021"
+        ],
+        "date": [
+          "2023-09-15T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Neuroscience Institute",
+          "Cognitive Science Department"
+        ],
+        "institutions.keyword": [
+          "Neuroscience Institute",
+          "Cognitive Science Department"
+        ],
+        "keywords": [
+          "Neuroplasticity, Brain Plasticity, Synaptic Plasticity"
+        ],
+        "keywords.keyword": [
+          "Neuroplasticity, Brain Plasticity, Synaptic Plasticity"
+        ],
+        "pdf_url": [
+          "https://example.com/article3.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article3.pdf"
+        ],
+        "text": [
+          "This is the text of Article 3."
+        ],
+        "text.keyword": [
+          "This is the text of Article 3."
+        ],
+        "title": [
+          "Neuroplasticity: Unraveling the Mysteries of Brain Adaptation"
+        ],
+        "title.keyword": [
+          "Neuroplasticity: Unraveling the Mysteries of Brain Adaptation"
+        ],
+        "_id": "0b6e3e7636b21a5cd19fae94e3246320",
+        "_index": "article_index",
+        "_score": 1
+      },
+      {
+        "abstract": [
+          "This research evaluates the interconnected impacts of climate change on biodiversity loss, analyzing global trends and identifying key ecosystems at risk. The study aims to contribute to the understanding of the urgent need for conservation efforts."
+        ],
+        "abstract.keyword": [
+          "This research evaluates the interconnected impacts of climate change on biodiversity loss, analyzing global trends and identifying key ecosystems at risk. The study aims to contribute to the understanding of the urgent need for conservation efforts."
+        ],
+        "authors": [
+          "Dr. Sarah Williams",
+          "Prof. James Thompson"
+        ],
+        "authors.keyword": [
+          "Dr. Sarah Williams",
+          "Prof. James Thompson"
+        ],
+        "bibliographie": [
+          "Williams, S. et al. Global Trends in Biodiversity Loss. Nature 2021",
+          "Thompson, J. Climate Change and Ecosystem Resilience. Science 2019"
+        ],
+        "bibliographie.keyword": [
+          "Williams, S. et al. Global Trends in Biodiversity Loss. Nature 2021",
+          "Thompson, J. Climate Change and Ecosystem Resilience. Science 2019"
+        ],
+        "date": [
+          "2023-11-03T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Environmental Science Center",
+          "Global Ecology Research Institute"
+        ],
+        "institutions.keyword": [
+          "Environmental Science Center",
+          "Global Ecology Research Institute"
+        ],
+        "keywords": [
+          "Climate Change, Biodiversity Loss, Ecosystem Impact"
+        ],
+        "keywords.keyword": [
+          "Climate Change, Biodiversity Loss, Ecosystem Impact"
+        ],
+        "pdf_url": [
+          "https://example.com/article4.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article4.pdf"
+        ],
+        "text": [
+          "This is the text of Article 4."
+        ],
+        "text.keyword": [
+          "This is the text of Article 4."
+        ],
+        "title": [
+          "Climate Change and Biodiversity Loss: Assessing Global Impacts"
+        ],
+        "title.keyword": [
+          "Climate Change and Biodiversity Loss: Assessing Global Impacts"
+        ],
+        "_id": "25ee65bbffa534650e07148c883727fb",
+        "_index": "article_index",
+        "_score": 1
+      },
+      {
+        "abstract": [
+          "This article reviews recent advancements in solar cell technologies, with a focus on perovskite solar cells and organic photovoltaic materials. The study explores the potential of these materials for sustainable energy applications."
+        ],
+        "abstract.keyword": [
+          "This article reviews recent advancements in solar cell technologies, with a focus on perovskite solar cells and organic photovoltaic materials. The study explores the potential of these materials for sustainable energy applications."
+        ],
+        "authors": [
+          "Prof. Laura Martinez",
+          "Dr. David Chang"
+        ],
+        "authors.keyword": [
+          "Prof. Laura Martinez",
+          "Dr. David Chang"
+        ],
+        "bibliographie": [
+          "Martinez, L. et al. Recent Developments in Perovskite Solar Cells. Adv. Mater. 2022",
+          "Chang, D. Organic Photovoltaic Materials for Enhanced Efficiency. J. Mater. Chem. A 2020"
+        ],
+        "bibliographie.keyword": [
+          "Martinez, L. et al. Recent Developments in Perovskite Solar Cells. Adv. Mater. 2022",
+          "Chang, D. Organic Photovoltaic Materials for Enhanced Efficiency. J. Mater. Chem. A 2020"
+        ],
+        "date": [
+          "2024-01-18T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Energy Research Center",
+          "Materials Science Department"
+        ],
+        "institutions.keyword": [
+          "Energy Research Center",
+          "Materials Science Department"
+        ],
+        "keywords": [
+          "Solar Cells, Photovoltaics, Sustainable Energy"
+        ],
+        "keywords.keyword": [
+          "Solar Cells, Photovoltaics, Sustainable Energy"
+        ],
+        "pdf_url": [
+          "https://example.com/article5.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article5.pdf"
+        ],
+        "text": [
+          "This is the text of Article 5."
+        ],
+        "text.keyword": [
+          "This is the text of Article 5."
+        ],
+        "title": [
+          "Materials for Sustainable Energy: Advances in Solar Cell Technologies"
+        ],
+        "title.keyword": [
+          "Materials for Sustainable Energy: Advances in Solar Cell Technologies"
+        ],
+        "_id": "26eed4d2ab214f21a20e578f2a8da4bf",
+        "_index": "article_index",
+        "_score": 1
+      },
+      {
+        "abstract": [
+          "This research explores the transformative impact of artificial intelligence on healthcare, specifically focusing on machine learning applications in patient diagnosis. The study highlights the potential of AI to enhance medical decision-making and improve patient outcomes."
+        ],
+        "abstract.keyword": [
+          "This research explores the transformative impact of artificial intelligence on healthcare, specifically focusing on machine learning applications in patient diagnosis. The study highlights the potential of AI to enhance medical decision-making and improve patient outcomes."
+        ],
+        "authors": [
+          "Dr. Alex Turner",
+          "Prof. Maria Garcia"
+        ],
+        "authors.keyword": [
+          "Dr. Alex Turner",
+          "Prof. Maria Garcia"
+        ],
+        "bibliographie": [
+          "Turner, A. et al. Machine Learning for Medical Imaging Analysis. Nat. Rev. Med. 2023",
+          "Garcia, M. AI Applications in Precision Medicine. JAMA 2022"
+        ],
+        "bibliographie.keyword": [
+          "Turner, A. et al. Machine Learning for Medical Imaging Analysis. Nat. Rev. Med. 2023",
+          "Garcia, M. AI Applications in Precision Medicine. JAMA 2022"
+        ],
+        "date": [
+          "2024-03-10T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Health Informatics Institute",
+          "Medical Research Foundation"
+        ],
+        "institutions.keyword": [
+          "Health Informatics Institute",
+          "Medical Research Foundation"
+        ],
+        "keywords": [
+          "Artificial Intelligence, Healthcare, Medical Diagnosis"
+        ],
+        "keywords.keyword": [
+          "Artificial Intelligence, Healthcare, Medical Diagnosis"
+        ],
+        "pdf_url": [
+          "https://example.com/article6.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article6.pdf"
+        ],
+        "text": [
+          "This is the text of Article 6."
+        ],
+        "text.keyword": [
+          "This is the text of Article 6."
+        ],
+        "title": [
+          "Artificial Intelligence in Healthcare: Transforming Patient Diagnosis"
+        ],
+        "title.keyword": [
+          "Artificial Intelligence in Healthcare: Transforming Patient Diagnosis"
+        ],
+        "_id": "d99dc0530ee03967df6493152959cb1a",
+        "_index": "article_index",
+        "_score": 1
+      },
+      {
+        "abstract": [
+          "This case study investigates the relationship between urbanization and air quality, focusing on the unique challenges faced by megacities. The research aims to provide insights into effective urban planning strategies for mitigating air pollution in densely populated areas."
+        ],
+        "abstract.keyword": [
+          "This case study investigates the relationship between urbanization and air quality, focusing on the unique challenges faced by megacities. The research aims to provide insights into effective urban planning strategies for mitigating air pollution in densely populated areas."
+        ],
+        "authors": [
+          "Prof. Daniel Lee",
+          "Dr. Rachel Bennett"
+        ],
+        "authors.keyword": [
+          "Prof. Daniel Lee",
+          "Dr. Rachel Bennett"
+        ],
+        "bibliographie": [
+          "Lee, D. Urban Development and Air Pollution. Environ. Sci. Technol. 2021",
+          "Bennett, R. Impact of Urbanization on Respiratory Health. Lancet Planet. Health 2020"
+        ],
+        "bibliographie.keyword": [
+          "Lee, D. Urban Development and Air Pollution. Environ. Sci. Technol. 2021",
+          "Bennett, R. Impact of Urbanization on Respiratory Health. Lancet Planet. Health 2020"
+        ],
+        "date": [
+          "2024-05-22T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Urban Studies Department",
+          "Environmental Health Research Center"
+        ],
+        "institutions.keyword": [
+          "Urban Studies Department",
+          "Environmental Health Research Center"
+        ],
+        "keywords": [
+          "Urbanization, Air Quality, Megacities"
+        ],
+        "keywords.keyword": [
+          "Urbanization, Air Quality, Megacities"
+        ],
+        "pdf_url": [
+          "https://example.com/article7.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article7.pdf"
+        ],
+        "text": [
+          "This is the text of Article 7."
+        ],
+        "text.keyword": [
+          "This is the text of Article 7."
+        ],
+        "title": [
+          "Urbanization and Air Quality: A Case Study of Megacities"
+        ],
+        "title.keyword": [
+          "Urbanization and Air Quality: A Case Study of Megacities"
+        ],
+        "_id": "3135602747f26aca31f9dff00ba1b7e7",
+        "_index": "article_index",
+        "_score": 1
+      },
+      {
+        "abstract": [
+          "This article examines the role of robotics in manufacturing, emphasizing advancements in automation that contribute to increased efficiency and precision. The study provides insights into the integration of robotic systems in various manufacturing processes."
+        ],
+        "abstract.keyword": [
+          "This article examines the role of robotics in manufacturing, emphasizing advancements in automation that contribute to increased efficiency and precision. The study provides insights into the integration of robotic systems in various manufacturing processes."
+        ],
+        "authors": [
+          "Dr. Andrew Miller",
+          "Prof. Karen Anderson"
+        ],
+        "authors.keyword": [
+          "Dr. Andrew Miller",
+          "Prof. Karen Anderson"
+        ],
+        "bibliographie": [
+          "Miller, A. et al. Advances in Industrial Robotics. IEEE Trans. Robot. 2022",
+          "Anderson, K. Robotics and Precision Machining. J. Manuf. Sci. Eng. 2021"
+        ],
+        "bibliographie.keyword": [
+          "Miller, A. et al. Advances in Industrial Robotics. IEEE Trans. Robot. 2022",
+          "Anderson, K. Robotics and Precision Machining. J. Manuf. Sci. Eng. 2021"
+        ],
+        "date": [
+          "2024-07-15T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Robotics Research Center",
+          "Mechanical Engineering Department"
+        ],
+        "institutions.keyword": [
+          "Robotics Research Center",
+          "Mechanical Engineering Department"
+        ],
+        "keywords": [
+          "Robotics, Manufacturing, Automation"
+        ],
+        "keywords.keyword": [
+          "Robotics, Manufacturing, Automation"
+        ],
+        "pdf_url": [
+          "https://example.com/article8.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article8.pdf"
+        ],
+        "text": [
+          "This is the text of Article 8."
+        ],
+        "text.keyword": [
+          "This is the text of Article 8."
+        ],
+        "title": [
+          "Robotics in Manufacturing: Enhancing Efficiency and Precision"
+        ],
+        "title.keyword": [
+          "Robotics in Manufacturing: Enhancing Efficiency and Precision"
+        ],
+        "_id": "ab111b8bc37b70e050ebaf6892165853",
+        "_index": "article_index",
+        "_score": 1
+      },
+      {
+        "abstract": [
+          "This research explores the intricate connection between the microbiome and human health, with a focus on the gut-brain axis. The study investigates the role of gut microbes in neurological disorders and potential therapeutic interventions."
+        ],
+        "abstract.keyword": [
+          "This research explores the intricate connection between the microbiome and human health, with a focus on the gut-brain axis. The study investigates the role of gut microbes in neurological disorders and potential therapeutic interventions."
+        ],
+        "authors": [
+          "Prof. Jessica Collins",
+          "Dr. Mark Turner"
+        ],
+        "authors.keyword": [
+          "Prof. Jessica Collins",
+          "Dr. Mark Turner"
+        ],
+        "bibliographie": [
+          "Collins, J. et al. Gut Microbiome and Neurological Disorders. Nat. Rev. Microbiol. 2023",
+          "Turner, M. Impact of Diet on the Gut-Brain Axis. Cell Host Microbe 2022"
+        ],
+        "bibliographie.keyword": [
+          "Collins, J. et al. Gut Microbiome and Neurological Disorders. Nat. Rev. Microbiol. 2023",
+          "Turner, M. Impact of Diet on the Gut-Brain Axis. Cell Host Microbe 2022"
+        ],
+        "date": [
+          "2024-09-28T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Microbiome Research Institute",
+          "Neurology Department"
+        ],
+        "institutions.keyword": [
+          "Microbiome Research Institute",
+          "Neurology Department"
+        ],
+        "keywords": [
+          "Microbiome, Gut-Brain Axis, Human Health"
+        ],
+        "keywords.keyword": [
+          "Microbiome, Gut-Brain Axis, Human Health"
+        ],
+        "pdf_url": [
+          "https://example.com/article9.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article9.pdf"
+        ],
+        "text": [
+          "This is the text of Article 9."
+        ],
+        "text.keyword": [
+          "This is the text of Article 9."
+        ],
+        "title": [
+          "The Microbiome and Human Health: Exploring the Gut-Brain Connection"
+        ],
+        "title.keyword": [
+          "The Microbiome and Human Health: Exploring the Gut-Brain Connection"
+        ],
+        "_id": "e6352bdc17d7875496a379737ccfb1fb",
+        "_index": "article_index",
+        "_score": 1
+      },
+    {
+        "abstract": [
+          "This article reviews recent advancements in renewable energy solutions, specifically focusing on harnessing the power of wind and solar technologies. The study highlights the potential of these sources in achieving sustainable and clean energy production."
+        ],
+        "abstract.keyword": [
+          "This article reviews recent advancements in renewable energy solutions, specifically focusing on harnessing the power of wind and solar technologies. The study highlights the potential of these sources in achieving sustainable and clean energy production."
+        ],
+        "authors": [
+          "Dr. Olivia Walker",
+          "Prof. Richard Evans"
+        ],
+        "authors.keyword": [
+          "Dr. Olivia Walker",
+          "Prof. Richard Evans"
+        ],
+        "bibliographie": [
+          "Walker, O. et al. Advances in Wind Turbine Technology. Renew. Energy 2023",
+          "Evans, R. Solar Photovoltaics for Sustainable Energy. Prog. Photovolt. Res. Appl. 2022"
+        ],
+        "bibliographie.keyword": [
+          "Walker, O. et al. Advances in Wind Turbine Technology. Renew. Energy 2023",
+          "Evans, R. Solar Photovoltaics for Sustainable Energy. Prog. Photovolt. Res. Appl. 2022"
+        ],
+        "date": [
+          "2024-11-12T00:00:00.000Z"
+        ],
+        "institutions": [
+          "Renewable Energy Research Center",
+          "Environmental Engineering Department"
+        ],
+        "institutions.keyword": [
+          "Renewable Energy Research Center",
+          "Environmental Engineering Department"
+        ],
+        "keywords": [
+          "Renewable Energy, Wind Power, Solar Energy"
+        ],
+        "keywords.keyword": [
+          "Renewable Energy, Wind Power, Solar Energy"
+        ],
+        "pdf_url": [
+          "https://example.com/article10.pdf"
+        ],
+        "pdf_url.keyword": [
+          "https://example.com/article10.pdf"
+        ],
+        "text": [
+          "This is the text of Article 10."
+        ],
+        "text.keyword": [
+          "This is the text of Article 10."
+        ],
+        "title": [
+          "Renewable Energy Solutions: Harnessing the Power of Wind and Solar"
+        ],
+        "title.keyword": [
+          "Renewable Energy Solutions: Harnessing the Power of Wind and Solar"
+        ],
+        "_id": "25ce74ec273a9836c022eedea2257f51",
+        "_index": "article_index",
+        "_score": 1
+      }
+]

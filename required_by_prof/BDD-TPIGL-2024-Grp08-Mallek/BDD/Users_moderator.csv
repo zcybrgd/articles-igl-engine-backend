@@ -1,0 +1,3 @@
+id,userName,firstName,familyName,email,password,adminId_id,userId_id,profile_picture,edit_count,delete_count,validate_count
+13,nada,nada,djedjig,nada@esi.dz,pbkdf2_sha256$600000$8q49Kl0Ry2BioWeYoje7eM$flBADNyqiqisVK3edQFl+vfsP9lxqvRu7ofuKE80dGk=,8,52,media/profile_pics/default_profile_pic.jpg,2,1,1
+16,mariMod,mariNameModd,mariFamilyMod,mariMod@gmail.com,pbkdf2_sha256$600000$T7oCrk3hNtyy8qvNPHjzY9$iAZfpQb0WaygSPa/wV0Y5mquBJ42MrMQ7kzeXrDvX8k=,1,55,media/profile_pics/default_profile_pic.jpg,0,0,0

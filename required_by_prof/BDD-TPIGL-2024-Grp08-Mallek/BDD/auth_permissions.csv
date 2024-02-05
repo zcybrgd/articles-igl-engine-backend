@@ -1,0 +1,69 @@
+id,name,content_type_id,codename
+1,Can add admin,1,add_admin
+2,Can change admin,1,change_admin
+3,Can delete admin,1,delete_admin
+4,Can view admin,1,view_admin
+5,Can add user,2,add_user
+6,Can change user,2,change_user
+7,Can delete user,2,delete_user
+8,Can view user,2,view_user
+9,Can add moderator,3,add_moderator
+10,Can change moderator,3,change_moderator
+11,Can delete moderator,3,delete_moderator
+12,Can view moderator,3,view_moderator
+13,Can add log entry,4,add_logentry
+14,Can change log entry,4,change_logentry
+15,Can delete log entry,4,delete_logentry
+16,Can view log entry,4,view_logentry
+17,Can add permission,5,add_permission
+18,Can change permission,5,change_permission
+19,Can delete permission,5,delete_permission
+20,Can view permission,5,view_permission
+21,Can add group,6,add_group
+22,Can change group,6,change_group
+23,Can delete group,6,delete_group
+24,Can view group,6,view_group
+25,Can add user,7,add_user
+26,Can change user,7,change_user
+27,Can delete user,7,delete_user
+28,Can view user,7,view_user
+29,Can add content type,8,add_contenttype
+30,Can change content type,8,change_contenttype
+31,Can delete content type,8,delete_contenttype
+32,Can view content type,8,view_contenttype
+33,Can add session,9,add_session
+34,Can change session,9,change_session
+35,Can delete session,9,delete_session
+36,Can view session,9,view_session
+37,Can add admin,10,add_admin
+38,Can change admin,10,change_admin
+39,Can delete admin,10,delete_admin
+40,Can view admin,10,view_admin
+41,Can add user,11,add_user
+42,Can change user,11,change_user
+43,Can delete user,11,delete_user
+44,Can view user,11,view_user
+45,Can add moderator,12,add_moderator
+46,Can change moderator,12,change_moderator
+47,Can delete moderator,12,delete_moderator
+48,Can view moderator,12,view_moderator
+49,Can add client,13,add_client
+50,Can change client,13,change_client
+51,Can delete client,13,delete_client
+52,Can view client,13,view_client
+53,Can add Token,14,add_token
+54,Can change Token,14,change_token
+55,Can delete Token,14,delete_token
+56,Can view Token,14,view_token
+57,Can add token,15,add_tokenproxy
+58,Can change token,15,change_tokenproxy
+59,Can delete token,15,delete_tokenproxy
+60,Can view token,15,view_tokenproxy
+61,Can add Token,16,add_nonusertoken
+62,Can change Token,16,change_nonusertoken
+63,Can delete Token,16,delete_nonusertoken
+64,Can view Token,16,view_nonusertoken
+65,Can add article,17,add_article
+66,Can change article,17,change_article
+67,Can delete article,17,delete_article
+68,Can view article,17,view_article

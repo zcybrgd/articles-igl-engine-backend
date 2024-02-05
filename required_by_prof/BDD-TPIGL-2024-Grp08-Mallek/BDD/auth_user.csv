@@ -1,0 +1,9 @@
+id,password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined
+2,pbkdf2_sha256$600000$EgJZzMcATwzWhyv00YZGZX$jDSx/9pKKPl2OWy9UQYYcpnyOlLo59PjaV76UyWbtrI=,2023-12-15 18:22:53.466091+01,t,admin2,"","",lm_bouyahiaoui@esi.dz,t,t,2023-12-15 18:22:14.476094+01
+1,pbkdf2_sha256$600000$7cMNB8wKuhtg0TMBMRwOCn$L76fqT1jJnRBh9BintSLc2L/9b7dGnyjEBzQP4wfPt4=,2023-12-23 23:46:59.970156+01,t,admin1,"","",lm_bouyahiaoui@esi.dz,t,t,2023-12-15 00:19:38.772867+01
+3,pbkdf2_sha256$600000$LM0Vx4fvNmgUhNup88M3si$AMBUJVtM4D8HTY8mPmdVmpoLUX1JXo/MKKtKiejTPrA=,2023-12-27 13:53:21.1253+01,t,admin3,"","",lm_bouyahiaoui@esi.dz,t,t,2023-12-27 13:44:56.254908+01
+4,pbkdf2_sha256$600000$cV9dhOvRARzTo9YEgLRPsl$aXwtrUuutpRsQcC+TAJ7IzdyDpe1inUA1i8v08wayTM=,,t,admin4,"","",lm_bouyahiaoui@esi.dz,t,t,2023-12-27 13:57:11.581661+01
+5,pbkdf2_sha256$600000$d5KA4DwVoSThl31WeHbSI5$cPuCmmbETBqC2OdYe2FVijbOXd2yDStKOPSXf49ltac=,,t,admin5,"","",lm_bouyahiaoui@esi.dz,t,t,2023-12-27 14:01:52.093662+01
+6,pbkdf2_sha256$600000$sHKnRTS713rORThzyqBZT8$U9mbg9Zfx2lxMF5vS8gRKkUhzGsXGK6WW1i7lHNfPck=,,t,admin6,"","",lm_bouyahiaoui@esi.dz,t,t,2023-12-27 14:05:25.869727+01
+7,pbkdf2_sha256$600000$Exxf8KSPx0UhnIiqNnOmba$7Ccr7JBpkxbdGwEMd70rmFbaMDEE6o36w8NaSvsKfrI=,,t,admin7,"","",lm_bouyahiaoui@esi.dz,t,t,2023-12-27 14:40:54.460404+01
+8,pbkdf2_sha256$600000$90bE9LuRX25Efi2hNcfzXV$Qrmd4sH70htQNyZTi6HzQbj0a+MXCAN3V/qdLQ8Pwgc=,,t,Dina,"","",Dina@azazga.dz,t,t,2024-01-03 12:35:26.559604+01

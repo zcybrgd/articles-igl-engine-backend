@@ -1,0 +1,13 @@
+id,firstName,familyName,email,userId_id,password,userName,profile_picture,favorite_articles
+15,client11Name,client11famname,client11@gmail.com,2,pbkdf2_sha256$600000$ICiRodseU04hrCbFZnGIyq$keS5Ejk/KpyLO3GYPQY6ygNITRDsXi/6dMhmu9Phevw=,client11,media/profile_pics/,{}
+16,client12Name,client12famname,client12@gmail.com,3,pbkdf2_sha256$600000$o7ZjlDbcsg1kPGx4YKDR1D$5qzWvxfrrk2GdGnRxRqUtFpubJb30pdG4mbmPpH1deM=,client12,media/profile_pics/,{}
+19,client14Name,client14famname,client14@gmail.com,5,pbkdf2_sha256$600000$yCgfo7RBcAdEGy1QpTBUtm$EBs6ieSKl+aoySOi68Ralg9igbWIIEUjTKPofASlHMY=,client14,media/profile_pics/,{}
+20,client15Name,client15famname,client15@gmail.com,10,pbkdf2_sha256$600000$VIPGGhj3WDZLVIsmyCKszB$op5e5Pk86yQlOLfORbKkBwtvBMK7ys3mZyOZt/vtXRE=,client15,media/profile_pics/,{}
+21,client16Name,client16famname,client16@gmail.com,11,pbkdf2_sha256$600000$zvrL1Gj0PDQlpOWcw9yJJ2$qGeczsn9Ro5EzXzCoTFgEH03naLh72GtF+n3HOGMxfo=,client16,media/profile_pics/,{}
+22,client17Name,client17famname,client17@gmail.com,12,pbkdf2_sha256$600000$nf5QXKPMScht96SK58XNpV$W/9AKqxHPCLPcRklXJV4EE8cS+rLUS1lRSER7LASiz8=,client17,media/profile_pics/,{}
+23,client18Name,client18famname,client18@gmail.com,13,pbkdf2_sha256$600000$FRDcnIgDvWXzdl0Bnzx7hP$EYZXweaeAY5AfyfguydrxQvcmrDNxk8OSb9EIVPu7NI=,client18,media/profile_pics/,{}
+24,client19Name,client19famname,client19@gmail.com,14,pbkdf2_sha256$600000$i7c12ua56AtzxScDcEZp4t$su1vJs8Drm7NzPDfCYTi8CNCRagA2xnjxCTq8y/Dv68=,client19,media/profile_pics/,{}
+25,client20Name,client20famname,client20@gmail.com,15,pbkdf2_sha256$600000$hl0KlIxzNAfhgIGCrBCGlU$lIXoTYWuF7TrcH1UyxFT2S7MGt/aS74oVL56mjavx3k=,client20,media/profile_pics/,{}
+26,client21Name,client21famname,client21@gmail.com,16,pbkdf2_sha256$600000$hwTh3zmz0gRnD73ZJuVcvL$ikoim54a8lCn7j709Hb+3BVeQu1raDEu/ky/BxSXfcE=,client21,media/profile_pics/,{}
+27,Meriem,Bouyahiaoui,mari@gmail.com,33,pbkdf2_sha256$600000$33RII6eaRwYQOVrhMcmZbp$DLJ5HAOFIvQcS38f0WniAXPp0cVzfPM9RW4whMKt+80=,Mari,media/profile_pics/,"{91843fe632f6cb450bf67ea37cf56438,22d7e6cd766a516eaee6558b0ca65ce4}"
+14,client10Name,client10famname,client10@gmail.com,1,pbkdf2_sha256$600000$3ICe2EQA3HOoOs30Kc9gjw$DufZCcK/vZPUahWV0eHYy5TYX0XPphdU3jwPRLTbMCE=,client10,media/profile_pics/,{f4a2f80f1a380cb0d84b402b07b2457a}
