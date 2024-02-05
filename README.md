@@ -55,8 +55,8 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 
 # Deployement
 - Docker and Docker-compose 
-<a><img src="https://banner2.cleanpng.com/20180804/ubh/kisspng-docker-inc-clip-art-microservices-application-so-olcay-%C5%9Eeker-olcayseker-amp-apos-s-twitter-pro-5b65d5d0a00746.8639726315334005286555.jpg" alt="docker" width="50" height="50" /></a>&nbsp;&nbsp;
-<a><img src="https://miro.medium.com/v2/resize:fit:701/1*k4mqX_CqX6sZwKZLtwH3-A.png" alt="docker-compose" width="50" height="50" /></a>&nbsp;&nbsp;
+<a><img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-512.png" alt="docker" width="50" height="50" /></a>&nbsp;&nbsp;
+<a><img src="https://miro.medium.com/v2/resize:fit:701/1*k4mqX_CqX6sZwKZLtwH3-A.png" alt="docker-compose" width="90" height="90" /></a>&nbsp;&nbsp;
 
 N.B. 
 if you want to run the container of the application locally you should run the docker-compose file in a way that
