@@ -53,8 +53,15 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 <a><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PGSQL Logo" width="40" height="40" /></a>&nbsp;&nbsp;
 <a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="120" height="50" /></a>&nbsp;&nbsp;
 
+# Deployement
+- Docker and Docker-compose 
+<a><img src="https://banner2.cleanpng.com/20180804/ubh/kisspng-docker-inc-clip-art-microservices-application-so-olcay-%C5%9Eeker-olcayseker-amp-apos-s-twitter-pro-5b65d5d0a00746.8639726315334005286555.jpg" alt="docker" width="50" height="50" /></a>&nbsp;&nbsp;
+<a><img src="https://miro.medium.com/v2/resize:fit:701/1*k4mqX_CqX6sZwKZLtwH3-A.png" alt="docker-compose" width="50" height="50" /></a>&nbsp;&nbsp;
 
-
+N.B. 
+if you want to run the container of the application locally you should run the docker-compose file in a way that
+corresponds to the path to both the folders where your frontend and backend is present, feel free to change it depending
+on the path on your pc
 # Developement Team
 [Boukhetala Zaïneb](https://github.com/zcybrgd)
 
@@ -75,7 +82,6 @@ We welcome contributions to make this project even better. To contribute:
 3. Submit a pull request, clearly describing the modifications made or the additional features added.
 
 
-# Deployement
-- Docker and Docker-compose 
+
 
 

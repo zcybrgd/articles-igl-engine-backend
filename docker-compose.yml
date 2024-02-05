@@ -1,17 +1,51 @@
 version: '3'
 
-# containers that make the application
 services:
   frontend:
     build:
       context: ./frontend/articles-igl-engine-frontend
     ports:
       - "5173:5173"
-
+    stdin_open: true
+    tty: true
+#i think i should remove the depend on backend (because maybe thats the reason its not working)
   backend:
     build:
       context: ./backend/articles_igl_engine
     ports:
-      - "8000:8000"
+      - "8000:8000"      
     depends_on:
-      - frontend
+      - db
+      - elasticsearch
+    volumes:
+      - .:/app
+      - ./backend/articles_igl_engine/search/articles.json:/app/backend/articles_igl_engine/search/articles.json
+  
+    # volumes:
+    #  - ./config:/app/config if we need files that are inside the config directory
+  db:
+    container_name: db
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=dbname
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pswd
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+  elasticsearch:
+    image: elasticsearch:8.11.3
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    
+
+volumes:
+  postgres_data: {}
+  es_data: {}
