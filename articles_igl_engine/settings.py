@@ -12,17 +12,23 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+dotenv_file = BASE_DIR / ".env"
+
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^vh4u6b1y*k31-4%%u6guj2siv&8gkq#8@mhy(gwj9qe8k*t3y'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
 # i added this for docker-compose
 ALLOWED_HOSTS = ['localhost','127.0.0.1','http://elasticsearch:9200']
@@ -86,28 +92,15 @@ WSGI_APPLICATION = 'articles_igl_engine.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-'''
-DATABASES = {
-       'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ArticlesBDD',
-        'USER': 'postgres',
-        'PASSWORD': 'TPIGL062023@//@',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-
-}
-'''
 
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('DB_DRIVER','django.db.backends.postgresql'),
-        'USER': os.environ.get('PG_USER','postgres'),
-        'PASSWORD':os.environ.get('PG_PASSWORD','TPIGL062023@//@'),
-        'NAME': os.environ.get('PG_DB','ArticlesBDD'),
-        'PORT': os.environ.get('PG_PORT','5432'),
-        'HOST': os.environ.get('PG_HOST','db'), # uses the container if set, otherwise it runs locally
+        'USER': os.environ.get('PG_USER'),
+        'PASSWORD': os.environ.get('PG_PASSWORD'),
+        'NAME': os.environ.get('PG_DB'),
+        'PORT': os.environ.get('PG_PORT'),
+        'HOST': os.environ.get('PG_HOST'),
     }
 }
 
@@ -171,7 +164,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# settings.py
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
