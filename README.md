@@ -54,7 +54,6 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 <a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/SpaCy_logo.svg/1920px-SpaCy_logo.svg.png" alt="Spacy" width="120" height="50" /></a>&nbsp;&nbsp;
 
 # Deployement
-- Docker and Docker-compose 
 <a><img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-512.png" alt="docker" width="90" height="90" /></a>&nbsp;&nbsp;
 <a><img src="https://miro.medium.com/v2/resize:fit:701/1*k4mqX_CqX6sZwKZLtwH3-A.png" alt="docker-compose" width="90" height="90" /></a>&nbsp;&nbsp;
 
