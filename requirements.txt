@@ -1,7 +1,6 @@
 pytest==7.4.3
 PyMuPDFb==1.23.7
 PyMuPDF==1.23.7
-Pillow==9.2.0
 django-crum==0.7.9
 django-cors-headers==4.3.1
 djangorestframework==3.14.0
@@ -18,7 +17,6 @@ en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl#sha256=86cc141f63942d4b2c5fcee06630fd6f904788d2f0ab005cce45aadb8fb73889
 spacy~=3.7.2
 django-elasticsearch-dsl==8.0
-djangorestframework-simplejwt==5.3.1
 pyjwt==2.8.0
 PDFMiner==20191125
 pyPDF==3.17.4
@@ -31,4 +29,3 @@ psycopg2==2.9.9
 pdf2image==1.16.3
 pdfminer==20191125
 regex==2023.10.3
-requests==2.28.1
